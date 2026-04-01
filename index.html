@@ -13,123 +13,178 @@ body {
   color: #fff;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 .hero {
   text-align: center;
-  padding: 120px 20px;
+  padding: 140px 20px;
+}
+
+/* FLASHY GOLD LOGO */
+.logo {
+  font-size: 32px;
+  letter-spacing: 4px;
+  font-weight: bold;
+
+  background: linear-gradient(
+    90deg,
+    #ffd700,
+    #ffb800,
+    #fff3a0,
+    #ffcc00,
+    #ffd700
+  );
+
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: goldShine 3s linear infinite;
+
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.25);
+}
+
+@keyframes goldShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 300% center; }
 }
 
 .hero h1 {
-  font-size: 64px;
-  letter-spacing: 2px;
+  font-size: 70px;
+  margin: 10px 0;
 }
 
 .hero p {
-  opacity: 0.7;
-  max-width: 650px;
+  opacity: 0.75;
+  max-width: 750px;
   margin: auto;
-  line-height: 1.6;
+  line-height: 1.8;
+  font-size: 18px;
 }
 
-/* SECTION TITLE */
+/* =========================
+   SECTION TITLES
+========================= */
 .section-title {
   text-align: center;
-  font-size: 40px;
-  margin: 80px 0 30px;
+  font-size: 46px;
+  margin: 90px 0 40px;
 }
 
-/* SERVICES */
+/* =========================
+   SERVICES
+========================= */
 .services {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 950px;
+  max-width: 1000px;
   margin: auto;
   padding: 0 20px;
 }
 
 .service-box {
   background: #111;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
   border: 1px solid #222;
-  transition: 0.3s;
-}
-
-.service-box:hover {
-  transform: scale(1.02);
-  border-color: #555;
+  transition: 0.3s ease;
 }
 
 .service-box h3 {
-  margin-bottom: 10px;
-  font-size: 22px;
+  font-size: 24px;
+  margin-bottom: 12px;
 }
 
 .service-box p {
-  line-height: 1.6;
+  line-height: 1.8;
   opacity: 0.85;
+  font-size: 16px;
 }
 
-/* PACKAGES */
+/* hover glow (only one box at a time visually feels active) */
+.service-box:hover {
+  transform: scale(1.02);
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+/* =========================
+   PACKAGES
+========================= */
 .packages {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 950px;
+  max-width: 1000px;
   margin: auto;
   padding: 0 20px;
 }
 
 .package {
   background: #111;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
   border: 1px solid #222;
   transition: 0.3s;
 }
 
 .package:hover {
-  border-color: #555;
+  transform: scale(1.02);
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
 }
 
 .price {
-  font-size: 24px;
-  color: #00ffcc;
+  font-size: 26px;
+  color: #ffd700;
   margin: 10px 0;
 }
 
-/* TESTIMONIALS */
+/* =========================
+   TESTIMONIALS
+========================= */
 .testimonials {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 950px;
+  max-width: 1000px;
   margin: auto;
   padding: 0 20px;
 }
 
 .testimonial {
   background: #111;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
   border: 1px solid #222;
-  line-height: 1.7;
+  line-height: 1.9;
+  font-size: 16px;
   opacity: 0.9;
+  transition: 0.3s ease;
 }
 
-/* CONTACT */
+.testimonial:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.12);
+  transform: scale(1.01);
+}
+
+/* =========================
+   CONTACT
+========================= */
 .contact {
-  max-width: 750px;
+  max-width: 800px;
   margin: auto;
-  padding: 50px 20px;
+  padding: 60px 20px 100px;
 }
 
 input, textarea {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   background: #111;
   border: 1px solid #333;
   color: #fff;
@@ -137,12 +192,16 @@ input, textarea {
 }
 
 button {
-  padding: 12px 25px;
-  background: #00ffcc;
+  padding: 14px 26px;
+  background: #ffd700;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: 8px;
+}
+
+button:hover {
+  background: #e6c200;
 }
 </style>
 </head>
@@ -151,10 +210,13 @@ button {
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Acquirely</h1>
+  <div class="logo">Acquirely</div>
+
+  <h1>Lead Generation Systems</h1>
+
   <p>
     We build high-performance lead generation systems, automation funnels, and cold outreach infrastructure
-    designed to scale your business and generate predictable client flow.
+    designed to scale your business with predictable and consistent client acquisition.
   </p>
 </div>
 
@@ -165,27 +227,27 @@ button {
   <div class="service-box">
     <h3>Lead Generation Systems</h3>
     <p>
-      We create complete lead generation ecosystems that bring in qualified prospects consistently.
-      This includes landing pages, conversion funnels, outreach systems, and messaging strategies designed
-      to turn cold traffic into real paying customers.
+      We design complete lead generation systems that attract, capture, and convert high-quality prospects for your business.
+      This includes structured funnels, landing pages, conversion messaging, and strategic positioning so your business
+      consistently generates inbound interest without relying on random referrals or inconsistent traffic sources.
     </p>
   </div>
 
   <div class="service-box">
     <h3>Cold Email Automation</h3>
     <p>
-      Fully automated outreach systems that handle sending, tracking, and optimizing email campaigns.
-      We build infrastructure for deliverability, inbox rotation, personalization, and response tracking
-      to maximise engagement and conversion rates.
+      We build fully automated cold email systems that handle prospecting, outreach, follow-ups, and tracking.
+      Every system is optimised for deliverability, inbox placement, and response rates. This allows your outreach
+      to run in the background while consistently generating conversations with potential clients.
     </p>
   </div>
 
   <div class="service-box">
     <h3>Marketing Funnels</h3>
     <p>
-      High-converting funnel systems that guide users from awareness to action.
-      Includes landing pages, offer structuring, CTA optimisation, and automated follow-ups to increase conversions
-      and reduce drop-off rates.
+      Our funnel systems are designed to guide potential clients through a structured journey from awareness to conversion.
+      We build landing pages, optimise calls-to-action, and implement automated follow-ups that increase conversion rates
+      and turn traffic into predictable revenue opportunities.
     </p>
   </div>
 
@@ -199,9 +261,8 @@ button {
     <h3>Starter Package</h3>
     <div class="price">$499 USD</div>
     <p>
-      A foundational system for new businesses. Includes basic lead capture setup,
-      contact form integration, and initial outreach structure. Designed to get your first
-      consistent leads and validate your offer.
+      A foundational system designed for new businesses that need structure. Includes a basic lead capture system,
+      simple funnel setup, and initial outreach configuration to start generating consistent leads.
     </p>
   </div>
 
@@ -209,8 +270,8 @@ button {
     <h3>Growth Package</h3>
     <div class="price">$899 USD</div>
     <p>
-      Advanced automation and scaling system. Includes full funnel setup, cold email automation,
-      tracking system, and optimized messaging structure to increase conversion rates and lead flow.
+      A more advanced system with automation, improved funnel design, and structured cold outreach campaigns.
+      Built for businesses ready to scale and increase monthly lead volume consistently.
     </p>
   </div>
 
@@ -218,8 +279,8 @@ button {
     <h3>Premium Package</h3>
     <div class="price">$1299 USD</div>
     <p>
-      Complete business growth infrastructure. Includes everything in Growth plus advanced automation,
-      lead scoring, optimization systems, and AI-enhanced outreach workflows for maximum scaling.
+      A full-scale acquisition system including advanced automation, optimisation, tracking, and scaling infrastructure.
+      Designed for serious businesses aiming for high-volume client acquisition and predictable growth.
     </p>
   </div>
 
@@ -230,39 +291,28 @@ button {
 <div class="testimonials">
 
   <div class="testimonial">
-    “Before working with Acquirely, we struggled to get consistent leads.
-    Everything was random and dependent on referrals. Now we have a structured system that brings in
-    predictable inquiries every week, which has completely stabilised our pipeline.”
+    “Before working with this system, our business had no predictable way of getting clients. We relied heavily on referrals and inconsistent outreach that never produced stable results. After implementation, we now have a fully structured lead generation pipeline that brings in qualified prospects every single week, allowing us to finally scale with confidence and consistency.”
   </div>
 
   <div class="testimonial">
-    “The automation system they built saved us hours of manual outreach every day.
-    Our response rate increased significantly because the messaging and funnel structure was
-    properly optimised for conversions.”
+    “The cold email automation system completely changed how we operate. What used to take hours of manual outreach is now fully automated, including follow-ups and tracking. Our response rates increased significantly, and we now spend our time speaking to qualified leads instead of chasing them manually.”
   </div>
 
   <div class="testimonial">
-    “What impressed us most was the level of detail in the setup. Every part of the system
-    works together — from landing pages to email follow-ups — creating a smooth client acquisition process.”
+    “The funnel system created a clear path for our customers that we never had before. Instead of scattered traffic and random inquiries, we now have a structured journey that consistently converts visitors into paying clients. It feels like we finally have a proper client acquisition engine working in the background.”
   </div>
 
 </div>
 
 <!-- CONTACT -->
-<h2 class="section-title">Contact Us</h2>
+<h2 class="section-title">Contact</h2>
 <div class="contact">
 
   <form>
-    <label>Name</label>
-    <input type="text" name="name" placeholder="Your name">
-
-    <label>Email</label>
-    <input type="email" name="email" placeholder="Your email">
-
-    <label>Message</label>
-    <textarea name="message" rows="5" placeholder="Your message"></textarea>
-
-    <button type="submit">Send Message</button>
+    <input type="text" placeholder="Name" />
+    <input type="email" placeholder="Email" />
+    <textarea rows="5" placeholder="Message"></textarea>
+    <button type="submit">Send</button>
   </form>
 
 </div>
