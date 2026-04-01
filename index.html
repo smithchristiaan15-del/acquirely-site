@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Acquirely - Lead Generation Systems</title>
+<title>Acquirely</title>
 
-<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -14,20 +13,13 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #000;
+    background: #000;
     color: #fff;
-    scroll-behavior: smooth;
 }
 
-/* FUTURISTIC LOGO */
-.logo {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: transparent;
-    background: linear-gradient(90deg, #d4af37, #fff, #d4af37);
-    -webkit-background-clip: text;
-    text-shadow: 0 0 10px rgba(255,215,0,0.2);
+/* SMOOTH SCROLL */
+html {
+    scroll-behavior: smooth;
 }
 
 /* NAV */
@@ -43,6 +35,22 @@ nav {
     z-index: 100;
 }
 
+/* LOGO */
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: transparent;
+    background: linear-gradient(90deg, #d4af37, #fff, #d4af37);
+    -webkit-background-clip: text;
+    cursor: pointer;
+}
+
+.logo:hover {
+    text-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* NAV LINKS */
 nav a {
     color: #fff;
     margin: 0 15px;
@@ -65,25 +73,23 @@ nav a:hover {
 }
 
 .hero p {
-    font-size: 18px;
     max-width: 700px;
     margin: 20px auto;
     color: #ccc;
 }
 
+/* BUTTON */
 .btn {
     display: inline-block;
-    margin-top: 20px;
     padding: 12px 25px;
     border: 1px solid gold;
     color: gold;
     text-decoration: none;
-    transition: 0.3s;
 }
 
 .btn:hover {
     background: gold;
-    color: black;
+    color: #000;
 }
 
 /* SECTIONS */
@@ -93,31 +99,11 @@ section {
     padding: 70px 20px;
 }
 
-/* FRAMED SECTIONS */
-#services, #packages, #testimonials, #contact {
-    border: 1px solid rgba(255, 215, 0, 0.25);
-    border-radius: 16px;
-    padding: 40px 20px;
-    margin-bottom: 40px;
-    background: rgba(17, 17, 17, 0.6);
-    backdrop-filter: blur(6px);
-    transition: 0.3s ease;
-}
-
-#services:hover, #packages:hover, #testimonials:hover, #contact:hover {
-    border: 1px solid gold;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
-    transform: translateY(-3px);
-}
-
-/* HEADINGS */
+/* TITLES */
 h2 {
     text-align: center;
     color: gold;
-    font-weight: 700;
-    letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 30px;
 }
 
 /* GRID */
@@ -131,7 +117,7 @@ h2 {
 .card {
     background: #111;
     padding: 25px;
-    border-radius: 14px;
+    border-radius: 12px;
     border: 1px solid #222;
     transition: 0.3s;
 }
@@ -144,17 +130,17 @@ h2 {
 
 .card h3 {
     color: gold;
-    font-weight: 700;
 }
 
-.card p {
-    color: #ccc;
-    line-height: 1.6;
-}
-
-/* CONTACT */
-.contact a {
+/* PACKAGE LINKS */
+.card a {
     color: gold;
+    text-decoration: none;
+}
+
+/* PACKAGE DETAILS */
+#package-details .card {
+    margin-bottom: 20px;
 }
 
 /* FOOTER */
@@ -165,10 +151,26 @@ footer {
     color: #666;
 }
 
+/* CURSOR GLOW */
+#cursor-glow {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 215, 0, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(255,215,0,0.6);
+    z-index: 9999;
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- CURSOR GLOW -->
+<div id="cursor-glow"></div>
 
 <!-- NAV -->
 <nav>
@@ -186,9 +188,7 @@ footer {
 <div class="hero">
     <h2>Predictable Lead Generation Systems</h2>
     <p>
-        Acquirely builds automated lead generation systems that bring consistent,
-        high-quality clients to your business. No guessing. No inconsistent sales.
-        Just structured growth through proven outreach systems.
+        We build automated systems that generate consistent, high-quality leads for businesses.
     </p>
     <a class="btn" href="#packages">View Packages</a>
 </div>
@@ -196,16 +196,12 @@ footer {
 <!-- SERVICES -->
 <section id="services">
     <h2>What We Do</h2>
-
     <div class="grid">
         <div class="card">
-            We design and run automated outreach systems that generate consistent leads
-            for your business. Everything is structured, tracked, and optimised for conversions.
+            We build outreach systems that generate consistent leads automatically.
         </div>
-
         <div class="card">
-            We identify your ideal customers and reach them using proven multi-channel
-            strategies. This turns cold audiences into paying clients at scale.
+            We convert cold audiences into paying clients using structured systems.
         </div>
     </div>
 </section>
@@ -216,20 +212,42 @@ footer {
 
     <div class="grid">
         <div class="card">
-            <h3>Starter</h3>
-            <p>Basic lead generation setup with outreach system and lead tracking.</p>
+            <h3><a href="#starter">Starter</a></h3>
+            <p>Basic lead generation setup.</p>
         </div>
 
         <div class="card">
-            <h3>Growth</h3>
-            <p>Advanced automation, higher volume outreach, and optimisation system.</p>
+            <h3><a href="#growth">Growth</a></h3>
+            <p>Automation + optimisation system.</p>
         </div>
 
         <div class="card">
-            <h3>Premium</h3>
-            <p>Full system build, scaling strategy, and ongoing management support.</p>
+            <h3><a href="#premium">Premium</a></h3>
+            <p>Full scaling system.</p>
         </div>
     </div>
+</section>
+
+<!-- PACKAGE DETAILS -->
+<section id="package-details">
+
+    <h2>Package Breakdown</h2>
+
+    <div class="card" id="starter">
+        <h3>Starter Package</h3>
+        <p>Basic outreach system setup, lead targeting, and initial client acquisition system for small businesses.</p>
+    </div>
+
+    <div class="card" id="growth">
+        <h3>Growth Package</h3>
+        <p>Advanced automation, multi-channel outreach, CRM tracking, and optimisation for consistent lead flow.</p>
+    </div>
+
+    <div class="card" id="premium">
+        <h3>Premium Package</h3>
+        <p>Full-scale system with automation, scaling strategy, conversion optimisation, and ongoing support.</p>
+    </div>
+
 </section>
 
 <!-- TESTIMONIALS -->
@@ -238,21 +256,18 @@ footer {
 
     <div class="grid">
         <div class="card">
-            “Acquirely completely transformed our lead flow. We now get consistent
-            qualified leads every week without chasing clients manually.”
-            <br><br>— Daniel Wright, SaaS Founder
+            “We now get consistent leads every week. Game changer.”
+            <br><br>— Daniel Wright
         </div>
 
         <div class="card">
-            “Their system is structured and predictable. Within weeks we had booked calls
-            coming in daily from cold outreach.”
-            <br><br>— Sarah Collins, Agency Owner
+            “Our outreach finally works. Booked calls daily now.”
+            <br><br>— Sarah Collins
         </div>
 
         <div class="card">
-            “Best investment we made. Our conversion rate increased massively because
-            leads are now properly targeted.”
-            <br><br>— Michael Tan, Consultant
+            “Massive improvement in conversions and lead quality.”
+            <br><br>— Michael Tan
         </div>
     </div>
 </section>
@@ -260,17 +275,24 @@ footer {
 <!-- CONTACT -->
 <section id="contact">
     <h2>Contact</h2>
-
     <p style="text-align:center;">
-        Email us:
-        <a href="mailto:contact@acquirely.com">contact@acquirely.com</a>
+        Email: <a href="mailto:contact@acquirely.com">contact@acquirely.com</a>
     </p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-    © 2026 Acquirely. Built for scalable lead generation.
+    © 2026 Acquirely
 </footer>
+
+<!-- CURSOR SCRIPT -->
+<script>
+document.addEventListener("mousemove", function(e) {
+    const glow = document.getElementById("cursor-glow");
+    glow.style.left = e.pageX + "px";
+    glow.style.top = e.pageY + "px";
+});
+</script>
 
 </body>
 </html>
