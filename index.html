@@ -20,13 +20,13 @@ body {
   animation: pageLoad 1.2s ease-out;
 }
 
-/* ================= PAGE LOAD ================= */
+/* PAGE LOAD */
 @keyframes pageLoad {
   from { opacity: 0; transform: scale(1.02); }
   to { opacity: 1; transform: scale(1); }
 }
 
-/* ================= BACKGROUND PARALLAX ================= */
+/* BACKGROUND */
 body::before {
   content: "";
   position: fixed;
@@ -46,7 +46,7 @@ body::before {
   to { transform: translateY(20px) scale(1.05); }
 }
 
-/* ================= NAV ================= */
+/* NAV */
 nav {
   display: flex;
   justify-content: space-between;
@@ -54,25 +54,27 @@ nav {
   align-items: center;
 }
 
-/* ================= GLOWING LOGO ================= */
+/* ======= METALLIC LOGO ======= */
 .logo {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: bold;
-  color: gold;
-  animation: glowPulse 2.5s infinite ease-in-out;
-  text-shadow: 0 0 15px rgba(255,215,0,0.6);
+  background: linear-gradient(90deg, #b8860b, #ffd700, #fff8dc, #ffd700, #b8860b);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s infinite linear, glowPulse 2.5s infinite ease-in-out;
+  text-shadow: 0 0 15px rgba(255,215,0,0.4);
+}
+
+@keyframes shine {
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
 }
 
 @keyframes glowPulse {
-  0% {
-    text-shadow: 0 0 5px rgba(255,215,0,0.4);
-  }
-  50% {
-    text-shadow: 0 0 25px rgba(255,215,0,0.9);
-  }
-  100% {
-    text-shadow: 0 0 5px rgba(255,215,0,0.4);
-  }
+  0% { filter: drop-shadow(0 0 5px rgba(255,215,0,0.4)); }
+  50% { filter: drop-shadow(0 0 20px rgba(255,215,0,0.9)); }
+  100% { filter: drop-shadow(0 0 5px rgba(255,215,0,0.4)); }
 }
 
 nav a {
@@ -85,7 +87,7 @@ nav a:hover {
   color: gold;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero {
   text-align: center;
   padding: 120px 20px;
@@ -102,12 +104,20 @@ nav a:hover {
   opacity: 0.8;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTION HEADINGS */
+section h2 {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 25px;
+  color: gold;
+}
+
+/* SECTIONS */
 section {
   padding: 80px 20px;
 }
 
-/* scroll animation base */
+/* SCROLL ANIMATION */
 section, .card {
   opacity: 0;
   transform: translateY(40px);
@@ -119,7 +129,7 @@ section.show, .card.show {
   transform: translateY(0);
 }
 
-/* ================= CARDS ================= */
+/* CARDS */
 .card {
   background: #111;
   padding: 20px;
@@ -128,12 +138,14 @@ section.show, .card.show {
   transition: 0.3s ease;
 }
 
-.card:hover {
+/* HOVER ONLY ONE CARD ACTIVE */
+.card.active {
+  transform: scale(1.05);
   border: 1px solid gold;
-  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255,215,0,0.25);
 }
 
-/* ================= SERVICES DETAIL HOVER ================= */
+/* SERVICES DETAIL */
 .card .detail {
   margin-top: 10px;
   font-size: 13px;
@@ -141,25 +153,25 @@ section.show, .card.show {
   display: none;
 }
 
-.card:hover .detail {
+.card.active .detail {
   display: block;
 }
 
-/* ================= GRIDS ================= */
+/* GRIDS */
 .services, .packages, .testimonials {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
-/* ================= PRICE ================= */
+/* PRICE */
 .price {
   margin-top: 10px;
   color: gold;
   font-weight: bold;
 }
 
-/* ================= CONTACT ================= */
+/* CONTACT */
 .contact-box {
   max-width: 500px;
   margin: auto;
@@ -191,14 +203,19 @@ section.show, .card.show {
   cursor: pointer;
 }
 
-/* ================= PACKAGE HIGHLIGHT ================= */
-#packages .card.active {
-  border: 1px solid gold;
-  box-shadow: 0 0 20px rgba(255,215,0,0.25);
-  transform: scale(1.03);
+/* PACKAGE HOVER ONLY */
+.package-card {
+  transition: 0.3s ease;
 }
 
-/* ================= FOOTER ================= */
+/* ONLY HOVER GLOW (NO PERMANENT GLOW) */
+.package-card:hover {
+  border: 1px solid gold;
+  box-shadow: 0 0 25px rgba(255,215,0,0.3);
+  transform: scale(1.05);
+}
+
+/* FOOTER */
 footer {
   text-align: center;
   padding: 40px;
@@ -229,16 +246,22 @@ footer {
 <section id="about">
   <h2>What We Do</h2>
 
-  <p style="margin-top:15px; opacity:0.85; max-width:900px;">
-    We build structured, automated lead generation systems designed for B2B companies that want predictable and scalable growth.
-    Instead of relying on inconsistent marketing or guesswork, we create systems that continuously generate qualified leads.
+  <p style="max-width:900px; margin:auto; opacity:0.85;">
+    We design and implement high-performance lead generation systems that help businesses move away from inconsistent marketing and toward predictable client acquisition.
+    Our focus is on building structured systems that continuously bring in qualified prospects without relying on manual effort.
   </p>
 
   <br>
 
-  <p style="opacity:0.85; max-width:900px;">
-    Our systems combine outreach strategy, automation tools, and conversion optimisation.
-    The goal is simple: reduce manual effort while increasing consistent sales and predictable revenue flow.
+  <p style="max-width:900px; margin:auto; opacity:0.85;">
+    These systems combine data-driven outreach, automation workflows, and conversion-focused messaging.
+    We identify your ideal customer, build targeted pipelines, and create outreach systems that run in the background while your business scales.
+  </p>
+
+  <br>
+
+  <p style="max-width:900px; margin:auto; opacity:0.85;">
+    The end result is simple: less time chasing leads, more time closing clients, and a predictable flow of revenue generated through automated systems designed for long-term growth.
   </p>
 </section>
 
@@ -251,21 +274,21 @@ footer {
     <div class="card">
       <h3>Lead Generation</h3>
       <div class="detail">
-        We build targeted lead lists, define ideal customer profiles, and create outreach pipelines that bring consistent new opportunities into your business.
+        We build highly targeted prospect lists, define your ideal customer profile, and construct outreach systems designed to consistently deliver qualified leads directly to your pipeline.
       </div>
     </div>
 
     <div class="card">
       <h3>Cold Email Systems</h3>
       <div class="detail">
-        We design automated cold email campaigns, write sequences, optimise deliverability, and improve reply rates through structured testing.
+        We design and automate cold email campaigns including copywriting, sequencing, deliverability optimisation, and performance testing to maximise response rates.
       </div>
     </div>
 
     <div class="card">
       <h3>Automation Funnels</h3>
       <div class="detail">
-        We build automated follow-up systems, CRM workflows, and conversion funnels that move leads from first contact to closed deal.
+        We build automated CRM workflows, follow-up systems, and conversion funnels that ensure no lead is lost and every opportunity is nurtured effectively.
       </div>
     </div>
 
@@ -306,17 +329,17 @@ footer {
   <div class="testimonials">
 
     <div class="card">
-      <p>"We went from inconsistent leads to a fully structured system generating predictable monthly clients with much higher quality and conversion rates."</p>
+      <p>"We went from inconsistent leads to a fully structured system generating predictable monthly clients."</p>
       <br><b>- Michael Thompson</b>
     </div>
 
     <div class="card">
-      <p>"Our outreach is now fully automated and optimised. We finally have a reliable pipeline that consistently brings in qualified opportunities."</p>
+      <p>"Our outreach is now fully automated and we finally have a stable pipeline of qualified leads."</p>
       <br><b>- Sarah Williams</b>
     </div>
 
     <div class="card">
-      <p>"This system transformed our sales process completely. Everything is now measurable, automated, and scalable."</p>
+      <p>"This system completely transformed how we acquire clients. Everything is now scalable and predictable."</p>
       <br><b>- David Johnson</b>
     </div>
 
@@ -347,28 +370,19 @@ const elements = document.querySelectorAll("section, .card");
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
+    if (entry.isIntersecting) entry.target.classList.add("show");
   });
 }, { threshold: 0.15 });
 
 elements.forEach(el => observer.observe(el));
 
-/* PACKAGE HIGHLIGHT */
-const packages = document.querySelectorAll(".package-card");
+/* ONLY ONE ACTIVE SERVICE CARD */
+const cards = document.querySelectorAll("#services .card");
 
-window.addEventListener("scroll", () => {
-  let index = 0;
-
-  const base = document.getElementById("packages").offsetTop;
-
-  if (window.scrollY > base + 50) index = 0;
-  if (window.scrollY > base + 200) index = 1;
-  if (window.scrollY > base + 400) index = 2;
-
-  packages.forEach((p, i) => {
-    p.classList.toggle("active", i === index);
+cards.forEach(card => {
+  card.addEventListener("mouseenter", () => {
+    cards.forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
   });
 });
 </script>
