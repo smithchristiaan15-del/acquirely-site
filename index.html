@@ -13,127 +13,90 @@ body {
 font-family:Poppins;
 margin:0;
 background:#000;
-color:#f5f5f5;
+color:#fff;
 }
 
-/* NAVBAR */
+/* NAV */
 header {
 position:fixed;
 top:0;
 width:100%;
 display:flex;
 justify-content:space-between;
-align-items:center;
-padding:20px 80px; /* ← FIXED spacing */
+padding:20px 80px;
 background:rgba(0,0,0,0.9);
-border-bottom:1px solid rgba(255,215,0,0.2);
 z-index:1000;
 }
 
-/* METALLIC LOGO */
 .logo a {
+font-size:22px;
 font-weight:700;
-font-size:24px;
 text-decoration:none;
-background:linear-gradient(
-120deg,
-#fff 0%,
-#ffd700 20%,
-#fff 40%,
-#facc15 60%,
-#fff 80%
-);
-background-size:200% auto;
+background:linear-gradient(90deg,#fff,#ffd700,#fff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:shine 4s linear infinite;
 }
 
-@keyframes shine {
-to {background-position:200% center;}
-}
-
-/* NAV LINKS */
 nav a {
 margin:0 20px;
+color:#ccc;
 text-decoration:none;
-color:#d4d4d4;
-font-weight:500;
-transition:0.3s;
 }
 
-nav a:hover {
-color:#ffd700;
-}
-
-/* CONTACT BUTTON IN NAV */
 .nav-btn {
 padding:10px 20px;
-border-radius:8px;
 background:linear-gradient(145deg,#ffd700,#facc15);
 color:#000;
+border-radius:8px;
 text-decoration:none;
-font-weight:600;
-box-shadow:
-0 0 10px rgba(255,215,0,0.4),
-inset 0 0 5px rgba(255,255,255,0.5);
-transition:0.3s;
-}
-
-.nav-btn:hover {
-transform:translateY(-2px);
-box-shadow:
-0 0 20px rgba(255,215,0,0.6),
-inset 0 0 8px rgba(255,255,255,0.7);
 }
 
 /* HERO */
 .hero {
-padding:180px 20px 120px;
+padding:180px 20px;
 text-align:center;
-background:radial-gradient(circle at top,#111,#000);
+background:url('https://images.unsplash.com/photo-1556157382-97eda2f9e2bf') center/cover;
+position:relative;
 }
-
-.hero h1 {
-font-size:3.5rem;
-background:linear-gradient(
-120deg,#fff,#ffd700,#fff
-);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+.hero::before {
+content:'';
+position:absolute;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.7);
 }
+.hero * {position:relative;}
 
-.hero p {
-color:#aaa;
-margin-top:20px;
-}
-
+.hero h1 {font-size:3.5rem;}
 .btn {
-display:inline-block;
-margin-top:30px;
 padding:15px 40px;
-border-radius:10px;
-background:linear-gradient(145deg,#ffd700,#facc15);
+background:#ffd700;
 color:#000;
+border-radius:8px;
 text-decoration:none;
-font-weight:600;
-box-shadow:
-0 0 20px rgba(255,215,0,0.4),
-inset 0 0 10px rgba(255,255,255,0.6);
+display:inline-block;
+margin-top:20px;
 }
 
 /* SECTIONS */
 .section {
-padding:100px 20px;
+padding:120px 20px;
 max-width:1100px;
-margin:60px auto;
-border-radius:15px;
+margin:auto;
+position:relative;
+}
+.section::before {
+content:'';
+position:absolute;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.75);
+z-index:-1;
 }
 
-.section.one {background:#050505;}
-.section.two {background:#0a0a0a;}
-.section.three {background:#111;}
-.section.four {background:#070707;}
+/* BACKGROUNDS */
+.services {background:url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d') center/cover;}
+.about {background:url('https://images.unsplash.com/photo-1553877522-43269d4ea984') center/cover;}
+.testimonials {background:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71') center/cover;}
+.contact {background:url('https://images.unsplash.com/photo-1551434678-e076c223a692') center/cover; padding-top:160px;}
 
 /* GRID */
 .grid {
@@ -145,29 +108,14 @@ gap:25px;
 .card {
 background:#111;
 padding:25px;
-border-radius:12px;
-border:1px solid rgba(255,215,0,0.1);
-transition:0.3s;
+border-radius:10px;
 }
 
-.card:hover {
-transform:translateY(-5px);
-box-shadow:0 0 25px rgba(255,215,0,0.3);
-}
-
-/* TESTIMONIALS */
+/* TESTIMONIAL */
 .testimonial {
 background:#111;
 padding:25px;
-border-radius:12px;
-border:1px solid rgba(255,215,0,0.1);
-}
-
-.testimonial img {
-width:60px;
-height:60px;
-border-radius:50%;
-margin-bottom:10px;
+border-radius:10px;
 }
 
 /* CONTACT */
@@ -182,7 +130,6 @@ footer {
 text-align:center;
 padding:30px;
 background:#000;
-border-top:1px solid rgba(255,215,0,0.1);
 }
 </style>
 </head>
@@ -190,10 +137,7 @@ border-top:1px solid rgba(255,215,0,0.1);
 <body>
 
 <header>
-<div class="logo">
-<a href="#home">ACQUIRELY</a>
-</div>
-
+<div class="logo"><a href="#home">ACQUIRELY</a></div>
 <nav>
 <a href="#services">Services</a>
 <a href="#about">About</a>
@@ -204,58 +148,77 @@ border-top:1px solid rgba(255,215,0,0.1);
 
 <!-- HERO -->
 <section id="home" class="hero">
-<h1>Client Acquisition, Engineered to Scale</h1>
-<p>We build systems that generate consistent, high-quality clients.</p>
+<h1>We Build Systems That Bring You Clients</h1>
+<p>Predictable lead generation without relying on ads</p>
 <a href="#contact" class="btn">Get Started</a>
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="section one">
-<h2>What We Do</h2>
+<section id="services" class="section services">
+<h2>Our Services</h2>
+
 <div class="grid">
-<div class="card"><h3>Lead Generation</h3><p>Highly targeted prospects ready to convert.</p></div>
-<div class="card"><h3>Outreach Systems</h3><p>Automated pipelines that generate responses daily.</p></div>
-<div class="card"><h3>Funnels</h3><p>Pages built to convert traffic into paying clients.</p></div>
+
+<div class="card">
+<h3>Lead Generation</h3>
+<p>We identify and build highly targeted prospect lists tailored to your ideal client. This ensures that every outreach effort is directed at businesses most likely to convert.</p>
 </div>
+
+<div class="card">
+<h3>Outreach Systems</h3>
+<p>We create automated email and LinkedIn outreach systems that generate responses daily. These systems are optimized for engagement, replies, and booked calls.</p>
+</div>
+
+<div class="card">
+<h3>Conversion Funnels</h3>
+<p>We design and build high-converting landing pages that turn visitors into leads. Every element is optimized to drive action and increase conversions.</p>
+</div>
+
+</div>
+
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="section two">
+<section id="about" class="section about">
 <h2>About Acquirely</h2>
-<p>We build scalable acquisition systems designed for predictable growth.</p>
-<p>No guesswork. Just results.</p>
+
+<p>Acquirely specializes in building scalable client acquisition systems for businesses that want predictable growth.</p>
+
+<p>Instead of relying on referrals or inconsistent marketing strategies, we create structured outreach systems that consistently generate new business opportunities.</p>
+
+<p>Our approach focuses on efficiency, automation, and results — ensuring that you can scale without increasing workload.</p>
+
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials" class="section three">
+<section id="testimonials" class="section testimonials">
 <h2>Client Results</h2>
 
 <div class="grid">
+
 <div class="testimonial">
-<img src="https://randomuser.me/api/portraits/men/32.jpg">
-<p>“We finally have a consistent pipeline and predictable growth.”</p>
-<strong>Daniel M.</strong>
+<p>“Before working with Acquirely, we had no consistent way of generating leads. Within weeks, we started receiving qualified prospects regularly and built a pipeline we could actually rely on.”</p>
+<strong>Agency Owner</strong>
 </div>
 
 <div class="testimonial">
-<img src="https://randomuser.me/api/portraits/women/44.jpg">
-<p>“We stopped chasing clients — now they come to us.”</p>
-<strong>Sarah K.</strong>
+<p>“The outreach system completely transformed our business. We went from chasing clients to having inbound conversations every single week.”</p>
+<strong>Consultant</strong>
 </div>
 
 <div class="testimonial">
-<img src="https://randomuser.me/api/portraits/men/76.jpg">
-<p>“Closed deals within weeks. The system works.”</p>
-<strong>James R.</strong>
+<p>“We closed multiple deals within the first month. The system is simple, effective, and scalable.”</p>
+<strong>Business Owner</strong>
 </div>
+
 </div>
 
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section four contact">
+<section id="contact" class="section contact">
 <h2>Contact</h2>
-<p>We’ll discuss pricing after understanding your needs.</p>
+<p>We’ll discuss pricing after understanding your needs and goals.</p>
 
 <a href="https://wa.me/6288211592253">💬 WhatsApp Me</a>
 <a href="mailto:smithchristiaan15@gmail.com">📧 Email Me</a>
