@@ -14,7 +14,7 @@ body {
 }
 
 /* =========================
-   TOP NAVIGATION (NEW)
+   TOP BAR
 ========================= */
 .topbar {
   position: fixed;
@@ -29,7 +29,7 @@ body {
   z-index: 1000;
 }
 
-/* BIGGER LOGO */
+/* LOGO */
 .logo {
   font-size: 42px;
   letter-spacing: 5px;
@@ -49,8 +49,6 @@ body {
   -webkit-text-fill-color: transparent;
 
   animation: goldShine 3s linear infinite;
-
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
 }
 
 @keyframes goldShine {
@@ -58,7 +56,7 @@ body {
   100% { background-position: 300% center; }
 }
 
-/* NAV LINKS TOP RIGHT */
+/* NAV */
 .nav {
   display: flex;
   gap: 25px;
@@ -69,17 +67,14 @@ body {
   text-decoration: none;
   font-size: 14px;
   opacity: 0.8;
-  transition: 0.3s;
 }
 
 .nav a:hover {
-  opacity: 1;
   color: #ffd700;
+  opacity: 1;
 }
 
-/* =========================
-   HERO
-========================= */
+/* HERO */
 .hero {
   text-align: center;
   padding: 180px 20px 140px;
@@ -98,18 +93,14 @@ body {
   font-size: 18px;
 }
 
-/* =========================
-   SECTION TITLES
-========================= */
+/* TITLES */
 .section-title {
   text-align: center;
   font-size: 46px;
   margin: 90px 0 40px;
 }
 
-/* =========================
-   SERVICES
-========================= */
+/* SERVICES */
 .services {
   display: flex;
   flex-direction: column;
@@ -124,29 +115,18 @@ body {
   padding: 30px;
   border-radius: 12px;
   border: 1px solid #222;
-  transition: 0.3s ease;
 }
 
 .service-box h3 {
   font-size: 24px;
-  margin-bottom: 12px;
 }
 
 .service-box p {
   line-height: 1.8;
   opacity: 0.85;
-  font-size: 16px;
 }
 
-.service-box:hover {
-  transform: scale(1.02);
-  border-color: #ffd700;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
-}
-
-/* =========================
-   PACKAGES
-========================= */
+/* PACKAGES */
 .packages {
   display: flex;
   flex-direction: column;
@@ -166,12 +146,9 @@ body {
 .price {
   font-size: 26px;
   color: #ffd700;
-  margin: 10px 0;
 }
 
-/* =========================
-   TESTIMONIALS
-========================= */
+/* TESTIMONIALS */
 .testimonials {
   display: flex;
   flex-direction: column;
@@ -187,12 +164,9 @@ body {
   border-radius: 12px;
   border: 1px solid #222;
   line-height: 1.9;
-  font-size: 16px;
 }
 
-/* =========================
-   CONTACT
-========================= */
+/* CONTACT */
 .contact {
   max-width: 800px;
   margin: auto;
@@ -222,14 +196,35 @@ button {
 button:hover {
   background: #e6c200;
 }
+
+/* =========================
+   POPUP MESSAGE
+========================= */
+.popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  border: 1px solid #ffd700;
+  color: #ffd700;
+  padding: 16px 28px;
+  border-radius: 10px;
+  font-weight: bold;
+  display: none;
+  z-index: 2000;
+}
 </style>
 </head>
 
 <body>
 
+<div class="popup" id="popup">
+  We will be in contact
+</div>
+
 <!-- TOP BAR -->
 <div class="topbar">
-
   <div class="logo">Acquirely</div>
 
   <div class="nav">
@@ -238,13 +233,11 @@ button:hover {
     <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </div>
-
 </div>
 
 <!-- HERO -->
 <div class="hero">
   <h1>Lead Generation Systems</h1>
-
   <p>
     We build high-performance lead generation systems, automation funnels, and cold outreach infrastructure
     designed to scale your business with predictable and consistent client acquisition.
@@ -254,56 +247,39 @@ button:hover {
 <!-- SERVICES -->
 <h2 class="section-title" id="services">Services</h2>
 <div class="services">
-
   <div class="service-box">
     <h3>Lead Generation Systems</h3>
-    <p>
-      We design complete lead generation systems that attract, capture, and convert high-quality prospects for your business.
-      This includes structured funnels, landing pages, conversion messaging, and strategic positioning so your business
-      consistently generates inbound interest.
-    </p>
+    <p>We build structured systems that generate consistent qualified leads for your business.</p>
   </div>
 
   <div class="service-box">
     <h3>Cold Email Automation</h3>
-    <p>
-      We build fully automated cold email systems that handle prospecting, outreach, follow-ups, and tracking.
-      Optimised for deliverability and response rates so outreach runs in the background consistently generating leads.
-    </p>
+    <p>Automated outreach systems with follow-ups and tracking for consistent replies.</p>
   </div>
 
   <div class="service-box">
     <h3>Marketing Funnels</h3>
-    <p>
-      Structured funnels that guide prospects from awareness to conversion using landing pages, messaging strategy,
-      and automated follow-ups to increase conversion rates.
-    </p>
+    <p>Conversion funnels that turn traffic into paying clients.</p>
   </div>
-
 </div>
 
 <!-- PACKAGES -->
 <h2 class="section-title" id="packages">Packages</h2>
 <div class="packages">
-
   <div class="package">
     <h3>Starter Package</h3>
     <div class="price">$499 USD</div>
-    <p>Basic lead system setup for new businesses.</p>
   </div>
 
   <div class="package">
     <h3>Growth Package</h3>
     <div class="price">$899 USD</div>
-    <p>Automation + scaling funnel system.</p>
   </div>
 
   <div class="package">
     <h3>Premium Package</h3>
     <div class="price">$1299 USD</div>
-    <p>Full acquisition system with scaling infrastructure.</p>
   </div>
-
 </div>
 
 <!-- TESTIMONIALS -->
@@ -311,15 +287,15 @@ button:hover {
 <div class="testimonials">
 
   <div class="testimonial">
-    “Before this system, we had no predictable client flow and relied heavily on inconsistent referrals. After implementation, we now have a structured pipeline that delivers consistent qualified leads every week.”
+    “We now have consistent leads every week after implementation.”
   </div>
 
   <div class="testimonial">
-    “Our outreach is now fully automated. Follow-ups, tracking, and messaging are handled automatically, which increased our response rates significantly and reduced manual workload.”
+    “Automation removed all manual outreach and increased response rates.”
   </div>
 
   <div class="testimonial">
-    “The funnel system created a clear conversion path that turned traffic into paying clients consistently. Everything now works like a proper acquisition machine.”
+    “Our funnel finally turns traffic into real clients.”
   </div>
 
 </div>
@@ -328,14 +304,30 @@ button:hover {
 <h2 class="section-title" id="contact">Contact</h2>
 <div class="contact">
 
-  <form>
-    <input type="text" placeholder="Name" />
-    <input type="email" placeholder="Email" />
-    <textarea rows="5" placeholder="Message"></textarea>
+  <form onsubmit="handleSubmit(event)">
+    <input type="text" placeholder="Name" required />
+    <input type="email" placeholder="Email" required />
+    <textarea rows="5" placeholder="Message" required></textarea>
     <button type="submit">Send</button>
   </form>
 
 </div>
+
+<!-- SCRIPT -->
+<script>
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 3000);
+
+  event.target.reset();
+}
+</script>
 
 </body>
 </html>
