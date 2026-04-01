@@ -1,241 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Acquirely | Growth Systems</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acquirely</title>
 
 <style>
-  body { background: black; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #111111, #000000 70%);
+  color: #f5f5f5;
+  line-height: 1.6;
+}
 
-  .gold {
-    background: linear-gradient(90deg,#d4af37,#fff4b0,#b8860b);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-  }
+h1, h2, h3 {
+  color: #d4af37;
+}
 
-  .glass {
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(212,175,55,0.15);
-  }
+a {
+  color: #d4af37;
+  text-decoration: none;
+}
 
-  .fade {
-    opacity:0;
-    transform: translateY(30px);
-  }
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.85);
+  position: sticky;
+  top: 0;
+}
+
+nav a {
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+}
+
+.hero p {
+  color: #ccc;
+}
+
+/* BUTTON */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: linear-gradient(145deg, #d4af37, #a67c00);
+  color: black;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* SECTIONS */
+section {
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* PRICING */
+.pricing {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(212,175,55,0.3);
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+}
+
+/* TESTIMONIALS */
+.testimonial {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
 </style>
 </head>
 
-<body class="text-white overflow-x-hidden">
-
-<!-- BACKGROUND -->
-<div class="fixed inset-0 -z-10">
-  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"
-       class="w-full h-full object-cover opacity-10"/>
-  <div class="absolute inset-0 bg-black/95"></div>
-</div>
+<body>
 
 <!-- NAV -->
-<nav class="fixed top-0 w-full z-50 glass">
-  <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-
-    <div class="text-2xl font-bold gold">Acquirely</div>
-
-    <div class="hidden md:flex gap-6 text-gray-300">
-      <a href="#services">Services</a>
-      <a href="#cases">Case Studies</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <button id="menu" class="md:hidden">☰</button>
-  </div>
-
-  <div id="mobile" class="hidden flex-col p-4 md:hidden text-gray-300">
+<nav>
+  <div><strong>Acquirely</strong></div>
+  <div>
     <a href="#services">Services</a>
-    <a href="#cases">Case Studies</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#pricing">Packages</a>
+    <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="pt-40 text-center max-w-5xl mx-auto px-6">
-
-  <h1 class="text-5xl md:text-7xl font-bold gold fade">
-    Acquirely
-  </h1>
-
-  <p class="mt-6 text-gray-300 text-lg fade">
-    We build automated client acquisition systems that replace ads, manual outreach, and inconsistent sales processes.
-  </p>
-
-  <div class="mt-10 fade">
-    <a href="#contact"
-       class="bg-gradient-to-r from-yellow-600 to-yellow-400 text-black px-8 py-3 rounded-full font-semibold">
-      Book a Strategy Call
-    </a>
-  </div>
-
-</section>
+<div class="hero">
+  <h1>High-Performance Lead Generation Systems</h1>
+  <p>Automation, outreach & AI systems that generate clients for your business.</p>
+  <a href="#pricing" class="btn">View Packages</a>
+</div>
 
 <!-- SERVICES -->
-<section id="services" class="mt-40 max-w-6xl mx-auto px-6">
-
-  <h2 class="text-4xl font-bold gold text-center mb-12 fade">Systems We Build</h2>
-
-  <div class="grid md:grid-cols-3 gap-6">
-
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400 font-semibold">AI Lead Generation</h3>
-      <p class="text-gray-400 mt-2">Automated outreach systems that find and qualify clients daily.</p>
-    </div>
-
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400 font-semibold">Sales Automation</h3>
-      <p class="text-gray-400 mt-2">Funnels, follow-ups, and CRM pipelines that close leads automatically.</p>
-    </div>
-
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400 font-semibold">Business Scaling Systems</h3>
-      <p class="text-gray-400 mt-2">We remove manual work so companies scale without hiring pressure.</p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CASE STUDIES -->
-<section id="cases" class="mt-40 max-w-6xl mx-auto px-6">
-
-  <h2 class="text-4xl font-bold gold text-center mb-12 fade">Case Studies</h2>
-
-  <div class="grid md:grid-cols-3 gap-6">
-
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400">Real Estate Agency</h3>
-      <p class="text-gray-400 mt-2">
-        Built a full automation system replacing manual lead hunting. Result: daily inbound inquiries without ads.
-      </p>
-    </div>
-
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400">Fitness Coach</h3>
-      <p class="text-gray-400 mt-2">
-        Automated DM outreach + booking funnel. Reduced 90% manual messaging workload.
-      </p>
-    </div>
-
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400">Digital Agency</h3>
-      <p class="text-gray-400 mt-2">
-        CRM + follow-up automation increased conversion rate through structured pipeline system.
-      </p>
-    </div>
-
-  </div>
-
+<section id="services">
+  <h2>What We Do</h2>
+  <p>
+    We build automated lead generation systems, CRM pipelines, outreach funnels,
+    and AI-powered automation tools that help businesses scale faster.
+  </p>
 </section>
 
 <!-- PRICING -->
-<section id="pricing" class="mt-40 max-w-5xl mx-auto px-6 text-center">
+<section id="pricing">
+  <h2>Packages</h2>
 
-  <h2 class="text-4xl font-bold gold mb-10 fade">Pricing</h2>
+  <div class="pricing">
 
-  <div class="grid md:grid-cols-3 gap-6">
-
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400">Starter</h3>
-      <p class="text-gray-400 mt-2">$300 setup</p>
+    <div class="card">
+      <h3>Starter</h3>
+      <p>Basic lead capture system + Google Sheets CRM setup.</p>
+      <a class="btn" href="#contact">Get Starter</a>
     </div>
 
-    <div class="glass p-6 rounded-xl border border-yellow-500 fade">
-      <h3 class="text-yellow-400">Growth</h3>
-      <p class="text-gray-400 mt-2">$800/month</p>
+    <div class="card">
+      <h3>Growth</h3>
+      <p>Automation system + email alerts + optimized funnel structure.</p>
+      <a class="btn" href="#contact">Get Growth</a>
     </div>
 
-    <div class="glass p-6 rounded-xl fade">
-      <h3 class="text-yellow-400">Scale</h3>
-      <p class="text-gray-400 mt-2">$1500/month</p>
+    <div class="card">
+      <h3>Premium</h3>
+      <p>Full AI system + WhatsApp automation + CRM + scaling funnel.</p>
+      <a class="btn" href="#contact">Get Premium</a>
     </div>
 
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <h2>Client Results</h2>
+
+  <div class="testimonial">
+    “We moved from manual spreadsheets to a fully automated lead system with real-time tracking and email notifications.”
+  </div>
+
+  <div class="testimonial">
+    “Their funnel system helped us structure inbound leads and improve conversions instantly.”
+  </div>
+
+  <div class="testimonial">
+    “The automation system feels like having a full-time sales assistant working 24/7.”
   </div>
 
 </section>
 
-<!-- CONTACT + LEAD FORM -->
-<section id="contact" class="mt-40 mb-20 max-w-3xl mx-auto px-6 text-center">
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Us</h2>
 
-  <h2 class="text-4xl font-bold gold fade">Get Started</h2>
+  <p><strong>WhatsApp:</strong> +62 882 1159 2253</p>
+  <p><strong>Email:</strong> acquirely@proton.me</p>
+  <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/christiaan-smith-32905387" target="_blank">Profile</a></p>
 
-  <p class="text-gray-400 mt-4 fade">Book a call or send your details below</p>
+  <br>
 
-  <!-- LEAD FORM (HOOK TO GOOGLE SHEETS) -->
-  <form class="mt-8 glass p-6 rounded-xl fade"
-        action="https://script.google.com/macros/s/AKfycbxWrGqqZq3XcY4yeYU69XtZGq3ojc5wDVVGbRRJP66QMMC07VM3_8HHEpi--KgHGR0w/exec"
-        method="POST">
-
-    <input name="name" placeholder="Name"
-           class="w-full p-3 mb-3 bg-black border border-yellow-600/30 rounded">
-
-    <input name="email" placeholder="Email"
-           class="w-full p-3 mb-3 bg-black border border-yellow-600/30 rounded">
-
-    <textarea name="message" placeholder="What do you need?"
-              class="w-full p-3 mb-3 bg-black border border-yellow-600/30 rounded"></textarea>
-
-    <button class="w-full bg-yellow-500 text-black py-3 font-semibold rounded">
-      Submit
-    </button>
+  <form action="YOUR_GOOGLE_SCRIPT_URL_HERE" method="POST">
+    <input name="name" placeholder="Your Name" required>
+    <input name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button class="btn" type="submit">Send Message</button>
   </form>
-
-  <!-- CONTACT LINKS -->
-  <div class="mt-10 space-y-3 fade">
-
-    <a href="https://wa.me/6288211592253" class="block text-yellow-400">
-      WhatsApp
-    </a>
-
-    <a href="mailto:smithchristiaan15@gmail.com" class="block text-yellow-400">
-      Email
-    </a>
-
-    <a href="https://www.linkedin.com/in/christiaan-smith-32905387" class="block text-yellow-400">
-      LinkedIn
-    </a>
-
-  </div>
-
 </section>
 
 <!-- FOOTER -->
-<footer class="text-center text-gray-600 p-6 border-t border-yellow-500/10">
+<footer>
   © 2026 Acquirely. All rights reserved.
 </footer>
-
-<!-- SCRIPTS -->
-<script>
-  document.getElementById("menu").onclick = () => {
-    document.getElementById("mobile").classList.toggle("hidden");
-  };
-
-  gsap.utils.toArray(".fade").forEach(el => {
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%"
-      }
-    });
-  });
-</script>
 
 </body>
 </html>
