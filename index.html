@@ -15,11 +15,22 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #000;
     color: #fff;
+    overflow-x: hidden;
 }
 
-/* SMOOTH SCROLL */
 html {
     scroll-behavior: smooth;
+}
+
+/* BACKGROUND */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.25;
 }
 
 /* NAV */
@@ -31,79 +42,54 @@ nav {
     border-bottom: 1px solid #222;
     position: sticky;
     top: 0;
-    background: #000;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
     z-index: 100;
 }
 
 /* LOGO */
 .logo {
+    position: relative;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: 4px;
+    cursor: pointer;
     color: transparent;
     background: linear-gradient(90deg, #d4af37, #fff, #d4af37);
     -webkit-background-clip: text;
-    cursor: pointer;
 }
 
-.logo:hover {
-    text-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
-
-/* NAV LINKS */
-nav a {
-    color: #fff;
-    margin: 0 15px;
-    text-decoration: none;
-}
-
-nav a:hover {
-    color: gold;
-}
-
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 120px 20px;
-}
-
-.hero h2 {
-    font-size: 42px;
-    color: gold;
-}
-
-.hero p {
-    max-width: 700px;
-    margin: 20px auto;
-    color: #ccc;
-}
-
-/* BUTTON */
-.btn {
-    display: inline-block;
-    padding: 12px 25px;
-    border: 1px solid gold;
-    color: gold;
-    text-decoration: none;
-}
-
-.btn:hover {
-    background: gold;
-    color: #000;
+/* CURSOR */
+#cursor-glow {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 215, 0, 0.25);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(255,215,0,0.4);
+    z-index: 9999;
 }
 
 /* SECTIONS */
 section {
     max-width: 1100px;
     margin: auto;
-    padding: 70px 20px;
+    padding: 90px 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s ease;
 }
 
-/* TITLES */
+section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 h2 {
     text-align: center;
     color: gold;
-    text-transform: uppercase;
 }
 
 /* GRID */
@@ -115,7 +101,7 @@ h2 {
 
 /* CARDS */
 .card {
-    background: #111;
+    background: rgba(20,20,20,0.7);
     padding: 25px;
     border-radius: 12px;
     border: 1px solid #222;
@@ -124,44 +110,33 @@ h2 {
 
 .card:hover {
     border: 1px solid gold;
-    box-shadow: 0 0 15px rgba(255,215,0,0.3);
     transform: translateY(-5px);
 }
 
-.card h3 {
+/* CONTACT */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: 1px solid gold;
     color: gold;
+    background: transparent;
+    cursor: pointer;
 }
 
-/* PACKAGE LINKS */
-.card a {
-    color: gold;
-    text-decoration: none;
-}
-
-/* PACKAGE DETAILS */
-#package-details .card {
-    margin-bottom: 20px;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 30px;
-    border-top: 1px solid #222;
-    color: #666;
-}
-
-/* CURSOR GLOW */
-#cursor-glow {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 215, 0, 0.4);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px rgba(255,215,0,0.6);
-    z-index: 9999;
+.btn:hover {
+    background: gold;
+    color: #000;
 }
 
 </style>
@@ -169,129 +144,147 @@ footer {
 
 <body>
 
-<!-- CURSOR GLOW -->
+<canvas id="bg-canvas"></canvas>
 <div id="cursor-glow"></div>
 
-<!-- NAV -->
 <nav>
     <div class="logo">ACQ<span style="color:gold;">U</span>IRELY</div>
-
-    <div>
-        <a href="#services">Services</a>
-        <a href="#packages">Packages</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
-    </div>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
+<section class="hero show">
     <h2>Predictable Lead Generation Systems</h2>
-    <p>
+    <p style="text-align:center; max-width:700px; margin:auto;">
         We build automated systems that generate consistent, high-quality leads for businesses.
     </p>
-    <a class="btn" href="#packages">View Packages</a>
-</div>
+</section>
 
 <!-- SERVICES -->
-<section id="services">
+<section>
     <h2>What We Do</h2>
     <div class="grid">
-        <div class="card">
-            We build outreach systems that generate consistent leads automatically.
-        </div>
-        <div class="card">
-            We convert cold audiences into paying clients using structured systems.
-        </div>
+        <div class="card">We build automated outreach systems that consistently generate qualified leads for your business every single day.</div>
+        <div class="card">We design conversion-focused funnels that turn cold traffic into paying clients using structured messaging systems.</div>
     </div>
 </section>
 
 <!-- PACKAGES -->
-<section id="packages">
+<section>
     <h2>Packages</h2>
-
     <div class="grid">
-        <div class="card">
-            <h3><a href="#starter">Starter</a></h3>
-            <p>Basic lead generation setup.</p>
-        </div>
-
-        <div class="card">
-            <h3><a href="#growth">Growth</a></h3>
-            <p>Automation + optimisation system.</p>
-        </div>
-
-        <div class="card">
-            <h3><a href="#premium">Premium</a></h3>
-            <p>Full scaling system.</p>
-        </div>
+        <div class="card"><strong>Starter</strong><br>Basic lead generation system setup.</div>
+        <div class="card"><strong>Growth</strong><br>Automation + optimisation system.</div>
+        <div class="card"><strong>Premium</strong><br>Full scaling system for maximum growth.</div>
     </div>
 </section>
 
-<!-- PACKAGE DETAILS -->
-<section id="package-details">
-
-    <h2>Package Breakdown</h2>
-
-    <div class="card" id="starter">
-        <h3>Starter Package</h3>
-        <p>Basic outreach system setup, lead targeting, and initial client acquisition system for small businesses.</p>
-    </div>
-
-    <div class="card" id="growth">
-        <h3>Growth Package</h3>
-        <p>Advanced automation, multi-channel outreach, CRM tracking, and optimisation for consistent lead flow.</p>
-    </div>
-
-    <div class="card" id="premium">
-        <h3>Premium Package</h3>
-        <p>Full-scale system with automation, scaling strategy, conversion optimisation, and ongoing support.</p>
-    </div>
-
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-    <h2>Client Results</h2>
-
+<!-- TESTIMONIALS (RESTORED LONG VERSION) -->
+<section>
+    <h2>Client Testimonials</h2>
     <div class="grid">
+
         <div class="card">
-            “We now get consistent leads every week. Game changer.”
-            <br><br>— Daniel Wright
+            “Before working with Acquirely, our business struggled to generate consistent leads and relied heavily on referrals. Within weeks of implementation, we started seeing a steady flow of qualified prospects coming in daily. The system they built completely changed how we acquire clients and gave us predictable revenue for the first time.”
+            <br><br>— Daniel Wright, Agency Owner
         </div>
 
         <div class="card">
-            “Our outreach finally works. Booked calls daily now.”
-            <br><br>— Sarah Collins
+            “The outreach system is extremely well structured and automated. We went from manually chasing leads to having booked calls coming in every day without constant effort. The clarity and consistency it brought to our sales process has been a complete game changer for our team.”
+            <br><br>— Sarah Collins, SaaS Founder
         </div>
 
         <div class="card">
-            “Massive improvement in conversions and lead quality.”
-            <br><br>— Michael Tan
+            “What impressed me most was not just the leads, but the quality. We’re now speaking to the right clients who are actually ready to buy. Our conversion rate improved significantly, and our sales pipeline finally feels stable and scalable.”
+            <br><br>— Michael Tan, Marketing Director
         </div>
+
     </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section>
     <h2>Contact</h2>
-    <p style="text-align:center;">
-        Email: <a href="mailto:contact@acquirely.com">contact@acquirely.com</a>
-    </p>
+
+    <p style="text-align:center;">Email: acquirely@proton.me</p>
+    <p style="text-align:center;">WhatsApp: +62 882 1159 2253</p>
+    <p style="text-align:center;">LinkedIn: christiaan-smith</p>
+
+    <form action="YOUR_GOOGLE_SCRIPT_URL_HERE" method="POST">
+        <input name="name" placeholder="Name" required>
+        <input name="email" placeholder="Email" required>
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button class="btn" type="submit">Send</button>
+    </form>
 </section>
 
-<!-- FOOTER -->
-<footer>
+<footer style="text-align:center; padding:30px; color:#666;">
     © 2026 Acquirely
 </footer>
 
-<!-- CURSOR SCRIPT -->
 <script>
-document.addEventListener("mousemove", function(e) {
+
+/* CURSOR */
+document.addEventListener("mousemove", (e) => {
     const glow = document.getElementById("cursor-glow");
-    glow.style.left = e.pageX + "px";
-    glow.style.top = e.pageY + "px";
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
 });
+
+/* SCROLL ANIMATION */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll("section").forEach(el => observer.observe(el));
+
+/* SUBTLE PARTICLES */
+const canvas = document.getElementById("bg-canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<50;i++){
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.2,
+        dx:(Math.random()-0.5)*0.3,
+        dy:(Math.random()-0.5)*0.3
+    });
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="rgba(255,215,0,0.04)";
+        ctx.fill();
+
+        p.x+=p.dx;
+        p.y+=p.dy;
+
+        if(p.x<0||p.x>canvas.width)p.dx*=-1;
+        if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener("resize",()=>{
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+});
+
 </script>
 
 </body>
