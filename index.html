@@ -5,64 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Brand</title>
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-50">
+<body class="relative text-white">
+
+  <!-- BACKGROUND IMAGE (muted + soft) -->
+  <div class="fixed inset-0 -z-10">
+    <img 
+      src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+      class="w-full h-full object-cover opacity-20"
+    />
+    <!-- dark overlay for readability -->
+    <div class="absolute inset-0 bg-black/70"></div>
+  </div>
 
   <!-- NAVBAR -->
-  <nav class="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+  <nav class="fixed w-full top-0 left-0 z-50 bg-black/60 backdrop-blur-md">
     <div class="max-w-6xl mx-auto px-4">
 
       <div class="flex justify-between items-center h-16">
 
-        <!-- Logo -->
         <div class="text-xl font-bold">
           MyBrand
         </div>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-8">
-          <a href="#" class="hover:text-blue-500">Home</a>
-          <a href="#" class="hover:text-blue-500">Services</a>
-          <a href="#" class="hover:text-blue-500">About</a>
-          <a href="#" class="hover:text-blue-500">Contact</a>
+        <!-- Desktop -->
+        <div class="hidden md:flex space-x-8 text-gray-200">
+          <a href="#" class="hover:text-white">Home</a>
+          <a href="#" class="hover:text-white">Services</a>
+          <a href="#" class="hover:text-white">About</a>
+          <a href="#" class="hover:text-white">Contact</a>
         </div>
 
-        <!-- Mobile Button -->
+        <!-- Mobile button -->
         <button id="menu-btn" class="md:hidden flex flex-col space-y-1">
-          <span class="w-6 h-0.5 bg-black"></span>
-          <span class="w-6 h-0.5 bg-black"></span>
-          <span class="w-6 h-0.5 bg-black"></span>
+          <span class="w-6 h-0.5 bg-white"></span>
+          <span class="w-6 h-0.5 bg-white"></span>
+          <span class="w-6 h-0.5 bg-white"></span>
         </button>
 
       </div>
 
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-4 pb-4">
-        <a href="#" class="hover:text-blue-500">Home</a>
-        <a href="#" class="hover:text-blue-500">Services</a>
-        <a href="#" class="hover:text-blue-500">About</a>
-        <a href="#" class="hover:text-blue-500">Contact</a>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-4 pb-4 text-gray-200">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
       </div>
 
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="pt-24 text-center px-6">
-    <h1 class="text-4xl font-bold mb-4">Grow Your Business</h1>
-    <p class="text-gray-600 mb-6">
-      We help you get more clients without ads.
+  <!-- HERO -->
+  <section class="pt-32 text-center px-6 max-w-3xl mx-auto">
+
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+      Grow Your Business
+    </h1>
+
+    <p class="text-gray-300 mb-8">
+      We help you get more clients through direct outreach and simple systems that actually work.
     </p>
 
-    <a href="#" class="bg-blue-500 text-white px-6 py-3 rounded-full">
+    <a href="#" class="bg-white text-black px-6 py-3 rounded-full font-semibold">
       Get Started
     </a>
+
   </section>
 
-  <!-- SIMPLE SCRIPT -->
+  <!-- SCRIPT -->
   <script>
     const btn = document.getElementById("menu-btn");
     const menu = document.getElementById("mobile-menu");
