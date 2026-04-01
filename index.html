@@ -5,313 +5,333 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Acquirely</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
-
-/* BASE (UNCHANGED) */
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #000;
-    color: #fff;
-    overflow-x: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+body {
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
 
-/* BACKGROUND */
-#bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.25;
+/* =========================
+   APPLE STYLE PAGE LOAD
+========================= */
+body {
+  animation: pageLoad 1.2s ease-out;
+}
+
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* NAV */
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
-    z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  align-items: center;
 }
 
-/* LOGO */
+/* =========================
+   ANIMATED GOLD LOGO
+========================= */
 .logo {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: transparent;
-    background: linear-gradient(90deg, #d4af37, #fff, #d4af37);
-    -webkit-background-clip: text;
+  font-size: 26px;
+  font-weight: bold;
+  color: gold;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1px;
 }
 
-/* CURSOR */
-#cursor-glow {
-    position: fixed;
-    width: 16px;
-    height: 16px;
-    background: rgba(255, 215, 0, 0.25);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px rgba(255,215,0,0.4);
-    z-index: 9999;
+/* shine effect */
+.logo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 215, 0, 0.6),
+    transparent
+  );
+  transform: skewX(-20deg);
 }
 
-/* SECTIONS (UNCHANGED) */
-section {
-    max-width: 1100px;
-    margin: auto;
-    padding: 90px 20px;
+.logo:hover::after {
+  animation: shine 1.2s ease-in-out;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* subtle glow pulse */
+.logo:hover {
+  text-shadow: 0 0 10px gold, 0 0 20px gold;
+  transition: 0.3s;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: gold;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 120px 20px;
+  animation: heroFade 1.5s ease-out;
+}
+
+@keyframes heroFade {
+  from {
     opacity: 0;
-    transform: translateY(40px);
-    transition: 0.8s ease;
-}
-
-section.show {
+    transform: translateY(30px);
+  }
+  to {
     opacity: 1;
     transform: translateY(0);
+  }
 }
 
-h2 {
-    text-align: center;
-    color: gold;
+.hero h1 {
+  font-size: 50px;
+  color: gold;
 }
 
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.hero p {
+  margin-top: 20px;
+  font-size: 18px;
+  opacity: 0.8;
 }
 
-/* CARDS */
+/* SECTIONS */
+section {
+  padding: 80px 20px;
+  animation: fadeInSection 1s ease-out;
+}
+
+@keyframes fadeInSection {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SERVICES / PACKAGES / TESTIMONIALS */
+.services, .packages, .testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
 .card {
-    background: rgba(20,20,20,0.7);
-    padding: 25px;
-    border-radius: 12px;
-    border: 1px solid #222;
-    transition: 0.3s;
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #222;
+  transition: transform 0.3s ease, border 0.3s ease;
 }
 
 .card:hover {
-    border: 1px solid gold;
-    transform: translateY(-5px);
+  border: 1px solid gold;
+  transform: translateY(-5px);
 }
 
-/* BUTTON */
-.btn {
-    padding: 12px 25px;
-    border: 1px solid gold;
-    color: gold;
-    background: transparent;
-    cursor: pointer;
+/* PACKAGE PRICING */
+.price {
+  margin-top: 10px;
+  color: gold;
+  font-weight: bold;
 }
 
-.btn:hover {
-    background: gold;
-    color: #000;
+/* CONTACT BOX */
+.contact-box {
+  max-width: 500px;
+  margin: auto;
+  background: #111;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #222;
 }
 
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+  color: white;
+  border: 1px solid #333;
+}
+
+.contact-box button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: gold;
+  border: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact-box button:hover {
+  opacity: 0.8;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px;
+  opacity: 0.7;
+}
 </style>
 </head>
 
 <body>
 
-<canvas id="bg-canvas"></canvas>
-<div id="cursor-glow"></div>
-
-<!-- NAV (RESTORED LINKS) -->
+<!-- NAV -->
 <nav>
-    <div class="logo">ACQ<span style="color:gold;">U</span>IRELY</div>
-
-    <div>
-        <a href="#about" style="color:white;margin:0 10px;">About</a>
-        <a href="#services" style="color:white;margin:0 10px;">Services</a>
-        <a href="#packages" style="color:white;margin:0 10px;">Packages</a>
-        <a href="#testimonials" style="color:white;margin:0 10px;">Testimonials</a>
-        <a href="#contact" style="color:white;margin:0 10px;">Contact</a>
-    </div>
+  <div class="logo">Acquirely</div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#packages">Packages</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
-<!-- HERO (UNCHANGED) -->
-<section class="show">
-    <h2>Predictable Lead Generation Systems</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-        We build automated systems that generate consistent, high-quality leads for businesses.
-    </p>
-</section>
+<!-- HERO -->
+<div class="hero">
+  <h1>Predictable Growth Systems</h1>
+  <p>We help businesses generate leads, automate outreach, and scale faster.</p>
+</div>
 
-<!-- ABOUT US (RESTORED) -->
+<!-- ABOUT -->
 <section id="about">
-    <h2>About Us</h2>
-    <div class="card">
-        We are a performance-driven lead generation agency focused on building automated systems that help businesses scale predictably.
-        Our approach combines data-driven outreach, conversion optimisation, and automation to create consistent client acquisition systems.
-    </div>
+  <h2>What We Do</h2>
+  <p style="margin-top:15px; opacity:0.8;">
+    We build automated lead generation systems for B2B businesses. Our focus is on predictable growth using outreach systems, funnels, and conversion optimisation. We help you get consistent clients without guessing or relying on inconsistent marketing.
+  </p>
 </section>
 
-<!-- SERVICES (RESTORED) -->
+<!-- SERVICES -->
 <section id="services">
-    <h2>Services</h2>
-
-    <div class="grid">
-        <div class="card">
-            We design and deploy automated outreach systems that generate high-quality leads consistently.
-        </div>
-
-        <div class="card">
-            We build conversion funnels that turn cold traffic into paying clients through structured messaging systems.
-        </div>
-
-        <div class="card">
-            We optimise your existing sales pipeline to increase conversion rates and improve ROI.
-        </div>
-    </div>
+  <h2>Services</h2>
+  <div class="services">
+    <div class="card">Lead Generation</div>
+    <div class="card">Cold Email Systems</div>
+    <div class="card">Automation Funnels</div>
+  </div>
 </section>
 
-<!-- PACKAGES (UNCHANGED) -->
+<!-- PACKAGES -->
 <section id="packages">
-    <h2>Packages</h2>
+  <h2>Packages</h2>
+  <div class="packages">
 
-    <div class="grid">
-        <div class="card"><strong>Starter</strong><br>Basic lead system setup.</div>
-        <div class="card"><strong>Growth</strong><br>Automation + optimisation system.</div>
-        <div class="card"><strong>Premium</strong><br>Full scaling system for maximum growth.</div>
+    <div class="card">
+      <h3>Starter</h3>
+      <div class="price">Starting from $499 USD</div>
+      <p>Basic lead system setup, outreach templates, and CRM structure.</p>
     </div>
+
+    <div class="card">
+      <h3>Growth</h3>
+      <div class="price">Starting from $899 USD</div>
+      <p>Advanced automation, email sequences, and lead tracking dashboard.</p>
+    </div>
+
+    <div class="card">
+      <h3>Premium</h3>
+      <div class="price">Starting from $1299 USD</div>
+      <p>Full done-for-you system with scaling strategy and optimisation.</p>
+    </div>
+
+  </div>
 </section>
 
-<!-- TESTIMONIALS (UNCHANGED) -->
+<!-- TESTIMONIALS -->
 <section id="testimonials">
-    <h2>Client Testimonials</h2>
+  <h2>Client Results</h2>
+  <div class="testimonials">
 
-    <div class="grid">
-        <div class="card">
-            “Before working with Acquirely, our business struggled to generate consistent leads and relied heavily on referrals. Within weeks of implementation, we started seeing a steady flow of qualified prospects coming in daily. The system they built completely changed how we acquire clients and gave us predictable revenue for the first time.”
-            <br><br>— Daniel Wright, Agency Owner
-        </div>
-
-        <div class="card">
-            “The outreach system is extremely well structured and automated. We went from manually chasing leads to having booked calls coming in every day without constant effort. The clarity and consistency it brought to our sales process has been a complete game changer for our team.”
-            <br><br>— Sarah Collins, SaaS Founder
-        </div>
-
-        <div class="card">
-            “What impressed me most was not just the leads, but the quality. We’re now speaking to the right clients who are actually ready to buy. Our conversion rate improved significantly, and our sales pipeline finally feels stable and scalable.”
-            <br><br>— Michael Tan, Marketing Director
-        </div>
+    <div class="card">
+      <p>"We went from zero inbound leads to consistent monthly clients within weeks. The system completely changed our pipeline."</p>
+      <br>
+      <b>- Michael Thompson</b>
     </div>
+
+    <div class="card">
+      <p>"The automation setup saved us hours every week and doubled our response rate almost instantly."</p>
+      <br>
+      <b>- Sarah Williams</b>
+    </div>
+
+    <div class="card">
+      <p>"Professional, structured and highly effective. This is the first system that actually delivered predictable results."</p>
+      <br>
+      <b>- David Johnson</b>
+    </div>
+
+  </div>
 </section>
 
-<!-- CONTACT (CLICKABLE RESTORED) -->
+<!-- CONTACT -->
 <section id="contact">
-    <h2>Contact</h2>
+  <h2>Contact Us</h2>
 
-    <p style="text-align:center;">
-        Email: <a href="mailto:acquirely@proton.me" style="color:gold;">acquirely@proton.me</a>
-    </p>
-
-    <p style="text-align:center;">
-        WhatsApp: 
-        <a href="https://wa.me/6288211592253" style="color:gold;" target="_blank">
-            Chat Now
-        </a>
-    </p>
-
-    <p style="text-align:center;">
-        LinkedIn: 
-        <a href="https://www.linkedin.com/in/christiaan-smith-32905387" style="color:gold;" target="_blank">
-            View Profile
-        </a>
-    </p>
-
+  <div class="contact-box">
     <form action="YOUR_GOOGLE_SCRIPT_URL_HERE" method="POST">
-        <input name="name" placeholder="Name" required>
-        <input name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Message" required></textarea>
-        <button class="btn" type="submit">Send</button>
+
+      <input type="text" name="name" placeholder="Your Name" required />
+
+      <input type="email" name="email" placeholder="Your Email" required />
+
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+      <button type="submit">Send Message</button>
+
     </form>
+  </div>
+
 </section>
 
-<footer style="text-align:center; padding:30px; color:#666;">
-    © 2026 Acquirely
+<!-- FOOTER -->
+<footer>
+  © 2026 Acquirely. All rights reserved.
 </footer>
-
-<script>
-
-/* CURSOR */
-document.addEventListener("mousemove", (e) => {
-    const glow = document.getElementById("cursor-glow");
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
-});
-
-/* SCROLL ANIMATION */
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
-    });
-});
-
-document.querySelectorAll("section").forEach(el => observer.observe(el));
-
-/* BACKGROUND PARTICLES */
-const canvas = document.getElementById("bg-canvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<50;i++){
-    particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*1.2,
-        dx:(Math.random()-0.5)*0.3,
-        dy:(Math.random()-0.5)*0.3
-    });
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(255,215,0,0.04)";
-        ctx.fill();
-
-        p.x+=p.dx;
-        p.y+=p.dy;
-
-        if(p.x<0||p.x>canvas.width)p.dx*=-1;
-        if(p.y<0||p.y>canvas.height)p.dy*=-1;
-    });
-
-    requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener("resize",()=>{
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
-});
-
-</script>
 
 </body>
 </html>
