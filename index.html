@@ -13,7 +13,7 @@
 :root {
   --gold: #d4af37;
   --bg: #050505;
-  --card: rgba(255,255,255,0.05);
+  --card: rgba(255,255,255,0.06);
   --border: rgba(255,255,255,0.12);
   --text: #ffffff;
 }
@@ -22,21 +22,26 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all 0.25s ease;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at top, #111 0%, #000 100%);
+  background: radial-gradient(circle at top, #0f0f0f 0%, #000 100%);
   color: var(--text);
-  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ===== PARTICLE BACKGROUND ===== */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAV ===== */
 nav {
   position: sticky;
   top: 0;
@@ -45,8 +50,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 18px 30px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(15px);
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
 
@@ -54,20 +59,17 @@ nav {
   font-size: 32px;
   font-weight: 800;
   color: var(--gold);
-  letter-spacing: 2px;
-  text-shadow: 0 0 18px rgba(212,175,55,0.6);
+  text-shadow: 0 0 20px rgba(212,175,55,0.6);
 }
 
 nav a {
   color: white;
   margin: 0 14px;
   text-decoration: none;
-  font-weight: 500;
 }
 
 nav a:hover {
   color: var(--gold);
-  text-shadow: 0 0 10px var(--gold);
 }
 
 /* ===== SECTIONS ===== */
@@ -75,36 +77,36 @@ section {
   padding: 100px 20px;
   max-width: 1100px;
   margin: auto;
+  transform-style: preserve-3d;
 }
 
 h1 { font-size: 56px; margin-bottom: 20px; }
 h2 { font-size: 38px; margin-bottom: 25px; }
 p { opacity: 0.92; }
 
-/* ===== CARDS ===== */
+/* ===== HERO ===== */
+.hero {
+  text-align: center;
+  padding-top: 140px;
+  perspective: 1000px;
+}
+
+/* ===== CARDS 3D ===== */
 .card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 28px;
   margin: 15px 0;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: rotateX(6deg) rotateY(-6deg) translateY(-10px);
+  box-shadow: 0 20px 60px rgba(212,175,55,0.25);
   border-color: var(--gold);
-  box-shadow: 0 0 35px rgba(212,175,55,0.25);
-}
-
-/* ===== HERO ===== */
-.hero {
-  text-align: center;
-  padding-top: 140px;
-}
-
-.hero p {
-  font-size: 18px;
 }
 
 /* ===== BUTTONS ===== */
@@ -116,14 +118,15 @@ button {
   font-weight: 600;
   cursor: pointer;
   color: black;
+  box-shadow: 0 0 20px rgba(212,175,55,0.3);
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(212,175,55,0.4);
+  transform: scale(1.07);
+  box-shadow: 0 0 30px rgba(212,175,55,0.5);
 }
 
-/* ===== PRICING ===== */
+/* ===== PRICING GRID ===== */
 .pricing {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -143,20 +146,29 @@ input, textarea {
 
 input:focus, textarea:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 12px rgba(212,175,55,0.3);
+  box-shadow: 0 0 15px rgba(212,175,55,0.3);
   outline: none;
 }
 
-hr {
-  border: 1px solid rgba(255,255,255,0.1);
-  margin: 20px 0;
+/* ===== SCROLL ANIMATION ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
 <nav>
   <div class="logo">ACQUIRELY</div>
   <div>
@@ -169,19 +181,20 @@ hr {
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero fade-in">
   <h1>We Build Predictable Lead Generation Systems That Grow Your Business</h1>
   <p>
     Acquirely helps businesses generate consistent, high-quality leads through advanced outbound systems,
     cold outreach campaigns, and done-for-you appointment setting services.
   </p>
-<a href="#contact">
-  <button>Get Started</button>
-</a>
+
+  <a href="#contact">
+    <button>Get Started</button>
+  </a>
 </section>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" class="fade-in">
   <h2>Our Services</h2>
 
   <div class="card">
@@ -213,7 +226,7 @@ hr {
 </section>
 
 <!-- PRICING -->
-<section id="pricing">
+<section id="pricing" class="fade-in">
   <h2>Pricing Packages</h2>
 
   <div class="pricing">
@@ -223,7 +236,7 @@ hr {
       <p><b>$499 / month</b></p>
       <p>
         - Basic outbound system setup<br>
-        - Lead list building (up to 250-400 targeted leads)<br>
+        - 250-400 targeted leads monthly<br>
         - Email outreach templates<br>
         - Campaign structure setup<br>
         - Basic performance tracking<br>
@@ -247,7 +260,7 @@ hr {
 
     <div class="card">
       <h3>Premium Package</h3>
-      <p><b>$1299 / month</b></p>
+      <p><b>$1399 / month</b></p>
       <p>
         - Fully managed done-for-you system<br>
         - Unlimited scaling outreach campaigns<br>
@@ -264,7 +277,7 @@ hr {
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials">
+<section id="testimonials" class="fade-in">
   <h2>Client Testimonials</h2>
 
   <div class="card">
@@ -284,7 +297,7 @@ hr {
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="fade-in">
   <h2>About Acquirely</h2>
 
   <div class="card">
@@ -302,7 +315,7 @@ hr {
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="fade-in">
   <h2>Contact Us</h2>
 
   <div class="card">
@@ -315,29 +328,68 @@ hr {
 
     <hr>
 
-    <h3>Direct Contact Options</h3>
-
     <p>📱 WhatsApp:
-      <a href="https://wa.me/6288211592253" target="_blank" style="color:#d4af37;">
-        Click to Chat Instantly
-      </a>
+      <a href="https://wa.me/6288211592253" target="_blank" style="color:#d4af37;">Click to Chat</a>
     </p>
 
     <p>📧 Email:
-      <a href="mailto:acquirely@proton.me" style="color:#d4af37;">
-        acquirely@proton.me
-      </a>
+      <a href="mailto:acquirely@proton.me" style="color:#d4af37;">acquirely@proton.me</a>
     </p>
 
     <p>💼 LinkedIn:
-      <a href="https://linkedin.com/in/christiaan-smith-32905387" target="_blank" style="color:#d4af37;">
-        View Company Profile
-      </a>
+      <a href="https://linkedin.com/in/christiaan-smith-32905387" target="_blank" style="color:#d4af37;">View Profile</a>
     </p>
   </div>
 </section>
 
 <script>
+// FADE IN SCROLL
+const elements = document.querySelectorAll('.fade-in');
+window.addEventListener('scroll', () => {
+  elements.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.classList.add('show');
+    }
+  });
+});
+
+// PARTICLES
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(212,175,55,0.5)";
+
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+
+    p.y -= 0.3;
+    if (p.y < 0) p.y = canvas.height;
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+// FORM
 function submitForm(e){
   e.preventDefault();
   alert("Thank you! We will be in contact with you shortly.");
