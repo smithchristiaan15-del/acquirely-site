@@ -17,27 +17,36 @@ body {
   background: #000;
   color: #fff;
   overflow-x: hidden;
-}
-
-/* =========================
-   APPLE STYLE PAGE LOAD
-========================= */
-body {
   animation: pageLoad 1.2s ease-out;
 }
 
+/* ================= PAGE LOAD ================= */
 @keyframes pageLoad {
-  from {
-    opacity: 0;
-    transform: scale(1.02);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* NAV */
+/* ================= BACKGROUND PARALLAX ================= */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,215,0,0.05), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.03), transparent 40%);
+  z-index: -1;
+  animation: bgMove 12s infinite alternate ease-in-out;
+}
+
+@keyframes bgMove {
+  from { transform: translateY(0px) scale(1); }
+  to { transform: translateY(20px) scale(1.05); }
+}
+
+/* ================= NAV ================= */
 nav {
   display: flex;
   justify-content: space-between;
@@ -45,48 +54,25 @@ nav {
   align-items: center;
 }
 
-/* =========================
-   ANIMATED GOLD LOGO
-========================= */
+/* ================= GLOWING LOGO ================= */
 .logo {
   font-size: 26px;
   font-weight: bold;
   color: gold;
-  position: relative;
-  overflow: hidden;
-  letter-spacing: 1px;
+  animation: glowPulse 2.5s infinite ease-in-out;
+  text-shadow: 0 0 15px rgba(255,215,0,0.6);
 }
 
-/* shine effect */
-.logo::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 215, 0, 0.6),
-    transparent
-  );
-  transform: skewX(-20deg);
-}
-
-.logo:hover::after {
-  animation: shine 1.2s ease-in-out;
-}
-
-@keyframes shine {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-
-/* subtle glow pulse */
-.logo:hover {
-  text-shadow: 0 0 10px gold, 0 0 20px gold;
-  transition: 0.3s;
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 5px rgba(255,215,0,0.4);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(255,215,0,0.9);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255,215,0,0.4);
+  }
 }
 
 nav a {
@@ -99,22 +85,10 @@ nav a:hover {
   color: gold;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero {
   text-align: center;
   padding: 120px 20px;
-  animation: heroFade 1.5s ease-out;
-}
-
-@keyframes heroFade {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .hero h1 {
@@ -128,36 +102,30 @@ nav a:hover {
   opacity: 0.8;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 section {
   padding: 80px 20px;
-  animation: fadeInSection 1s ease-out;
 }
 
-@keyframes fadeInSection {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* scroll animation base */
+section, .card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
 }
 
-/* SERVICES / PACKAGES / TESTIMONIALS */
-.services, .packages, .testimonials {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+section.show, .card.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
+/* ================= CARDS ================= */
 .card {
   background: #111;
   padding: 20px;
   border-radius: 12px;
   border: 1px solid #222;
-  transition: transform 0.3s ease, border 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .card:hover {
@@ -165,14 +133,33 @@ section {
   transform: translateY(-5px);
 }
 
-/* PACKAGE PRICING */
+/* ================= SERVICES DETAIL HOVER ================= */
+.card .detail {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.7;
+  display: none;
+}
+
+.card:hover .detail {
+  display: block;
+}
+
+/* ================= GRIDS ================= */
+.services, .packages, .testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* ================= PRICE ================= */
 .price {
   margin-top: 10px;
   color: gold;
   font-weight: bold;
 }
 
-/* CONTACT BOX */
+/* ================= CONTACT ================= */
 .contact-box {
   max-width: 500px;
   margin: auto;
@@ -187,7 +174,6 @@ section {
   width: 100%;
   margin-top: 15px;
   padding: 12px;
-  border: none;
   border-radius: 8px;
   background: #000;
   color: white;
@@ -205,11 +191,14 @@ section {
   cursor: pointer;
 }
 
-.contact-box button:hover {
-  opacity: 0.8;
+/* ================= PACKAGE HIGHLIGHT ================= */
+#packages .card.active {
+  border: 1px solid gold;
+  box-shadow: 0 0 20px rgba(255,215,0,0.25);
+  transform: scale(1.03);
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer {
   text-align: center;
   padding: 40px;
@@ -220,7 +209,6 @@ footer {
 
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="logo">Acquirely</div>
   <div>
@@ -232,7 +220,6 @@ footer {
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <h1>Predictable Growth Systems</h1>
   <p>We help businesses generate leads, automate outreach, and scale faster.</p>
@@ -241,41 +228,71 @@ footer {
 <!-- ABOUT -->
 <section id="about">
   <h2>What We Do</h2>
-  <p style="margin-top:15px; opacity:0.8;">
-    We build automated lead generation systems for B2B businesses. Our focus is on predictable growth using outreach systems, funnels, and conversion optimisation. We help you get consistent clients without guessing or relying on inconsistent marketing.
+
+  <p style="margin-top:15px; opacity:0.85; max-width:900px;">
+    We build structured, automated lead generation systems designed for B2B companies that want predictable and scalable growth.
+    Instead of relying on inconsistent marketing or guesswork, we create systems that continuously generate qualified leads.
+  </p>
+
+  <br>
+
+  <p style="opacity:0.85; max-width:900px;">
+    Our systems combine outreach strategy, automation tools, and conversion optimisation.
+    The goal is simple: reduce manual effort while increasing consistent sales and predictable revenue flow.
   </p>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
   <h2>Services</h2>
+
   <div class="services">
-    <div class="card">Lead Generation</div>
-    <div class="card">Cold Email Systems</div>
-    <div class="card">Automation Funnels</div>
+
+    <div class="card">
+      <h3>Lead Generation</h3>
+      <div class="detail">
+        We build targeted lead lists, define ideal customer profiles, and create outreach pipelines that bring consistent new opportunities into your business.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Cold Email Systems</h3>
+      <div class="detail">
+        We design automated cold email campaigns, write sequences, optimise deliverability, and improve reply rates through structured testing.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Automation Funnels</h3>
+      <div class="detail">
+        We build automated follow-up systems, CRM workflows, and conversion funnels that move leads from first contact to closed deal.
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- PACKAGES -->
 <section id="packages">
   <h2>Packages</h2>
+
   <div class="packages">
 
-    <div class="card">
+    <div class="card package-card">
       <h3>Starter</h3>
-      <div class="price">Starting from $499 USD</div>
+      <div class="price">$499 USD</div>
       <p>Basic lead system setup, outreach templates, and CRM structure.</p>
     </div>
 
-    <div class="card">
+    <div class="card package-card">
       <h3>Growth</h3>
-      <div class="price">Starting from $899 USD</div>
+      <div class="price">$899 USD</div>
       <p>Advanced automation, email sequences, and lead tracking dashboard.</p>
     </div>
 
-    <div class="card">
+    <div class="card package-card">
       <h3>Premium</h3>
-      <div class="price">Starting from $1299 USD</div>
+      <div class="price">$1299 USD</div>
       <p>Full done-for-you system with scaling strategy and optimisation.</p>
     </div>
 
@@ -285,24 +302,22 @@ footer {
 <!-- TESTIMONIALS -->
 <section id="testimonials">
   <h2>Client Results</h2>
+
   <div class="testimonials">
 
     <div class="card">
-      <p>"We went from zero inbound leads to consistent monthly clients within weeks. The system completely changed our pipeline."</p>
-      <br>
-      <b>- Michael Thompson</b>
+      <p>"We went from inconsistent leads to a fully structured system generating predictable monthly clients with much higher quality and conversion rates."</p>
+      <br><b>- Michael Thompson</b>
     </div>
 
     <div class="card">
-      <p>"The automation setup saved us hours every week and doubled our response rate almost instantly."</p>
-      <br>
-      <b>- Sarah Williams</b>
+      <p>"Our outreach is now fully automated and optimised. We finally have a reliable pipeline that consistently brings in qualified opportunities."</p>
+      <br><b>- Sarah Williams</b>
     </div>
 
     <div class="card">
-      <p>"Professional, structured and highly effective. This is the first system that actually delivered predictable results."</p>
-      <br>
-      <b>- David Johnson</b>
+      <p>"This system transformed our sales process completely. Everything is now measurable, automated, and scalable."</p>
+      <br><b>- David Johnson</b>
     </div>
 
   </div>
@@ -313,25 +328,50 @@ footer {
   <h2>Contact Us</h2>
 
   <div class="contact-box">
-    <form action="YOUR_GOOGLE_SCRIPT_URL_HERE" method="POST">
-
+    <form action="YOUR_GOOGLE_SCRIPT_URL_HERE">
       <input type="text" name="name" placeholder="Your Name" required />
-
       <input type="email" name="email" placeholder="Your Email" required />
-
       <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-
       <button type="submit">Send Message</button>
-
     </form>
   </div>
-
 </section>
 
-<!-- FOOTER -->
 <footer>
   © 2026 Acquirely. All rights reserved.
 </footer>
+
+<script>
+/* SCROLL ANIMATION */
+const elements = document.querySelectorAll("section, .card");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.15 });
+
+elements.forEach(el => observer.observe(el));
+
+/* PACKAGE HIGHLIGHT */
+const packages = document.querySelectorAll(".package-card");
+
+window.addEventListener("scroll", () => {
+  let index = 0;
+
+  const base = document.getElementById("packages").offsetTop;
+
+  if (window.scrollY > base + 50) index = 0;
+  if (window.scrollY > base + 200) index = 1;
+  if (window.scrollY > base + 400) index = 2;
+
+  packages.forEach((p, i) => {
+    p.classList.toggle("active", i === index);
+  });
+});
+</script>
 
 </body>
 </html>
