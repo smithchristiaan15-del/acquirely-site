@@ -6,85 +6,11 @@
 <title>Acquirely</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
 body {
+  margin: 0;
+  font-family: Arial, sans-serif;
   background: #000;
   color: #fff;
-  overflow-x: hidden;
-  animation: pageLoad 1.2s ease-out;
-}
-
-/* PAGE LOAD */
-@keyframes pageLoad {
-  from { opacity: 0; transform: scale(1.02); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* BACKGROUND */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,215,0,0.05), transparent 40%),
-    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.03), transparent 40%);
-  z-index: -1;
-  animation: bgMove 12s infinite alternate ease-in-out;
-}
-
-@keyframes bgMove {
-  from { transform: translateY(0px) scale(1); }
-  to { transform: translateY(20px) scale(1.05); }
-}
-
-/* NAV */
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 50px;
-  align-items: center;
-}
-
-/* ======= METALLIC LOGO ======= */
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-  background: linear-gradient(90deg, #b8860b, #ffd700, #fff8dc, #ffd700, #b8860b);
-  background-size: 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s infinite linear, glowPulse 2.5s infinite ease-in-out;
-  text-shadow: 0 0 15px rgba(255,215,0,0.4);
-}
-
-@keyframes shine {
-  0% { background-position: 0%; }
-  100% { background-position: 300%; }
-}
-
-@keyframes glowPulse {
-  0% { filter: drop-shadow(0 0 5px rgba(255,215,0,0.4)); }
-  50% { filter: drop-shadow(0 0 20px rgba(255,215,0,0.9)); }
-  100% { filter: drop-shadow(0 0 5px rgba(255,215,0,0.4)); }
-}
-
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-}
-
-nav a:hover {
-  color: gold;
 }
 
 /* HERO */
@@ -94,298 +20,252 @@ nav a:hover {
 }
 
 .hero h1 {
-  font-size: 50px;
-  color: gold;
+  font-size: 64px;
+  letter-spacing: 2px;
 }
 
 .hero p {
-  margin-top: 20px;
-  font-size: 18px;
-  opacity: 0.8;
+  opacity: 0.7;
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.6;
 }
 
-/* SECTION HEADINGS */
-section h2 {
+/* SECTION TITLE */
+.section-title {
   text-align: center;
-  font-size: 38px;
-  margin-bottom: 25px;
-  color: gold;
+  font-size: 40px;
+  margin: 80px 0 30px;
 }
 
-/* SECTIONS */
-section {
-  padding: 80px 20px;
+/* SERVICES */
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 950px;
+  margin: auto;
+  padding: 0 20px;
 }
 
-/* SCROLL ANIMATION */
-section, .card {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease-out;
-}
-
-section.show, .card.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* CARDS */
-.card {
+.service-box {
   background: #111;
-  padding: 20px;
+  padding: 25px;
   border-radius: 12px;
   border: 1px solid #222;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
-/* HOVER ONLY ONE CARD ACTIVE */
-.card.active {
-  transform: scale(1.05);
-  border: 1px solid gold;
-  box-shadow: 0 0 25px rgba(255,215,0,0.25);
+.service-box:hover {
+  transform: scale(1.02);
+  border-color: #555;
 }
 
-/* SERVICES DETAIL */
-.card .detail {
-  margin-top: 10px;
-  font-size: 13px;
-  opacity: 0.7;
-  display: none;
+.service-box h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
 }
 
-.card.active .detail {
-  display: block;
+.service-box p {
+  line-height: 1.6;
+  opacity: 0.85;
 }
 
-/* GRIDS */
-.services, .packages, .testimonials {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+/* PACKAGES */
+.packages {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
+  max-width: 950px;
+  margin: auto;
+  padding: 0 20px;
 }
 
-/* PRICE */
+.package {
+  background: #111;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #222;
+  transition: 0.3s;
+}
+
+.package:hover {
+  border-color: #555;
+}
+
 .price {
-  margin-top: 10px;
-  color: gold;
-  font-weight: bold;
+  font-size: 24px;
+  color: #00ffcc;
+  margin: 10px 0;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 950px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.testimonial {
+  background: #111;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #222;
+  line-height: 1.7;
+  opacity: 0.9;
 }
 
 /* CONTACT */
-.contact-box {
-  max-width: 500px;
+.contact {
+  max-width: 750px;
   margin: auto;
+  padding: 50px 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 15px;
   background: #111;
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid #222;
-}
-
-.contact-box input,
-.contact-box textarea {
-  width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 8px;
-  background: #000;
-  color: white;
   border: 1px solid #333;
+  color: #fff;
+  border-radius: 8px;
 }
 
-.contact-box button {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  background: gold;
+button {
+  padding: 12px 25px;
+  background: #00ffcc;
   border: none;
-  color: black;
-  font-weight: bold;
   cursor: pointer;
-}
-
-/* PACKAGE HOVER ONLY */
-.package-card {
-  transition: 0.3s ease;
-}
-
-/* ONLY HOVER GLOW (NO PERMANENT GLOW) */
-.package-card:hover {
-  border: 1px solid gold;
-  box-shadow: 0 0 25px rgba(255,215,0,0.3);
-  transform: scale(1.05);
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 40px;
-  opacity: 0.7;
+  font-weight: bold;
+  border-radius: 6px;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="logo">Acquirely</div>
-  <div>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#packages">Packages</a>
-    <a href="#testimonials">Testimonials</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
+<!-- HERO -->
 <div class="hero">
-  <h1>Predictable Growth Systems</h1>
-  <p>We help businesses generate leads, automate outreach, and scale faster.</p>
+  <h1>Acquirely</h1>
+  <p>
+    We build high-performance lead generation systems, automation funnels, and cold outreach infrastructure
+    designed to scale your business and generate predictable client flow.
+  </p>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <h2>What We Do</h2>
-
-  <p style="max-width:900px; margin:auto; opacity:0.85;">
-    We design and implement high-performance lead generation systems that help businesses move away from inconsistent marketing and toward predictable client acquisition.
-    Our focus is on building structured systems that continuously bring in qualified prospects without relying on manual effort.
-  </p>
-
-  <br>
-
-  <p style="max-width:900px; margin:auto; opacity:0.85;">
-    These systems combine data-driven outreach, automation workflows, and conversion-focused messaging.
-    We identify your ideal customer, build targeted pipelines, and create outreach systems that run in the background while your business scales.
-  </p>
-
-  <br>
-
-  <p style="max-width:900px; margin:auto; opacity:0.85;">
-    The end result is simple: less time chasing leads, more time closing clients, and a predictable flow of revenue generated through automated systems designed for long-term growth.
-  </p>
-</section>
-
 <!-- SERVICES -->
-<section id="services">
-  <h2>Services</h2>
+<h2 class="section-title">Services</h2>
+<div class="services">
 
-  <div class="services">
-
-    <div class="card">
-      <h3>Lead Generation</h3>
-      <div class="detail">
-        We build highly targeted prospect lists, define your ideal customer profile, and construct outreach systems designed to consistently deliver qualified leads directly to your pipeline.
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Cold Email Systems</h3>
-      <div class="detail">
-        We design and automate cold email campaigns including copywriting, sequencing, deliverability optimisation, and performance testing to maximise response rates.
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Automation Funnels</h3>
-      <div class="detail">
-        We build automated CRM workflows, follow-up systems, and conversion funnels that ensure no lead is lost and every opportunity is nurtured effectively.
-      </div>
-    </div>
-
+  <div class="service-box">
+    <h3>Lead Generation Systems</h3>
+    <p>
+      We create complete lead generation ecosystems that bring in qualified prospects consistently.
+      This includes landing pages, conversion funnels, outreach systems, and messaging strategies designed
+      to turn cold traffic into real paying customers.
+    </p>
   </div>
-</section>
+
+  <div class="service-box">
+    <h3>Cold Email Automation</h3>
+    <p>
+      Fully automated outreach systems that handle sending, tracking, and optimizing email campaigns.
+      We build infrastructure for deliverability, inbox rotation, personalization, and response tracking
+      to maximise engagement and conversion rates.
+    </p>
+  </div>
+
+  <div class="service-box">
+    <h3>Marketing Funnels</h3>
+    <p>
+      High-converting funnel systems that guide users from awareness to action.
+      Includes landing pages, offer structuring, CTA optimisation, and automated follow-ups to increase conversions
+      and reduce drop-off rates.
+    </p>
+  </div>
+
+</div>
 
 <!-- PACKAGES -->
-<section id="packages">
-  <h2>Packages</h2>
+<h2 class="section-title">Packages</h2>
+<div class="packages">
 
-  <div class="packages">
-
-    <div class="card package-card">
-      <h3>Starter</h3>
-      <div class="price">$499 USD</div>
-      <p>Basic lead system setup, outreach templates, and CRM structure.</p>
-    </div>
-
-    <div class="card package-card">
-      <h3>Growth</h3>
-      <div class="price">$899 USD</div>
-      <p>Advanced automation, email sequences, and lead tracking dashboard.</p>
-    </div>
-
-    <div class="card package-card">
-      <h3>Premium</h3>
-      <div class="price">$1299 USD</div>
-      <p>Full done-for-you system with scaling strategy and optimisation.</p>
-    </div>
-
+  <div class="package">
+    <h3>Starter Package</h3>
+    <div class="price">$499 USD</div>
+    <p>
+      A foundational system for new businesses. Includes basic lead capture setup,
+      contact form integration, and initial outreach structure. Designed to get your first
+      consistent leads and validate your offer.
+    </p>
   </div>
-</section>
+
+  <div class="package">
+    <h3>Growth Package</h3>
+    <div class="price">$899 USD</div>
+    <p>
+      Advanced automation and scaling system. Includes full funnel setup, cold email automation,
+      tracking system, and optimized messaging structure to increase conversion rates and lead flow.
+    </p>
+  </div>
+
+  <div class="package">
+    <h3>Premium Package</h3>
+    <div class="price">$1299 USD</div>
+    <p>
+      Complete business growth infrastructure. Includes everything in Growth plus advanced automation,
+      lead scoring, optimization systems, and AI-enhanced outreach workflows for maximum scaling.
+    </p>
+  </div>
+
+</div>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials">
-  <h2>Client Results</h2>
+<h2 class="section-title">Testimonials</h2>
+<div class="testimonials">
 
-  <div class="testimonials">
-
-    <div class="card">
-      <p>"We went from inconsistent leads to a fully structured system generating predictable monthly clients."</p>
-      <br><b>- Michael Thompson</b>
-    </div>
-
-    <div class="card">
-      <p>"Our outreach is now fully automated and we finally have a stable pipeline of qualified leads."</p>
-      <br><b>- Sarah Williams</b>
-    </div>
-
-    <div class="card">
-      <p>"This system completely transformed how we acquire clients. Everything is now scalable and predictable."</p>
-      <br><b>- David Johnson</b>
-    </div>
-
+  <div class="testimonial">
+    “Before working with Acquirely, we struggled to get consistent leads.
+    Everything was random and dependent on referrals. Now we have a structured system that brings in
+    predictable inquiries every week, which has completely stabilised our pipeline.”
   </div>
-</section>
+
+  <div class="testimonial">
+    “The automation system they built saved us hours of manual outreach every day.
+    Our response rate increased significantly because the messaging and funnel structure was
+    properly optimised for conversions.”
+  </div>
+
+  <div class="testimonial">
+    “What impressed us most was the level of detail in the setup. Every part of the system
+    works together — from landing pages to email follow-ups — creating a smooth client acquisition process.”
+  </div>
+
+</div>
 
 <!-- CONTACT -->
-<section id="contact">
-  <h2>Contact Us</h2>
+<h2 class="section-title">Contact Us</h2>
+<div class="contact">
 
-  <div class="contact-box">
-    <form action="https://script.google.com/macros/s/AKfycbzbqrQ_ntu7r3ekn0dYNFzRZOeCFh_l0ps6B8fb1eQY5XANgE60_JLr7dKZhRulGqrv/exec">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
-</section>
+  <form>
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Your name">
 
-<footer>
-  © 2026 Acquirely. All rights reserved.
-</footer>
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Your email">
 
-<script>
-/* SCROLL ANIMATION */
-const elements = document.querySelectorAll("section, .card");
+    <label>Message</label>
+    <textarea name="message" rows="5" placeholder="Your message"></textarea>
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("show");
-  });
-}, { threshold: 0.15 });
+    <button type="submit">Send Message</button>
+  </form>
 
-elements.forEach(el => observer.observe(el));
-
-/* ONLY ONE ACTIVE SERVICE CARD */
-const cards = document.querySelectorAll("#services .card");
-
-cards.forEach(card => {
-  card.addEventListener("mouseenter", () => {
-    cards.forEach(c => c.classList.remove("active"));
-    card.classList.add("active");
-  });
-});
-</script>
+</div>
 
 </body>
 </html>
