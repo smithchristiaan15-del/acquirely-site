@@ -13,6 +13,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -32,6 +33,37 @@ body {
   opacity: 0.25;
 }
 
+/* SECTION UPGRADE */
+section {
+  padding: 100px 60px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SECTION TITLE */
+h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: gold;
+  margin-top: 8px;
+  opacity: 0.6;
+}
+
 /* ========================= */
 /* PREMIUM INTEGRATED LOGO */
 /* ========================= */
@@ -43,7 +75,6 @@ body {
   font-weight: 800;
   letter-spacing: 2px;
   cursor: pointer;
-  position: relative;
 }
 
 .logo-mark {
@@ -58,33 +89,9 @@ body {
   color: #120d05;
   font-weight: 900;
   font-size: 18px;
-  position: relative;
-  overflow: hidden;
   box-shadow:
     0 0 15px rgba(255, 215, 0, 0.35),
     inset 0 0 8px rgba(255,255,255,0.2);
-}
-
-.logo-mark::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    120deg,
-    transparent 40%,
-    rgba(255,255,255,0.4),
-    transparent 60%
-  );
-  transform: rotate(25deg);
-  animation: shineMove 4s linear infinite;
-}
-
-@keyframes shineMove {
-  0% { transform: translateX(-100%) rotate(25deg); }
-  100% { transform: translateX(100%) rotate(25deg); }
 }
 
 .logo-text {
@@ -100,6 +107,7 @@ body {
   100% { background-position: 100% 50%; }
 }
 
+/* NAV */
 nav {
   display: flex;
   justify-content: space-between;
@@ -117,10 +125,16 @@ nav a {
   color: #fff;
   margin-left: 20px;
   text-decoration: none;
+  transition: 0.3s;
 }
 
 nav a:hover {
   color: gold;
+}
+
+nav a.active-nav {
+  color: gold;
+  text-shadow: 0 0 10px rgba(255,215,0,0.4);
 }
 
 .cta-btn {
@@ -132,13 +146,12 @@ nav a:hover {
   margin-left: 15px;
 }
 
-section {
-  padding: 90px 60px;
-}
-
+/* HERO */
 .hero {
   text-align: center;
   padding-top: 140px;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .hero h1 {
@@ -149,6 +162,7 @@ section {
   color: #d6c9a1;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -156,6 +170,7 @@ section {
   margin-top: 40px;
 }
 
+/* CARD */
 .card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,215,0,0.2);
@@ -163,6 +178,7 @@ section {
   border-radius: 16px;
   transition: 0.3s;
   position: relative;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -170,7 +186,7 @@ section {
   box-shadow: 0 0 30px rgba(255,215,0,0.25);
 }
 
-/* FIXED: only active card expands */
+/* FIXED EXPAND */
 .card .extra {
   max-height: 0;
   overflow: hidden;
@@ -182,7 +198,7 @@ section {
 }
 
 .card.active .extra {
-  max-height: 200px;
+  max-height: 220px;
   opacity: 1;
 }
 
@@ -328,6 +344,7 @@ footer {
 
 <section id="services">
   <h2>Services</h2>
+
   <div class="grid">
 
     <div class="card">
@@ -355,6 +372,7 @@ footer {
 
 <section id="pricing">
   <h2>Pricing</h2>
+
   <div class="grid">
 
     <div class="card">
@@ -377,6 +395,7 @@ footer {
 
 <section>
   <h2>Testimonials</h2>
+
   <div class="grid">
     <div class="card">“15+ booked calls weekly, extremely satisfied.- Jaco Botes”</div>
     <div class="card">“Streamlined outbound completely.- Robert V.d Merwe”</div>
@@ -457,7 +476,7 @@ if(c>=t){el.innerText=t;clearInterval(i);}
 },10);
 });
 
-/* FIXED CARD HOVER (ONLY ONE ACTIVE) */
+/* FIXED SINGLE ACTIVE CARD */
 const cards = document.querySelectorAll(".card");
 
 cards.forEach(card => {
@@ -468,6 +487,38 @@ cards.forEach(card => {
 
   card.addEventListener("mouseleave", () => {
     card.classList.remove("active");
+  });
+});
+
+/* SCROLL REVEAL */
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.15 });
+
+sections.forEach(sec => observer.observe(sec));
+
+/* NAV ACTIVE SCROLL */
+const navLinks = document.querySelectorAll("nav a[href^='#']");
+
+window.addEventListener("scroll", () => {
+  let fromTop = window.scrollY;
+
+  navLinks.forEach(link => {
+    const section = document.querySelector(link.getAttribute("href"));
+    if(section){
+      if(section.offsetTop <= fromTop + 100 &&
+         section.offsetTop + section.offsetHeight > fromTop + 100){
+        link.classList.add("active-nav");
+      } else {
+        link.classList.remove("active-nav");
+      }
+    }
   });
 });
 
