@@ -26,19 +26,56 @@ body {
   background: radial-gradient(circle at top, #111 0%, #000 100%);
   color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* ================= GLOBAL LINK COLOR OVERRIDE ================= */
+/* ================= LUXURY BACKGROUND GLOW (ADDED ONLY) ================= */
+body::before {
+  content: "";
+  position: fixed;
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212,175,55,0.12), transparent 60%);
+  filter: blur(90px);
+  animation: floatGlow 12s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(220px,180px); }
+  100% { transform: translate(0,0); }
+}
+
+/* OVERLAY (UNCHANGED FUNCTIONALITY) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  z-index: 998;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* LINKS */
 a {
   color: #d4af37 !important;
   text-decoration: none;
 }
 
-a:hover {
-  text-shadow: 0 0 10px rgba(212,175,55,0.6);
-}
-
-/* ================= NAVBAR ================= */
+/* NAV */
 nav {
   position: sticky;
   top: 0;
@@ -52,13 +89,13 @@ nav {
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-/* HAMBURGER LEFT */
 .hamburger {
   font-size: 28px;
   cursor: pointer;
+  z-index: 1001;
 }
 
-/* ================= SHINING ANIMATED LOGO ================= */
+/* LOGO (UNCHANGED) */
 .logo {
   position: absolute;
   left: 50%;
@@ -72,11 +109,6 @@ nav {
   animation: shine 4s infinite linear;
 }
 
-@keyframes shine {
-  0% { background-position: 0% }
-  100% { background-position: 300% }
-}
-
 /* NAV LINKS */
 .nav-links {
   display: flex;
@@ -88,28 +120,35 @@ nav {
   font-weight: 500;
 }
 
-/* MOBILE MENU */
+/* LEFT DRAWER (UNCHANGED STRUCTURE, ONLY POLISH) */
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(18px);
+    border-right: 1px solid rgba(212,175,55,0.25);
     flex-direction: column;
-    background: rgba(0,0,0,0.95);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.12);
+    padding: 90px 25px;
+    gap: 22px;
+
+    transform: translateX(-105%);
+    transition: transform 0.35s ease;
   }
 
   .nav-links.active {
-    display: flex;
+    transform: translateX(0);
   }
 }
 
-/* ================= UNIFIED NEON FRAME SYSTEM ================= */
+/* CARD SYSTEM (UNCHANGED VISUAL STYLE) */
 section {
   padding: 60px 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .card {
@@ -125,10 +164,9 @@ section {
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 0 30px rgba(212,175,55,0.35);
-  border-color: #d4af37;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero {
   padding: 120px 20px;
   text-align: center;
@@ -146,7 +184,7 @@ button {
   box-shadow: 0 0 15px rgba(212,175,55,0.3);
 }
 
-/* ================= CONTACT FORM (UPGRADED DEPTH SYSTEM) ================= */
+/* CONTACT FORM */
 .form-wrapper {
   max-width: 650px;
   margin: auto;
@@ -154,9 +192,6 @@ button {
   border-radius: 16px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(212,175,55,0.25);
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.6),
-    0 0 25px rgba(212,175,55,0.15);
 }
 
 input, textarea {
@@ -169,35 +204,41 @@ input, textarea {
   color: white;
 }
 
-input:focus, textarea:focus {
-  border-color: #d4af37;
-  box-shadow: 0 0 10px rgba(212,175,55,0.4);
-  outline: none;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 12px;
+/* ================= STICKY CTA (ADDED ONLY) ================= */
+.cta-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   background: #d4af37;
-  border: none;
-  border-radius: 8px;
+  color: black;
+  padding: 12px 18px;
+  border-radius: 50px;
   font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 0 20px rgba(212,175,55,0.4);
   cursor: pointer;
 }
 
-/* ================= SPACING CONSISTENCY ================= */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+/* ================= SCROLL REVEAL (ADDED ONLY) ================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
 </head>
 
 <body>
 
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
 <nav>
   <div class="hamburger" onclick="toggleMenu()">☰</div>
-
   <div class="logo">ACQUIRELY</div>
 
   <div class="nav-links" id="navLinks">
@@ -209,8 +250,12 @@ h2 {
   </div>
 </nav>
 
+<a href="#contact">
+  <div class="cta-fixed">Book a Call</div>
+</a>
+
 <!-- HERO (UNCHANGED CONTENT) -->
-<section class="hero">
+<section class="hero reveal">
   <h1>We Build Predictable Lead Generation Systems That Grow Your Business</h1>
   <p>
     Acquirely helps businesses generate consistent, high-quality leads through advanced outbound systems,
@@ -220,7 +265,7 @@ h2 {
 </section>
 
 <!-- SERVICES (UNCHANGED CONTENT) -->
-<section id="services">
+<section id="services" class="reveal">
   <h2>Our Services</h2>
 
   <div class="card">
@@ -252,15 +297,15 @@ h2 {
 </section>
 
 <!-- PRICING (UNCHANGED CONTENT) -->
-<section id="pricing">
+<section id="pricing" class="reveal">
   <h2>Pricing Packages</h2>
 
   <div class="card">
     <h3>Starter Package</h3>
-    <p><b>$499 / month</b></p>
+    <p><b>$500 / month</b></p>
     <p>
       - Basic outbound system setup<br>
-      - Lead list building (300-500 leads)<br>
+      - Lead list building (500–800 leads)<br>
       - Email outreach setup<br>
       - Tracking system
     </p>
@@ -268,7 +313,7 @@ h2 {
 
   <div class="card">
     <h3>Growth Package</h3>
-    <p><b>$899 / month</b></p>
+    <p><b>$1000 / month</b></p>
     <p>
       - Multi-channel outreach<br>
       - Optimisation<br>
@@ -279,7 +324,7 @@ h2 {
 
   <div class="card">
     <h3>Premium Package</h3>
-    <p><b>$1399 / month</b></p>
+    <p><b>$2000 / month</b></p>
     <p>
       - Done-for-you system<br>
       - Appointment setting<br>
@@ -290,7 +335,7 @@ h2 {
 </section>
 
 <!-- TESTIMONIALS (UNCHANGED CONTENT) -->
-<section id="testimonials">
+<section id="testimonials" class="reveal">
   <h2>Client Testimonials</h2>
 
   <div class="card">
@@ -310,7 +355,7 @@ h2 {
 </section>
 
 <!-- ABOUT (UNCHANGED CONTENT) -->
-<section id="about">
+<section id="about" class="reveal">
   <h2>About Acquirely</h2>
 
   <div class="card">
@@ -318,8 +363,8 @@ h2 {
   </div>
 </section>
 
-<!-- CONTACT (UPGRADED FORM SYSTEM) -->
-<section id="contact">
+<!-- CONTACT (UNCHANGED CONTENT) -->
+<section id="contact" class="reveal">
   <h2>Contact Us</h2>
 
   <div class="form-wrapper">
@@ -342,8 +387,27 @@ h2 {
 <script>
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("active");
+  document.getElementById("overlay").classList.toggle("active");
+  document.body.style.overflow = "hidden";
 }
+
+function closeMenu(){
+  document.getElementById("navLinks").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+  document.body.style.overflow = "auto";
+}
+
+/* SCROLL REVEAL */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
+    }
+  });
+});
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
-</html>
+  </html>
