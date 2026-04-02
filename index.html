@@ -180,10 +180,10 @@ nav {
   }
 }
 
-/* ================= SECTIONS (MADE MORE COMPACT) ================= */
+/* ================= SECTIONS (ONLY CHANGE HERE) ================= */
 section {
   padding: 45px 18px;
-  margin: 12px auto;
+  margin: 35px auto;
   max-width: 1100px;
   border-radius: 18px;
   border: 1px solid rgba(212,175,55,0.25);
@@ -285,7 +285,7 @@ input, textarea {
   border-radius: 10px;
 }
 
-/* ================= REVEAL (FIXED FADE IN + OUT) ================= */
+/* ================= REVEAL ================= */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -301,7 +301,6 @@ input, textarea {
 
 <body>
 
-<!-- FADE EDGES -->
 <div class="fade-top"></div>
 <div class="fade-bottom"></div>
 
@@ -322,13 +321,11 @@ input, textarea {
 
 <a href="#contact"><div class="cta-fixed">Book a Call</div></a>
 
-<!-- ================= HERO ================= -->
 <section class="reveal">
   <h1>We Build Predictable Lead Generation Systems That Scale Businesses</h1>
   <p>We help companies replace inconsistent outreach with structured, automated lead generation systems that deliver predictable sales opportunities every single week.</p>
 </section>
 
-<!-- ================= SERVICES ================= -->
 <section id="services" class="reveal">
 <h2>Our Services</h2>
 
@@ -348,7 +345,6 @@ input, textarea {
 </div>
 </section>
 
-<!-- ================= PRICING ================= -->
 <section id="pricing" class="reveal">
 <h2>Pricing Packages</h2>
 
@@ -371,7 +367,6 @@ input, textarea {
 </div>
 </section>
 
-<!-- ================= TESTIMONIALS ================= -->
 <section id="testimonials" class="reveal">
 <h2>Testimonials</h2>
 
@@ -388,7 +383,6 @@ input, textarea {
 </div>
 </section>
 
-<!-- ================= ABOUT ================= -->
 <section id="about" class="reveal">
 <h2>About Us</h2>
 <div class="card">
@@ -396,7 +390,6 @@ Acquirely is a premium lead generation agency focused on building scalable outbo
 </div>
 </section>
 
-<!-- ================= CONTACT ================= -->
 <section id="contact" class="reveal">
 <h2>Contact</h2>
 
@@ -440,7 +433,6 @@ function closeMenu() {
   document.documentElement.style.overflow = "";
 }
 
-/* FIXED: proper submit behaviour */
 function submitForm() {
   document.getElementById("successMsg").style.display = "block";
   setTimeout(() => {
@@ -448,7 +440,6 @@ function submitForm() {
   }, 4000);
 }
 
-/* FIXED: fade in AND fade out on scroll */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
