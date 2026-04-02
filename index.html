@@ -173,7 +173,7 @@ opacity:0.85;
 }
 
 /* =========================
-SECTION HEADINGS (NEW)
+SECTION HEADINGS
 ========================= */
 .section-title{
 text-align:center;
@@ -306,7 +306,6 @@ border-radius:8px;
 
 <div class="bg"></div>
 
-<!-- NAV -->
 <nav>
 <div class="logo"><div class="logo-a">A</div>Acquirely</div>
 
@@ -315,7 +314,6 @@ border-radius:8px;
 </div>
 </nav>
 
-<!-- MENU -->
 <div class="menu" id="menu">
 <a href="#about">About</a>
 <a href="#services">Services</a>
@@ -324,14 +322,17 @@ border-radius:8px;
 <a href="#contact">Contact</a>
 </div>
 
-<!-- HERO -->
 <section class="hero">
 <h1>SaaS Lead Generation System</h1>
 <p>Fully automated outbound infrastructure that generates leads, books calls, and scales revenue predictably.</p>
+
+<!-- FIX 1: scroll to bottom -->
+<a href="#contact">
 <button class="btn">Get Started</button>
+</a>
+
 </section>
 
-<!-- ABOUT (MOVED ABOVE STATS) -->
 <section id="about" class="grid">
 <div class="about-box">
 <h3>About Acquirely</h3>
@@ -345,84 +346,41 @@ The goal is predictable revenue without manual prospecting.
 </div>
 </section>
 
-<!-- STATS -->
 <section class="stats">
 <div class="stat"><h2 id="c1">0</h2><p>Clients</p></div>
 <div class="stat"><h2 id="c2">0</h2><p>Leads</p></div>
 <div class="stat"><h2 id="c3">0</h2><p>Success %</p></div>
 </section>
 
-<!-- SERVICES -->
 <div class="section-title">SERVICES</div>
 <section id="services" class="grid">
 
-<div class="card">
-<h3>Cold Email Systems</h3>
-<p class="extra">Full setup: domains, inboxes, warmup, scraping, deliverability optimization.</p>
-</div>
-
-<div class="card">
-<h3>AI Appointment Setting</h3>
-<p class="extra">AI handles replies, qualification, objections, and booking calls automatically.</p>
-</div>
-
-<div class="card">
-<h3>LinkedIn Automation</h3>
-<p class="extra">Connection flows, messaging sequences, targeting, and engagement tracking.</p>
-</div>
-
-<div class="card">
-<h3>Conversion Funnels</h3>
-<p class="extra">Landing pages, A/B testing, tracking, and optimization systems.</p>
-</div>
+<div class="card"><h3>Cold Email Systems</h3><p class="extra">Full setup: domains, inboxes, warmup.</p></div>
+<div class="card"><h3>AI Appointment Setting</h3><p class="extra">AI handles replies and bookings.</p></div>
+<div class="card"><h3>LinkedIn Automation</h3><p class="extra">Messaging and outreach flows.</p></div>
+<div class="card"><h3>Conversion Funnels</h3><p class="extra">Landing pages and optimization.</p></div>
 
 </section>
 
-<!-- PRICING -->
 <div class="section-title">PRICING</div>
 <section id="pricing" class="grid">
 
-<div class="price-card">
-<h3>Starter - $399 p/m</h3>
-<p class="extra">Basic setup for new businesses.</p>
-</div>
-
-<div class="price-card">
-<h3>Pro - $799 p/m(Most Popular)</h3>
-<p class="extra">Full automation system + AI follow-ups.</p>
-</div>
-
-<div class="price-card">
-<h3>Elite - $1599 p/m</h3>
-<p class="extra">Full SaaS scaling system + multi-channel outreach + Automation.</p>
-</div>
+<div class="price-card"><h3>Starter - $399 p/m</h3><p class="extra">Basic setup.</p></div>
+<div class="price-card"><h3>Pro - $799 p/m(Most Popular)</h3><p class="extra">Full automation.</p></div>
+<div class="price-card"><h3>Elite - $1599 p/m</h3><p class="extra">Full SaaS scaling.</p></div>
 
 </section>
 
-<!-- TESTIMONIALS -->
 <div class="section-title">TESTIMONIALS</div>
 <section id="testimonials" class="grid">
 
-<div class="testimonial">
-<h3>Agency Owner</h3>
-<p class="extra">“We replaced manual outreach completely.”</p>
-</div>
-
-<div class="testimonial">
-<h3>SaaS Founder</h3>
-<p class="extra">“Predictable pipeline for the first time ever.”</p>
-</div>
-
-<div class="testimonial">
-<h3>Consultant</h3>
-<p class="extra">“Highest ROI system we’ve used.”</p>
-</div>
+<div class="testimonial"><h3>Agency Owner</h3><p class="extra">“We replaced manual outreach completely.”</p></div>
+<div class="testimonial"><h3>SaaS Founder</h3><p class="extra">“Predictable pipeline.”</p></div>
+<div class="testimonial"><h3>Consultant</h3><p class="extra">“Highest ROI system.”</p></div>
 
 </section>
 
-<!-- CONTACT -->
 <section id="contact" class="grid">
-
 <div class="card">
 <h3>Contact</h3>
 <form>
@@ -431,10 +389,8 @@ The goal is predictable revenue without manual prospecting.
 <textarea placeholder="Message"></textarea>
 </form>
 </div>
-
 </section>
 
-<!-- FOOTER -->
 <footer>
 <p>© 2026 Acquirely. All rights reserved.</p>
 <p>Disclaimer: Results vary depending on execution.</p>
@@ -454,7 +410,23 @@ function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
 
-/* BACKGROUND (ENHANCED ONLY) */
+/* CLOSE MENU ON LINK CLICK */
+document.querySelectorAll(".menu a").forEach(link=>{
+link.addEventListener("click",()=>{
+document.getElementById("menu").classList.remove("active");
+});
+});
+
+/* CLOSE MENU ON OUTSIDE CLICK */
+document.addEventListener("click",(e)=>{
+const menu=document.getElementById("menu");
+const burger=document.querySelector(".burger");
+if(!menu.contains(e.target) && !burger.contains(e.target)){
+menu.classList.remove("active");
+}
+});
+
+/* BACKGROUND */
 const bg=document.querySelector(".bg");
 for(let i=0;i<260;i++){
 let s=document.createElement("span");
