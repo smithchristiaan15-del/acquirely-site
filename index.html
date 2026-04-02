@@ -407,6 +407,23 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
     alert("Something went wrong.");
   });
 });
+<script>
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function updateDashboard() {
+  document.getElementById("total-leads").innerText = randomNumber(50, 300);
+  document.getElementById("new-leads").innerText = randomNumber(5, 50);
+  document.getElementById("conversion-rate").innerText = randomNumber(10, 85) + "%";
+  document.getElementById("active-campaigns").innerText = randomNumber(1, 12);
+}
+
+// Run once immediately
+updateDashboard();
+
+// Keep it “live”
+setInterval(updateDashboard, 2000);
 </script>
 
 </body>
