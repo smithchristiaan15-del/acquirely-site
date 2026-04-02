@@ -29,37 +29,48 @@ cursor:none;
 }
 
 /* =========================
-BACKGROUND FX (UPGRADED)
+FLOATING BACKGROUND LIGHTS (RESTORED + ENHANCED)
 ========================= */
 .bg{
 position:fixed;
 inset:0;
 z-index:-3;
 background:
-radial-gradient(circle at 15% 20%, #00f5ff35, transparent 40%),
-radial-gradient(circle at 80% 30%, #7c3aed30, transparent 45%),
-radial-gradient(circle at 50% 80%, #00ffb330, transparent 50%),
-radial-gradient(circle at 50% 50%, #00f5ff10, transparent 60%);
-filter:blur(100px);
-animation:floatBg 10s ease-in-out infinite alternate;
+radial-gradient(circle at 20% 20%, rgba(0,245,255,0.18), transparent 35%),
+radial-gradient(circle at 80% 30%, rgba(0,255,200,0.12), transparent 40%),
+radial-gradient(circle at 50% 80%, rgba(0,180,255,0.10), transparent 45%);
+filter:blur(90px);
+animation:floatBg 14s ease-in-out infinite alternate;
 }
 
 @keyframes floatBg{
 0%{transform:scale(1) translateY(0px);}
-100%{transform:scale(1.08) translateY(10px);}
+100%{transform:scale(1.08) translateY(18px);}
 }
 
 .dots{
 position:fixed;
 inset:0;
 z-index:-2;
-background-image:radial-gradient(#00f5ff55 1px, transparent 1px);
-background-size:42px 42px;
-opacity:0.10;
+background-image:radial-gradient(rgba(0,245,255,0.25) 1px, transparent 1px);
+background-size:45px 45px;
+opacity:0.12;
+}
+
+/* extra floating light layer */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 10% 60%, rgba(0,245,255,0.08), transparent 40%),
+radial-gradient(circle at 90% 70%, rgba(0,245,255,0.06), transparent 45%);
+z-index:-4;
+filter:blur(60px);
 }
 
 /* =========================
-CURSOR
+CURSOR + CLICK GLOW
 ========================= */
 .cursor,.cursor-follower{
 position:fixed;
@@ -73,14 +84,21 @@ width:8px;
 height:8px;
 background:#00f5ff;
 border-radius:50%;
-box-shadow:0 0 12px #00f5ff;
+box-shadow:0 0 15px #00f5ff;
 }
 
 .cursor-follower{
 width:30px;
 height:30px;
-border:1px solid #00f5ff;
+border:1px solid rgba(0,245,255,0.7);
 border-radius:50%;
+}
+
+/* click pulse */
+.cursor.click,.cursor-follower.click{
+transform:translate(-50%,-50%) scale(1.8);
+opacity:0.6;
+transition:0.15s;
 }
 
 @media (hover:none){
@@ -100,44 +118,57 @@ justify-content:space-between;
 align-items:center;
 padding:18px 40px;
 backdrop-filter:blur(18px);
-background:rgba(5,8,12,0.75);
-border-bottom:1px solid #111;
+background:rgba(5,8,12,0.7);
+border-bottom:1px solid rgba(0,245,255,0.08);
 z-index:1000;
 }
 
 /* =========================
-ANIMATED LOGO (UPGRADED)
+PREMIUM LOGO (ARTISTIC A)
 ========================= */
 .logo{
 display:flex;
-gap:10px;
-font-weight:900;
-color:#00f5ff;
-letter-spacing:1px;
+gap:12px;
 align-items:center;
+font-weight:900;
+letter-spacing:1px;
+color:#00f5ff;
 }
 
 .logo-icon{
-width:36px;
-height:36px;
-background:linear-gradient(135deg,#00f5ff,#7c3aed);
-color:#000;
+width:40px;
+height:40px;
+position:relative;
 display:flex;
 align-items:center;
 justify-content:center;
-border-radius:10px;
-font-weight:900;
-box-shadow:0 0 20px #00f5ff55;
-animation:pulseLogo 2.5s infinite ease-in-out;
+background:linear-gradient(135deg,#00f5ff,#0066ff);
+border-radius:12px;
+box-shadow:0 0 25px rgba(0,245,255,0.25);
+animation:logoFloat 3s ease-in-out infinite;
 }
 
-@keyframes pulseLogo{
-0%{transform:scale(1); box-shadow:0 0 10px #00f5ff33;}
-50%{transform:scale(1.08); box-shadow:0 0 25px #00f5ff88;}
-100%{transform:scale(1); box-shadow:0 0 10px #00f5ff33;}
+/* abstract A shape */
+.logo-icon::before{
+content:"";
+position:absolute;
+width:18px;
+height:18px;
+border-left:3px solid #fff;
+border-bottom:3px solid #fff;
+transform:rotate(-45deg);
+opacity:0.9;
 }
 
-/* MENU */
+@keyframes logoFloat{
+0%{transform:translateY(0px) rotate(0deg);}
+50%{transform:translateY(-3px) rotate(2deg);}
+100%{transform:translateY(0px) rotate(0deg);}
+}
+
+/* =========================
+MENU (UNCHANGED)
+========================= */
 nav ul{
 display:flex;
 gap:25px;
@@ -156,7 +187,6 @@ color:#00f5ff;
 text-shadow:0 0 10px #00f5ff;
 }
 
-/* BURGER */
 .burger{
 display:none;
 flex-direction:column;
@@ -186,7 +216,7 @@ padding:170px 20px 90px;
 
 .hero h1{
 font-size:54px;
-background:linear-gradient(90deg,#00f5ff,#7c3aed,#00ffb3);
+background:linear-gradient(90deg,#00f5ff,#ffffff,#00f5ff);
 -webkit-background-clip:text;
 color:transparent;
 }
@@ -216,34 +246,25 @@ box-shadow:0 0 20px #00f5ff;
 }
 
 /* =========================
-SECTIONS
+GLOBAL CARDS (NEON INTERACTIVE BORDERS)
 ========================= */
-section{
-padding:80px 40px;
+.card,.price-card,.testimonial{
+background:rgba(10,12,18,0.65);
+border:1px solid rgba(0,245,255,0.12);
+backdrop-filter:blur(10px);
+transition:0.3s;
 }
 
-/* =========================
-SERVICES (UNCHANGED TEXT)
-========================= */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
+.card:hover,.price-card:hover,.testimonial:hover{
+transform:translateY(-8px);
+border-color:rgba(0,245,255,0.6);
+box-shadow:0 0 20px rgba(0,245,255,0.25);
 }
 
+/* SERVICES */
 .card{
-background:rgba(10,12,18,0.7);
-border:1px solid rgba(0,245,255,0.15);
 padding:25px;
 border-radius:15px;
-transition:0.3s;
-backdrop-filter:blur(10px);
-}
-
-.card:hover{
-transform:translateY(-8px);
-border-color:rgba(0,245,255,0.35);
-box-shadow:0 0 18px rgba(0,245,255,0.15);
 }
 
 .card h3{
@@ -251,67 +272,56 @@ color:#00f5ff;
 margin-bottom:10px;
 }
 
-/* =========================
-PRICING (UNCHANGED CONTENT)
-========================= */
+/* PRICING */
 .price-card{
 position:relative;
 padding:30px;
 border-radius:15px;
-background:rgba(10,12,18,0.75);
-border:1px solid #111;
 text-align:center;
-transition:0.3s;
 }
-
-.price-card:hover{
-transform:translateY(-10px);
-}
-
-.price-card:nth-child(1){border-color:#00f5ff33;}
-.price-card:nth-child(2){border-color:#ffffff22;}
-.price-card:nth-child(3){border-color:#ffd70055;}
-
-.price-card:nth-child(1) .price{color:#00f5ff;}
-.price-card:nth-child(2) .price{color:#fff;}
-.price-card:nth-child(3) .price{color:#ffd700;}
 
 .price{
 font-size:42px;
 margin:10px 0;
 font-weight:800;
+color:#fff;
 }
 
+/* MOST POPULAR (WHITE ONLY) */
 .popular{
 position:absolute;
 top:-10px;
 right:10px;
-background:linear-gradient(135deg,#ffd700,#ffb300);
+background:#fff;
 color:#000;
 padding:5px 10px;
 border-radius:20px;
 font-weight:800;
+border:1px solid #fff;
 }
 
-/* =========================
-TESTIMONIALS (UNCHANGED CONTENT)
-========================= */
+.price-card:nth-child(1) .price{color:#00f5ff;}
+.price-card:nth-child(2) .price{color:#fff;}
+.price-card:nth-child(3) .price{color:#ffd700;}
+
+/* TESTIMONIALS */
 .testimonial{
 padding:20px;
 border-radius:15px;
-background:rgba(10,12,18,0.7);
-border:1px solid rgba(0,245,255,0.15);
+border:1px solid rgba(0,245,255,0.25);
 }
 
-/* =========================
-CONTACT
-========================= */
+/* CONTACT FORM BOX */
 form{
 max-width:500px;
 margin:auto;
 display:flex;
 flex-direction:column;
 gap:12px;
+padding:25px;
+border-radius:15px;
+border:1px solid rgba(0,245,255,0.35);
+box-shadow:0 0 20px rgba(0,245,255,0.12);
 }
 
 input,textarea{
@@ -325,10 +335,10 @@ color:#7fdfff;
 input:focus,textarea:focus{
 outline:none;
 border-color:#00f5ff;
-box-shadow:0 0 10px rgba(0,245,255,0.2);
+box-shadow:0 0 10px rgba(0,245,255,0.25);
 }
 
-/* SOCIAL */
+/* FOOTER */
 footer{
 display:flex;
 justify-content:center;
@@ -386,7 +396,7 @@ section{padding:60px 20px;}
 
 <nav>
 <div class="logo">
-<div class="logo-icon">A</div>ACQUIRELY
+<div class="logo-icon"></div>ACQUIRELY
 </div>
 
 <ul id="menu">
@@ -411,7 +421,6 @@ Get In Touch
 </button>
 </section>
 
-<!-- EVERYTHING BELOW IS YOUR ORIGINAL CONTENT (UNCHANGED) -->
 <section id="services">
 <h2 style="text-align:center;margin-bottom:30px;">Services</h2>
 <div class="grid">
@@ -476,8 +485,6 @@ Get In Touch
 </footer>
 
 <script>
-
-/* BURGER FIX */
 const burger=document.getElementById('burger');
 const menu=document.getElementById('menu');
 
@@ -500,7 +507,6 @@ burger.classList.remove("active");
 }
 });
 
-/* CURSOR */
 const c=document.querySelector('.cursor');
 const f=document.querySelector('.cursor-follower');
 
@@ -511,17 +517,23 @@ f.style.left=e.clientX+'px';
 f.style.top=e.clientY+'px';
 });
 
-/* FORM */
+/* CLICK GLOW (DESKTOP + MOBILE TAP) */
+document.addEventListener('click',()=>{
+c.classList.add('click');
+f.classList.add('click');
+setTimeout(()=>{
+c.classList.remove('click');
+f.classList.remove('click');
+},150);
+});
+
 document.getElementById('form').addEventListener('submit',e=>{
 e.preventDefault();
 fetch("YOUR_GOOGLE_SHEETS_SCRIPT_URL",{
 method:"POST",
 body:new FormData(e.target)
 })
-.then(()=>alert("Sent"))
-.catch(()=>alert("Error"));
 });
-
 </script>
 
 </body>
