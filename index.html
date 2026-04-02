@@ -32,60 +32,58 @@ body {
   opacity: 0.25;
 }
 
-/* ========================= */
-/* PREMIUM NEON GOLD LOGO */
-/* ========================= */
-
+/* ===== UPDATED LOGO (ONLY CHANGE) ===== */
 .logo {
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   letter-spacing: 2px;
   cursor: pointer;
 }
 
 .logo-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   margin-right: 12px;
 
-  background: radial-gradient(circle, #ffd700, #b8860b, #3a2c00);
-  
+  background: radial-gradient(circle at 30% 30%, #fff2a6, #ffd700, #b8860b);
+
   display: flex;
   align-items: center;
   justify-content: center;
 
   font-weight: 900;
-  color: black;
-
-  animation: pulseGlow 2.5s infinite ease-in-out;
+  color: #1a1200;
 
   box-shadow:
-    0 0 10px rgba(255,215,0,0.4),
-    0 0 30px rgba(255,215,0,0.25),
-    inset 0 0 10px rgba(255,255,255,0.2);
+    0 0 12px rgba(255,215,0,0.6),
+    0 0 40px rgba(255,215,0,0.35),
+    inset 0 0 10px rgba(255,255,255,0.3);
+
+  animation: logoPulse 2.5s infinite ease-in-out;
 }
 
-@keyframes pulseGlow {
-  0% { transform: scale(1); box-shadow: 0 0 10px rgba(255,215,0,0.4);}
-  50% { transform: scale(1.08); box-shadow: 0 0 30px rgba(255,215,0,0.8);}
-  100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,215,0,0.4);}
+@keyframes logoPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
 }
 
 .logo-text {
-  background: linear-gradient(90deg, #ffd700, #fff2a6, #d4af37, #ffd700);
+  background: linear-gradient(90deg, #ffd700, #fff2a6, #ffd700);
   -webkit-background-clip: text;
   color: transparent;
-  background-size: 300%;
-  animation: goldFlow 6s linear infinite;
+  background-size: 200%;
+  animation: textGlow 4s linear infinite;
 }
 
-@keyframes goldFlow {
+@keyframes textGlow {
   0% { background-position: 0%; }
-  100% { background-position: 300%; }
+  100% { background-position: 200%; }
 }
+/* ===== END LOGO CHANGE ===== */
 
 /* NAV */
 nav {
@@ -160,26 +158,25 @@ section {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 30px rgba(255,215,0,0.25);
-  z-index: 10;
 }
 
-/* FIXED EXPANSION */
+/* ===== FIXED EXPANSION (ONLY CHANGE) ===== */
 .card .extra {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: all 0.4s ease;
+  transition: 0.4s ease;
   margin-top: 10px;
   color: #cbbd8a;
   font-size: 13px;
 }
 
 .card:hover > .extra {
-  max-height: 300px;
+  max-height: 200px;
   opacity: 1;
 }
+/* ===== END FIX ===== */
 
-/* COUNTER */
 .counter {
   font-size: 42px;
   color: gold;
@@ -325,22 +322,22 @@ footer {
 
     <div class="card">
       Lead Generation Systems
-      <div class="extra">We build fully automated lead generation systems that consistently bring qualified prospects into your pipeline. Each system is tailored to your ideal client profile, ensuring you attract the right decision-makers. This creates a predictable and scalable flow of opportunities for your business.</div>
+      <div class="extra">We build fully automated lead generation systems that consistently bring qualified prospects into your pipeline. Instead of relying on referrals or inconsistent outreach, we create a structured flow of targeted leads tailored to your ideal customer profile. Every system is designed to attract decision-makers who actually need your service, giving you a predictable and scalable way to grow your business..</div>
     </div>
 
     <div class="card">
       Cold Email Outreach
-      <div class="extra">We manage high-performing cold email campaigns designed to reach decision-makers directly. Every campaign is optimized for deliverability, personalization, and conversions to maximize replies. You get a steady stream of conversations without needing to handle outreach yourself.</div>
+      <div class="extra">We manage high-performing cold email campaigns that put you directly in front of decision-makers. Each campaign is built around deliverability, personalization, and conversion so your messages feel relevant rather than generic. From setup to scaling, we handle everything needed to ensure your outreach runs smoothly and consistently generates replies</div>
     </div>
 
     <div class="card">
       LinkedIn Automation
-      <div class="extra">We turn LinkedIn into a powerful lead generation channel through smart automation. From connection requests to follow-ups, everything is handled while maintaining precise targeting. This allows you to build authority, start conversations, and generate leads on autopilot.</div>
+      <div class="extra">We turn LinkedIn into a reliable lead generation channel by automating connection requests, messaging, and follow-ups while keeping targeting precise and relevant. This allows you to connect with decision-makers, start conversations, and build authority without spending hours manually reaching out every day.</div>
     </div>
 
     <div class="card">
       Appointment Setting
-      <div class="extra">We convert your leads into booked sales calls with qualified prospects. Through structured follow-ups and proper qualification, we ensure only serious opportunities reach your calendar. This lets you focus purely on closing deals instead of chasing leads.</div>
+      <div class="extra">We convert your leads into booked sales calls with qualified prospects who are ready to talk. Through structured follow-ups and qualification systems, we ensure your calendar is filled with high-intent conversations so you spend less time chasing leads and more time closing deals.</div>
     </div>
 
   </div>
@@ -413,7 +410,7 @@ const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
-let particles=Array.from({length:60},()=>( {
+let particles=Array.from({length:60},()=>({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 r:Math.random()*2,
