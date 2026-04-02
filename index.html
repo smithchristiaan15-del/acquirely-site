@@ -91,13 +91,11 @@ border:1px solid rgba(0,245,255,0.5);
 border-radius:50%;
 }
 
-/* active only on click */
 .cursor.active,
 .cursor-follower.active{
 opacity:1;
 }
 
-/* click flash */
 .click-flash{
 position:fixed;
 width:60px;
@@ -426,7 +424,10 @@ ACQUIRELY
 <section class="hero">
 <h1>Premium Lead Generation Systems</h1>
 <p>We build AI-powered outbound systems that generate predictable revenue, automate outreach, and scale your business.</p>
-<button class="btn">Get In Touch</button>
+
+<button class="btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+Get In Touch
+</button>
 </section>
 
 <section class="stats">
@@ -542,19 +543,24 @@ This website is for informational purposes only. Results may vary depending on e
 
 <script>
 
-/* BURGER MENU */
+/* BURGER MENU - FIXED (CLICK + TOUCH) */
 const burger=document.getElementById("burger");
 const menu=document.getElementById("menu");
 
-burger.onclick=()=>menu.classList.toggle("active");
+function toggleMenu(){
+menu.classList.toggle("active");
+}
 
-/* close menu when clicking outside */
+burger.addEventListener("click",toggleMenu);
+burger.addEventListener("touchstart",toggleMenu);
+
 document.addEventListener("click",(e)=>{
 if(!menu.contains(e.target) && !burger.contains(e.target)){
 menu.classList.remove("active");
 }
 });
 
+/* close menu when clicking links */
 document.querySelectorAll("#menu a").forEach(a=>{
 a.onclick=()=>menu.classList.remove("active");
 });
@@ -569,7 +575,6 @@ el.classList.toggle("active");
 });
 });
 
-/* close cards when clicking outside */
 document.addEventListener("click",(e)=>{
 if(!e.target.closest(".card,.price-card,.testimonial,.about-box")){
 document.querySelectorAll(".card,.price-card,.testimonial,.about-box")
@@ -577,11 +582,11 @@ document.querySelectorAll(".card,.price-card,.testimonial,.about-box")
 }
 });
 
-/* CLICK-ONLY CURSOR */
+/* CLICK CURSOR FIX (MOBILE INCLUDED) */
 const c=document.querySelector(".cursor");
 const f=document.querySelector(".cursor-follower");
 
-document.addEventListener("click",e=>{
+function cursorClick(e){
 c.classList.add("active");
 f.classList.add("active");
 
@@ -595,7 +600,10 @@ setTimeout(()=>{
 c.classList.remove("active");
 f.classList.remove("active");
 },700);
-});
+}
+
+document.addEventListener("click",cursorClick);
+document.addEventListener("touchstart",cursorClick);
 
 /* CLICK FLASH */
 document.addEventListener("click",e=>{
@@ -625,14 +633,15 @@ el.textContent=count;
 
 document.querySelectorAll(".stat h2").forEach(animate);
 
-/* BACKGROUND FLOATS */
+/* BACKGROUND FLOATS (ENSURED STABILITY) */
 const bg=document.querySelector(".bg");
+
 for(let i=0;i<35;i++){
 let s=document.createElement("span");
 s.style.left=Math.random()*100+"%";
 s.style.animationDuration=(6+Math.random()*10)+"s";
 bg.appendChild(s);
-});
+}
 
 /* FORM */
 document.getElementById("form").addEventListener("submit",e=>{
@@ -643,4 +652,4 @@ alert("Message sent successfully!");
 </script>
 
 </body>
-</html>
+  </html>
