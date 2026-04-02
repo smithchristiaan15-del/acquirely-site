@@ -32,14 +32,12 @@ body {
   opacity: 0.25;
 }
 
-/* ===== UPDATED LOGO (ONLY CHANGE) ===== */
+/* LOGO */
 .logo {
   display: flex;
   align-items: center;
   font-size: 26px;
   font-weight: 800;
-  letter-spacing: 2px;
-  cursor: pointer;
 }
 
 .logo-mark {
@@ -47,43 +45,20 @@ body {
   height: 42px;
   border-radius: 50%;
   margin-right: 12px;
-
   background: radial-gradient(circle at 30% 30%, #fff2a6, #ffd700, #b8860b);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-weight: 900;
   color: #1a1200;
-
-  box-shadow:
-    0 0 12px rgba(255,215,0,0.6),
-    0 0 40px rgba(255,215,0,0.35),
-    inset 0 0 10px rgba(255,255,255,0.3);
-
-  animation: logoPulse 2.5s infinite ease-in-out;
-}
-
-@keyframes logoPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.12); }
-  100% { transform: scale(1); }
+  box-shadow: 0 0 20px rgba(255,215,0,0.6);
 }
 
 .logo-text {
   background: linear-gradient(90deg, #ffd700, #fff2a6, #ffd700);
   -webkit-background-clip: text;
   color: transparent;
-  background-size: 200%;
-  animation: textGlow 4s linear infinite;
 }
-
-@keyframes textGlow {
-  0% { background-position: 0%; }
-  100% { background-position: 200%; }
-}
-/* ===== END LOGO CHANGE ===== */
 
 /* NAV */
 nav {
@@ -96,7 +71,6 @@ nav {
   background: rgba(10,7,3,0.7);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  border-bottom: 1px solid rgba(255,215,0,0.25);
 }
 
 nav a {
@@ -105,17 +79,12 @@ nav a {
   text-decoration: none;
 }
 
-nav a:hover {
-  color: gold;
-}
-
 .cta-btn {
   background: linear-gradient(135deg, #ffd700, #b8860b);
   color: black;
   padding: 10px 16px;
   border-radius: 10px;
   font-weight: 800;
-  margin-left: 15px;
 }
 
 /* SECTIONS */
@@ -152,15 +121,9 @@ section {
   padding: 25px;
   border-radius: 16px;
   transition: 0.3s;
-  position: relative;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 30px rgba(255,215,0,0.25);
-}
-
-/* ===== FIXED EXPANSION (ONLY CHANGE) ===== */
+/* EXPAND FIX */
 .card .extra {
   max-height: 0;
   overflow: hidden;
@@ -171,16 +134,23 @@ section {
   font-size: 13px;
 }
 
-.card:hover > .extra {
-  max-height: 200px;
+.card.active .extra {
+  max-height: 300px;
   opacity: 1;
 }
-/* ===== END FIX ===== */
 
+/* DESKTOP HOVER */
+@media(min-width:769px){
+  .card:hover .extra {
+    max-height: 300px;
+    opacity: 1;
+  }
+}
+
+/* COUNTER */
 .counter {
   font-size: 42px;
   color: gold;
-  font-weight: 700;
 }
 
 /* CONTACT */
@@ -212,11 +182,38 @@ button {
   padding: 12px 20px;
   border: none;
   background: linear-gradient(135deg, #ffd700, #b8860b);
-  color: black;
   border-radius: 10px;
-  cursor: pointer;
-  font-weight: 800;
-  margin-top: 10px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  nav div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  section {
+    padding: 60px 20px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+  }
 }
 
 /* WHATSAPP */
@@ -250,13 +247,10 @@ button {
   padding: 10px;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   padding: 40px;
   font-size: 12px;
-  color: #aaa;
-  border-top: 1px solid rgba(255,215,0,0.15);
 }
 </style>
 </head>
@@ -405,6 +399,14 @@ footer {
 </div>
 
 <script>
+/* TAP FIX FOR MOBILE */
+document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("click", ()=>{
+    card.classList.toggle("active");
+  });
+});
+
+/* PARTICLES */
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -431,6 +433,7 @@ requestAnimationFrame(draw);
 }
 draw();
 
+/* COUNTERS */
 document.querySelectorAll(".counter").forEach(el=>{
 let t=+el.dataset.target,c=0,speed=t/120;
 let i=setInterval(()=>{
@@ -440,6 +443,7 @@ if(c>=t){el.innerText=t;clearInterval(i);}
 },10);
 });
 
+/* FORM */
 document.getElementById("contactForm").addEventListener("submit",async e=>{
 e.preventDefault();
 document.getElementById("status").innerText="Sending...";
@@ -451,6 +455,7 @@ document.getElementById("status").innerText="Sent!";
 e.target.reset();
 });
 
+/* WHATSAPP */
 function toggleWA(){
 const box=document.getElementById("wa-box");
 box.style.display=box.style.display==="block"?"none":"block";
