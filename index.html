@@ -470,11 +470,13 @@ document.querySelectorAll(".card").forEach(card=>{
 });
 
 /* CONTACT DROPDOWN */
-function toggleContact(){
+function toggleContact() {
   const menu = document.getElementById("contactMenu");
   menu.classList.toggle("active");
 }
-  document.addEventListener("click", function(e){
+
+// close when clicking outside
+document.addEventListener("click", function (e) {
   const dropdown = document.querySelector(".contact-dropdown");
   const menu = document.getElementById("contactMenu");
 
@@ -482,17 +484,12 @@ function toggleContact(){
     menu.classList.remove("active");
   }
 });
-  document.querySelectorAll(".contact-menu a").forEach(link => {
+
+// close when clicking a link
+document.querySelectorAll(".contact-menu a").forEach(link => {
   link.addEventListener("click", () => {
     document.getElementById("contactMenu").classList.remove("active");
   });
-});
-
-document.addEventListener("click", function(e){
-  const dropdown = document.querySelector(".contact-dropdown");
-  if(!dropdown.contains(e.target)){
-    document.getElementById("contactMenu").style.display = "none";
-  }
 });
 
 /* PARTICLES */
