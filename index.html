@@ -33,37 +33,89 @@ body {
 }
 
 /* ========================= */
-/* PREMIUM LOGO UPGRADE */
+/* PREMIUM INTEGRATED LOGO */
 /* ========================= */
+
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   font-size: 22px;
   font-weight: 800;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   cursor: pointer;
+  position: relative;
 }
 
-.logo .a-badge {
-  width: 28px;
-  height: 28px;
+.logo-mark {
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #ffd700, #b8860b);
-  color: black;
+
+  margin-right: 10px;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #ffd700, #b8860b, #fff2a6);
+  color: #120d05;
+
   font-weight: 900;
-  animation: pulse 2s infinite;
-  box-shadow: 0 0 15px rgba(255,215,0,0.5);
+  font-size: 18px;
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 0 15px rgba(255, 215, 0, 0.35),
+    inset 0 0 8px rgba(255,255,255,0.2);
 }
 
-.logo .name {
+.logo-mark::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.4),
+    transparent 60%
+  );
+  transform: rotate(25deg);
+  animation: shineMove 4s linear infinite;
+}
+
+@keyframes shineMove {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+.logo-text {
   background: linear-gradient(90deg, #ffd700, #fff2a6, #d4af37, #ffd700);
   -webkit-background-clip: text;
   color: transparent;
-  animation: shine 6s linear infinite, glow 3s infinite;
+  background-size: 300% 100%;
+  animation: textShine 6s linear infinite;
+}
+
+@keyframes textShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.logo:hover .logo-mark {
+  box-shadow:
+    0 0 25px rgba(255, 215, 0, 0.6),
+    inset 0 0 10px rgba(255,255,255,0.25);
+  transform: scale(1.03);
+  transition: 0.3s ease;
+}
+
+.logo:hover .logo-text {
+  filter: brightness(1.2);
+  transition: 0.3s ease;
 }
 
 @keyframes shine {
@@ -265,8 +317,8 @@ footer {
 
 <nav>
   <div class="logo">
-    <div class="a-badge">A</div>
-    <div class="name">Acquirely</div>
+    <span class="logo-mark">A</span>
+    <span class="logo-text">cquirely</span>
   </div>
 
   <div>
