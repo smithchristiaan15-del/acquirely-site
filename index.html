@@ -65,13 +65,15 @@ opacity:0.25;
 }
 
 /* =========================
-CURSOR
+CURSOR (CLICK ONLY FIX)
 ========================= */
 .cursor,.cursor-follower{
 position:fixed;
 pointer-events:none;
 z-index:9999;
 transform:translate(-50%,-50%);
+opacity:0;
+transition:opacity 0.2s ease;
 }
 
 .cursor{
@@ -87,6 +89,12 @@ width:34px;
 height:34px;
 border:1px solid rgba(0,245,255,0.5);
 border-radius:50%;
+}
+
+/* active only on click */
+.cursor.active,
+.cursor-follower.active{
+opacity:1;
 }
 
 /* click flash */
@@ -124,7 +132,6 @@ border-bottom:1px solid rgba(0,245,255,0.25);
 z-index:1000;
 }
 
-/* LOGO A */
 .logo{
 display:flex;
 align-items:center;
@@ -152,7 +159,6 @@ animation:logoPulse 2.5s infinite alternate;
 100%{box-shadow:0 0 22px #00f5ff;}
 }
 
-/* MENU */
 nav ul{
 display:flex;
 gap:22px;
@@ -171,7 +177,6 @@ color:#00f5ff;
 text-shadow:0 0 10px #00f5ff;
 }
 
-/* BURGER */
 .burger{
 display:none;
 flex-direction:column;
@@ -275,7 +280,6 @@ transform:scale(1.03);
 box-shadow:0 0 30px rgba(0,245,255,0.3);
 }
 
-/* EXPAND */
 .card p.extra,.price-card p.extra,.testimonial p.extra,.about-box p.extra{
 opacity:0;
 max-height:0;
@@ -425,14 +429,12 @@ ACQUIRELY
 <button class="btn">Get In Touch</button>
 </section>
 
-<!-- STATS -->
 <section class="stats">
 <div class="stat"><h2 data-target="128">0</h2><p>Clients</p></div>
 <div class="stat"><h2 data-target="5420">0</h2><p>Leads Generated</p></div>
 <div class="stat"><h2 data-target="97">0</h2><p>Success Rate %</p></div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="grid">
 <div class="about-box">
 <h3>About Acquirely</h3>
@@ -444,73 +446,56 @@ We work with founders, agencies, and B2B companies who want predictable lead flo
 </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services" class="grid">
 
 <div class="card">
 <h3>Cold Email Systems</h3>
 <p>Full outbound infrastructure</p>
-<p class="extra">
-Domain setup, warmup systems, copywriting frameworks, inbox rotation, deliverability optimization, and reply handling systems.
-</p>
+<p class="extra">Domain setup, warmup systems, copywriting frameworks, inbox rotation, deliverability optimization, and reply handling systems.</p>
 </div>
 
 <div class="card">
 <h3>AI Appointment Setting</h3>
 <p>Fully automated booking engine</p>
-<p class="extra">
-AI qualifies leads, handles objections, and books meetings automatically into your calendar 24/7 without human input.
-</p>
+<p class="extra">AI qualifies leads, handles objections, and books meetings automatically into your calendar 24/7 without human input.</p>
 </div>
 
 <div class="card">
 <h3>LinkedIn Automation</h3>
 <p>Scalable outreach system</p>
-<p class="extra">
-Profile optimization, automated connection flows, message sequencing, and lead scraping systems for consistent pipeline growth.
-</p>
+<p class="extra">Profile optimization, automated connection flows, message sequencing, and lead scraping systems for consistent pipeline growth.</p>
 </div>
 
 <div class="card">
 <h3>Conversion Funnels</h3>
 <p>High converting systems</p>
-<p class="extra">
-Landing pages, offer structuring, CRM integration, and conversion optimization systems designed to maximize ROI.
-</p>
+<p class="extra">Landing pages, offer structuring, CRM integration, and conversion optimization systems designed to maximize ROI.</p>
 </div>
 
 </section>
 
-<!-- PRICING -->
 <section id="pricing" class="grid">
 
 <div class="price-card">
 <h3>Starter</h3>
 <div class="price">$399</div>
-<p class="extra">
-Full cold email setup, templates, basic automation, and tracking dashboard.
-</p>
+<p class="extra">Full cold email setup, templates, basic automation, and tracking dashboard.</p>
 </div>
 
 <div class="price-card">
 <h3>Pro</h3>
 <div class="price">$699</div>
-<p class="extra">
-Advanced automation system, AI messaging flows, lead qualification, and CRM integration.
-</p>
+<p class="extra">Advanced automation system, AI messaging flows, lead qualification, and CRM integration.</p>
 </div>
 
 <div class="price-card">
 <h3>Elite</h3>
 <div class="price">$1599</div>
-<p class="extra">
-Full multi-channel scaling system, optimization engine, and growth management.
-</p>
+<p class="extra">Full multi-channel scaling system, optimization engine, and growth management.</p>
 </div>
 
 </section>
 
-<!-- TESTIMONIALS -->
 <section id="testimonials" class="grid">
 
 <div class="testimonial">
@@ -533,7 +518,6 @@ Full multi-channel scaling system, optimization engine, and growth management.
 
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
 <form id="form">
 <input name="name" placeholder="Name" required>
@@ -564,28 +548,53 @@ const menu=document.getElementById("menu");
 
 burger.onclick=()=>menu.classList.toggle("active");
 
+/* close menu when clicking outside */
+document.addEventListener("click",(e)=>{
+if(!menu.contains(e.target) && !burger.contains(e.target)){
+menu.classList.remove("active");
+}
+});
+
 document.querySelectorAll("#menu a").forEach(a=>{
 a.onclick=()=>menu.classList.remove("active");
 });
 
 /* EXPAND SYSTEM */
 document.querySelectorAll(".card,.price-card,.testimonial,.about-box").forEach(el=>{
-el.addEventListener("click",()=>{
+el.addEventListener("click",(e)=>{
+e.stopPropagation();
 document.querySelectorAll(".card,.price-card,.testimonial,.about-box")
 .forEach(e=>e.classList.remove("active"));
 el.classList.toggle("active");
 });
 });
 
-/* CURSOR */
+/* close cards when clicking outside */
+document.addEventListener("click",(e)=>{
+if(!e.target.closest(".card,.price-card,.testimonial,.about-box")){
+document.querySelectorAll(".card,.price-card,.testimonial,.about-box")
+.forEach(el=>el.classList.remove("active"));
+}
+});
+
+/* CLICK-ONLY CURSOR */
 const c=document.querySelector(".cursor");
 const f=document.querySelector(".cursor-follower");
 
-document.addEventListener("mousemove",e=>{
+document.addEventListener("click",e=>{
+c.classList.add("active");
+f.classList.add("active");
+
 c.style.left=e.clientX+"px";
 c.style.top=e.clientY+"px";
+
 f.style.left=e.clientX+"px";
 f.style.top=e.clientY+"px";
+
+setTimeout(()=>{
+c.classList.remove("active");
+f.classList.remove("active");
+},700);
 });
 
 /* CLICK FLASH */
@@ -623,7 +632,7 @@ let s=document.createElement("span");
 s.style.left=Math.random()*100+"%";
 s.style.animationDuration=(6+Math.random()*10)+"s";
 bg.appendChild(s);
-}
+});
 
 /* FORM */
 document.getElementById("form").addEventListener("submit",e=>{
@@ -634,4 +643,4 @@ alert("Message sent successfully!");
 </script>
 
 </body>
-  </html>
+</html>
