@@ -100,6 +100,43 @@ nav a:hover {
   box-shadow:0 0 15px rgba(0,234,255,0.7);
 }
 
+/* CONTACT DROPDOWN */
+.contact-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.contact-menu {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: rgba(5,10,15,0.95);
+  border: 1px solid rgba(0,234,255,0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,234,255,0.25);
+  display: none;
+  flex-direction: column;
+  min-width: 180px;
+  overflow: hidden;
+}
+
+.contact-menu a {
+  padding: 12px 16px;
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid rgba(0,234,255,0.1);
+  transition: 0.2s;
+}
+
+.contact-menu a:last-child {
+  border-bottom: none;
+}
+
+.contact-menu a:hover {
+  background: rgba(0,234,255,0.1);
+  color: var(--neon);
+}
+
 /* SECTIONS */
 section {
   padding:90px 60px;
@@ -228,7 +265,7 @@ button {
   }
 }
 
-/* WHATSAPP */
+/* WHATSAPP FLOAT */
 #wa-widget {
   position:fixed;
   bottom:20px;
@@ -273,7 +310,17 @@ footer {
     <a href="#pricing">Pricing</a>
     <a href="#contact">Contact</a>
     <a class="cta-btn" href="#contact">Get Started</a>
-    <a class="cta-btn" target="_blank" href="https://wa.me/6288211592253">WhatsApp</a>
+
+    <div class="contact-dropdown">
+      <div class="cta-btn" onclick="toggleContact()">Get in Touch</div>
+
+      <div class="contact-menu" id="contactMenu">
+        <a href="https://wa.me/6288211592253" target="_blank">WhatsApp</a>
+        <a href="mailto:acquirely@proton.me">Email</a>
+        <a href="https://www.linkedin.com/in/christiaan-smith-32905387" target="_blank">LinkedIn</a>
+        <a href="https://t.me/Acquir3ly" target="_blank">Telegram</a>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -318,12 +365,12 @@ footer {
 
     <div class="card">
       Lead Generation Systems
-      <div class="extra">We build fully automated lead generation systems that consistently bring qualified prospects into your pipeline. Instead of relying on referrals or inconsistent outreach, we create a structured flow of targeted leads tailored to your ideal customer profile. Every system is designed to attract decision-makers who actually need your service, giving you a predictable and scalable way to grow your business..</div>
+      <div class="extra">We build fully automated lead generation systems that consistently bring qualified prospects into your pipeline. Instead of relying on referrals or inconsistent outreach, we create a structured flow of targeted leads tailored to your ideal customer profile. Every system is designed to attract decision-makers who actually need your service, giving you a predictable and scalable way to grow your business.</div>
     </div>
 
     <div class="card">
       Cold Email Outreach
-      <div class="extra">We manage high-performing cold email campaigns that put you directly in front of decision-makers. Each campaign is built around deliverability, personalization, and conversion so your messages feel relevant rather than generic. From setup to scaling, we handle everything needed to ensure your outreach runs smoothly and consistently generates replies</div>
+      <div class="extra">We manage high-performing cold email campaigns that put you directly in front of decision-makers. Each campaign is built around deliverability, personalization, and conversion so your messages feel relevant rather than generic. From setup to scaling, we handle everything needed to ensure your outreach runs smoothly and consistently generates replies.</div>
     </div>
 
     <div class="card">
@@ -405,6 +452,19 @@ document.querySelectorAll(".card").forEach(card=>{
   card.addEventListener("click", ()=>{
     card.classList.toggle("active");
   });
+});
+
+/* CONTACT DROPDOWN */
+function toggleContact(){
+  const menu = document.getElementById("contactMenu");
+  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
+
+document.addEventListener("click", function(e){
+  const dropdown = document.querySelector(".contact-dropdown");
+  if(!dropdown.contains(e.target)){
+    document.getElementById("contactMenu").style.display = "none";
+  }
 });
 
 /* PARTICLES */
