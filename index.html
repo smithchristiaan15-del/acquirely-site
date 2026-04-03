@@ -24,12 +24,16 @@ background:#000;
 color:#fff;
 overflow-x:hidden;
 cursor:none;
+-webkit-font-smoothing:antialiased;
+text-rendering:optimizeSpeed;
 }
 
-html{scroll-behavior:smooth;}
+html{
+scroll-behavior:smooth;
+}
 
 /* =========================
-BACKGROUND
+BACKGROUND (APPLE SMOOTH LAYER)
 ========================= */
 .bg{
 position:fixed;
@@ -39,32 +43,20 @@ background:#000;
 overflow:hidden;
 }
 
-/* 3D glass screen */
+canvas{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+}
+
+/* subtle glass layer (lightweight) */
 .bg::after{
 content:"";
 position:absolute;
 inset:0;
-background:rgba(255,255,255,0.02);
-backdrop-filter: blur(2px);
--webkit-backdrop-filter: blur(2px);
-z-index:1;
+background:rgba(255,255,255,0.01);
 pointer-events:none;
-}
-
-.bg span{
-position:absolute;
-width:3px;
-height:3px;
-background:#00f5ff;
-border-radius:50%;
-box-shadow:0 0 10px #00f5ff,0 0 25px #00f5ff;
-animation:float 10s linear infinite;
-opacity:0.55;
-}
-
-@keyframes float{
-0%{transform:translateY(110vh) scale(0);}
-100%{transform:translateY(-10vh) scale(1);}
 }
 
 /* =========================
@@ -72,24 +64,25 @@ CLICK EFFECT
 ========================= */
 .click-glow{
 position:fixed;
-width:14px;
-height:14px;
+width:12px;
+height:12px;
 border-radius:50%;
 background:#00f5ff;
-box-shadow:0 0 40px #00f5ff;
+box-shadow:0 0 25px #00f5ff;
 transform:translate(-50%,-50%);
 pointer-events:none;
-animation:clickAnim 0.6s ease-out forwards;
+animation:clickAnim 0.5s ease-out forwards;
 z-index:9999;
+will-change:transform,opacity;
 }
 
 @keyframes clickAnim{
 0%{transform:translate(-50%,-50%) scale(0.5);opacity:1;}
-100%{transform:translate(-50%,-50%) scale(4);opacity:0;}
+100%{transform:translate(-50%,-50%) scale(3);opacity:0;}
 }
 
 /* =========================
-NAV + BURGER
+NAV
 ========================= */
 nav{
 position:fixed;
@@ -185,7 +178,7 @@ opacity:0.85;
 }
 
 /* =========================
-SECTION HEADINGS
+SECTION
 ========================= */
 .section-title{
 text-align:center;
@@ -196,9 +189,7 @@ margin-top:40px;
 opacity:0.9;
 }
 
-/* =========================
-BUTTON
-========================= */
+/* BUTTON */
 .btn{
 padding:12px 26px;
 border:1px solid #00f5ff;
@@ -213,9 +204,7 @@ background:#00f5ff;
 color:#000;
 }
 
-/* =========================
-GRID
-========================= */
+/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -225,9 +214,7 @@ max-width:1200px;
 margin:auto;
 }
 
-/* =========================
-CARDS + NEON
-========================= */
+/* CARDS */
 .card,.price-card,.testimonial,.about-box{
 background:rgba(10,10,10,0.9);
 border:1px solid rgba(0,245,255,0.3);
@@ -236,12 +223,12 @@ padding:22px;
 cursor:pointer;
 transition:0.3s;
 overflow:hidden;
+will-change:transform;
 }
 
 .card:hover,.price-card:hover,.testimonial:hover,.about-box:hover{
 transform:translateY(-6px);
-box-shadow:0 0 40px rgba(0,245,255,0.35);
-border-color:#00f5ff;
+box-shadow:0 0 35px rgba(0,245,255,0.25);
 }
 
 /* EXPAND */
@@ -258,34 +245,7 @@ opacity:1;
 margin-top:12px;
 }
 
-/* =========================
-PRICING BADGES
-========================= */
-.badge{
-display:inline-block;
-padding:4px 10px;
-border-radius:999px;
-font-size:12px;
-margin-left:8px;
-font-weight:600;
-}
-
-.badge.popular{
-background:#00aaff;
-color:#000;
-box-shadow:0 0 12px #00aaff;
-}
-
-.badge.gold{
-background:transparent;
-color:#ffd700;
-border:1px solid #ffd700;
-box-shadow:0 0 12px #ffd700;
-}
-
-/* =========================
-STATS
-========================= */
+/* STATS */
 .stats{
 display:flex;
 justify-content:center;
@@ -307,9 +267,7 @@ color:#00f5ff;
 font-size:34px;
 }
 
-/* =========================
-FOOTER
-========================= */
+/* FOOTER */
 footer{
 padding:40px;
 text-align:center;
@@ -323,9 +281,7 @@ margin:0 10px;
 text-decoration:none;
 }
 
-/* =========================
-CONTACT FORM
-========================= */
+/* FORM */
 form input,form textarea{
 width:100%;
 padding:10px;
@@ -341,7 +297,9 @@ border-radius:8px;
 
 <body>
 
-<div class="bg"></div>
+<div class="bg">
+<canvas id="c"></canvas>
+</div>
 
 <nav>
 <div class="logo"><div class="logo-a">A</div>Acquirely</div>
@@ -362,11 +320,7 @@ border-radius:8px;
 <section class="hero">
 <h1>SaaS Lead Generation System</h1>
 <p>Fully automated outbound infrastructure that generates leads, books calls, and scales revenue predictably.</p>
-
-<a href="#contact">
-<button class="btn">Get Started</button>
-</a>
-
+<a href="#contact"><button class="btn">Get Started</button></a>
 </section>
 
 <section id="about" class="grid">
@@ -417,13 +371,13 @@ Designed to improve conversions continuously over time.</p></div>
 </div>
 
 <div class="price-card">
-<h3>Pro - $799 p/m <span class="badge popular">Most Popular</span></h3>
-<p class="extra">Fully automated system with AI follow-ups, response handling, and deliverability optimisation. Optimised for higher replies and booked calls.</p>
+<h3>Pro - $799 p/m <span class="badge">Most Popular</span></h3>
+<p class="extra">Fully automated system with AI follow-ups, response handling, and deliverability optimisation.</p>
 </div>
 
 <div class="price-card">
-<h3>Elite - $1599 p/m <span class="badge gold">Premium</span></h3>
-<p class="extra">Full multi-channel system with email + LinkedIn, CRM integration, and AI pipeline management. Built for scaling and predictable revenue growth.</p>
+<h3>Elite - $1599 p/m <span class="badge">Premium</span></h3>
+<p class="extra">Full multi-channel system with email + LinkedIn, CRM integration, and AI pipeline management.</p>
 </div>
 
 </section>
@@ -431,32 +385,26 @@ Designed to improve conversions continuously over time.</p></div>
 <div class="section-title">TESTIMONIALS</div>
 <section id="testimonials" class="grid">
 
-<div class="testimonial"><h3>Agency Owner</h3><p class="extra">“We replaced manual outreach completely.”</p></div>
-<div class="testimonial"><h3>SaaS Founder</h3><p class="extra">“Predictable pipeline, predictable Revenue.”</p></div>
-<div class="testimonial"><h3>Consultant</h3><p class="extra">“Highest ROI system we have had in a long time.”</p></div>
+<div class="testimonial"><h3>Agency Owner</h3><p class="extra">We replaced manual outreach completely.</p></div>
+<div class="testimonial"><h3>SaaS Founder</h3><p class="extra">Predictable pipeline, predictable revenue.</p></div>
+<div class="testimonial"><h3>Consultant</h3><p class="extra">Highest ROI system we have had in a long time.</p></div>
 
 </section>
 
 <section id="contact" class="grid">
 <div class="card">
 <h3>Contact</h3>
-
 <form>
 <input type="text" placeholder="Name" required/>
 <input type="email" placeholder="Email" required/>
 <textarea placeholder="Message" required></textarea>
-
 <button type="submit" class="btn">Send Message</button>
-
 </form>
-
 </div>
 </section>
 
 <footer>
 <p>© 2026 Acquirely. All rights reserved.</p>
-<p>Disclaimer: Results vary depending on execution.</p>
-
 <div>
 <a href="#">WhatsApp</a>
 <a href="#">Telegram</a>
@@ -467,6 +415,9 @@ Designed to improve conversions continuously over time.</p></div>
 
 <script>
 
+/* =========================
+MENU
+========================= */
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
@@ -477,6 +428,9 @@ document.getElementById("menu").classList.remove("active");
 });
 });
 
+/* =========================
+OUTSIDE CLICK CLOSE
+========================= */
 document.addEventListener("click",(e)=>{
 const menu=document.getElementById("menu");
 const burger=document.querySelector(".burger");
@@ -485,39 +439,84 @@ menu.classList.remove("active");
 }
 });
 
-const bg=document.querySelector(".bg");
-for(let i=0;i<260;i++){
-let s=document.createElement("span");
-s.style.left=Math.random()*100+"%";
-s.style.animationDuration=(5+Math.random()*7)+"s";
-bg.appendChild(s);
+/* =========================
+APPLE CANVAS PARTICLE ENGINE
+========================= */
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
+
+let w,h;
+function resize(){
+w=canvas.width=window.innerWidth;
+h=canvas.height=window.innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
+
+const particles=[];
+const COUNT=90;
+
+for(let i=0;i<COUNT;i++){
+particles.push({
+x:Math.random()*w,
+y:Math.random()*h,
+vx:(Math.random()-0.5)*0.3,
+vy:(Math.random()-0.5)*0.3,
+r:Math.random()*1.8+0.5
+});
 }
 
-document.querySelectorAll(".card,.price-card,.testimonial,.about-box").forEach(el=>{
-el.addEventListener("click",()=>{
-el.classList.toggle("active");
-});
-});
+function draw(){
+ctx.clearRect(0,0,w,h);
 
+for(let p of particles){
+p.x+=p.vx;
+p.y+=p.vy;
+
+if(p.x<0||p.x>w)p.vx*=-1;
+if(p.y<0||p.y>h)p.vy*=-1;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="rgba(0,245,255,0.55)";
+ctx.fill();
+}
+
+requestAnimationFrame(draw);
+}
+draw();
+
+/* =========================
+CLICK EFFECT
+========================= */
 document.addEventListener("click",e=>{
 let d=document.createElement("div");
 d.className="click-glow";
 d.style.left=e.clientX+"px";
 d.style.top=e.clientY+"px";
 document.body.appendChild(d);
-setTimeout(()=>d.remove(),600);
+setTimeout(()=>d.remove(),500);
 });
 
-function count(id, target){
+/* =========================
+EXPAND CARDS
+========================= */
+document.querySelectorAll(".card,.price-card,.testimonial,.about-box").forEach(el=>{
+el.addEventListener("click",()=>{
+el.classList.toggle("active");
+});
+});
+
+/* =========================
+COUNTERS
+========================= */
+function count(id,target){
 let el=document.getElementById(id);
 let current=0;
-
-let steps=60;
-let increment=Math.ceil(target/steps);
+let step=Math.ceil(target/60);
 
 let t=setInterval(()=>{
-current+=increment;
-
+current+=step;
 if(current>=target){
 el.innerText=target;
 clearInterval(t);
