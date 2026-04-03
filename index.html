@@ -39,12 +39,19 @@ overflow:hidden;
 
 .particle{
 position:absolute;
-width:5px;
-height:5px;
-border-radius:50%;
-background:#00f5ff;
-box-shadow:0 0 10px #00f5ff, 0 0 25px #00f5ff;
-opacity:0.6;
+width:2px;
+height:2px;
+border-radius:30%;
+
+/* 🔥 metallic blue */
+background:linear-gradient(145deg,#00e5ff,#007a99);
+
+box-shadow:
+0 0 4px #00e5ff88,
+0 0 8px #00e5ff44;
+
+opacity:0.7;
+
 animation:floatUp linear infinite;
 }
 
@@ -178,8 +185,8 @@ SERVICES
 ========================= */
 .services{
 display:grid;
-grid-template-columns:repeat(auto-fit, minmax(250px, 250px));
-gap:20px;
+grid-template-columns:repeat(auto-fit, minmax(320px, 320px)); /* wider boxes */
+gap:25px;
 justify-content:center;
 }
 
@@ -187,22 +194,38 @@ justify-content:center;
 padding:20px;
 border-radius:14px;
 cursor:pointer;
-transition:0.3s;
+transition:all 0.4s ease;
 background:rgba(255,255,255,0.03);
 backdrop-filter:blur(12px);
 border:1px solid #00e5ff22;
-max-height:55px;
+
+/* 🔥 FIXED HEIGHT SYSTEM */
+height:70px; /* only show title */
 overflow:hidden;
+
 box-shadow:0 0 15px transparent;
 }
 
+/* remove extra spacing from text */
+.service h3{
+margin:0;
+}
+
+/* hide paragraph properly */
+.service p{
+margin-top:15px;
+opacity:0.85;
+}
+
+/* hover effect */
 .service:hover{
 box-shadow:0 0 25px #00e5ff55;
 transform:translateY(-3px);
 }
 
+/* 🔥 OPEN STATE */
 .service.active{
-max-height:320px;
+height:220px; /* expands fully */
 box-shadow:0 0 30px #00e5ff66;
 }
 
@@ -451,7 +474,7 @@ Acquirely builds automated outreach systems that help businesses generate consis
 /* FLOATING LIGHTS */
 const field = document.getElementById("field");
 
-for(let i=0;i<70;i++){
+for(let i=0;i<35;i++){
 const p=document.createElement("div");
 p.classList.add("particle");
 p.style.left=Math.random()*100+"vw";
