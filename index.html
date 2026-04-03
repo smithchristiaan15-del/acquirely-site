@@ -270,6 +270,21 @@ max-width:500px;
 margin:auto;
 }
 
+.contact-box{
+border:1px solid #00e5ff55;
+border-radius:16px;
+padding:25px;
+background:rgba(0,0,0,0.45);
+backdrop-filter:blur(16px);
+box-shadow:0 0 25px #00e5ff33, inset 0 0 10px #00e5ff11;
+transition:0.3s;
+}
+
+.contact-box:hover{
+box-shadow:0 0 45px #00e5ff88, inset 0 0 15px #00e5ff22;
+border-color:#00e5ff;
+}
+
 input,textarea{
 padding:12px;
 border-radius:10px;
@@ -415,7 +430,7 @@ Acquirely builds automated outreach systems that help businesses generate consis
 <section id="contact">
 <h2>Contact</h2>
 
-<form id="contactForm">
+<form id="contactForm" class="contact-box">
 <input type="text" placeholder="Name" required>
 <input type="email" placeholder="Email" required>
 <textarea placeholder="Message"></textarea>
