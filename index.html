@@ -21,34 +21,41 @@ font-family:Inter,sans-serif;
 }
 
 body{
-background:#050814;
+background:#05060a;
 color:#fff;
 overflow-x:hidden;
 }
 
 /* =========================
-ANIMATED BACKGROUND ORBS
+FLOATING LIGHT FIELD (NEW SYSTEM)
 ========================= */
-.orb{
-position:absolute;
-border-radius:50%;
-filter:blur(60px);
-opacity:0.6;
-animation:float 10s infinite ease-in-out;
+.light-field{
+position:fixed;
+inset:0;
+z-index:-1;
+pointer-events:none;
+overflow:hidden;
 }
 
-.orb1{width:300px;height:300px;background:#00e5ff;top:10%;left:10%;}
-.orb2{width:250px;height:250px;background:#ffffff55;top:60%;left:20%;}
-.orb3{width:350px;height:350px;background:#ffd70055;top:40%;right:10%;}
+.particle{
+position:absolute;
+width:5px;
+height:5px;
+border-radius:50%;
+background:#00f5ff;
+box-shadow:0 0 10px #00f5ff, 0 0 25px #00f5ff;
+opacity:0.6;
+animation:floatUp linear infinite;
+}
 
-@keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-40px);}
-100%{transform:translateY(0px);}
+@keyframes floatUp{
+0%{transform:translateY(110vh) scale(0.5); opacity:0;}
+20%{opacity:0.9;}
+100%{transform:translateY(-10vh) scale(1.2); opacity:0;}
 }
 
 /* =========================
-NAVBAR
+NAV
 ========================= */
 nav{
 display:flex;
@@ -81,7 +88,7 @@ transition:0.3s;
 color:#00e5ff;
 }
 
-/* MOBILE MENU */
+/* MOBILE */
 .burger{
 display:none;
 font-size:28px;
@@ -93,9 +100,9 @@ cursor:pointer;
 position:fixed;
 top:0;
 right:-100%;
-width:70%;
+width:75%;
 height:100vh;
-background:#0a0f22;
+background:#0a0d14;
 flex-direction:column;
 padding:80px 30px;
 transition:0.4s;
@@ -122,13 +129,13 @@ z-index:2;
 }
 
 .hero h1{
-font-size:48px;
-text-shadow:0 0 20px #00e5ff;
+font-size:52px;
+text-shadow:0 0 25px #00e5ff;
 }
 
 .hero p{
 margin-top:20px;
-opacity:0.8;
+opacity:0.85;
 }
 
 .stats{
@@ -141,11 +148,12 @@ flex-wrap:wrap;
 
 .stat{
 padding:20px;
-border:1px solid #00e5ff55;
-border-radius:12px;
-min-width:160px;
+border:1px solid #00e5ff33;
+border-radius:14px;
+background:rgba(255,255,255,0.03);
 backdrop-filter:blur(10px);
-box-shadow:0 0 15px #00e5ff33;
+box-shadow:0 0 20px #00e5ff22;
+min-width:160px;
 }
 
 /* =========================
@@ -176,23 +184,29 @@ gap:20px;
 
 .service{
 padding:20px;
-border:1px solid #00e5ff55;
-border-radius:12px;
+border-radius:14px;
 cursor:pointer;
 transition:0.3s;
 background:rgba(255,255,255,0.03);
-backdrop-filter:blur(10px);
+backdrop-filter:blur(12px);
+border:1px solid #00e5ff22;
 max-height:120px;
 overflow:hidden;
+box-shadow:0 0 15px transparent;
+}
+
+.service:hover{
+box-shadow:0 0 25px #00e5ff55;
+transform:translateY(-3px);
 }
 
 .service.active{
-max-height:300px;
-box-shadow:0 0 20px #00e5ff55;
+max-height:320px;
+box-shadow:0 0 30px #00e5ff66;
 }
 
 /* =========================
-PRICING
+PRICING (BLACK GLASS + NEON)
 ========================= */
 .pricing{
 display:flex;
@@ -202,28 +216,30 @@ flex-wrap:wrap;
 }
 
 .price-card{
-width:260px;
+width:270px;
 padding:25px;
-border-radius:14px;
-transition:0.3s;
+border-radius:16px;
 cursor:pointer;
-border:2px solid transparent;
-backdrop-filter:blur(10px);
-background:rgba(255,255,255,0.03);
+transition:0.3s;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(14px);
+border:1px solid #00e5ff22;
+box-shadow:0 0 20px transparent;
 }
 
 .price-card:hover{
-transform:scale(1.05);
-box-shadow:0 0 25px #00e5ff55;
+transform:scale(1.06);
+box-shadow:0 0 30px #00e5ff55;
+border-color:#00e5ff;
 }
 
-.price-card.white{border-color:#fff;}
-.price-card.blue{border-color:#00e5ff;}
-.price-card.gold{border-color:#ffd700;}
+.price-card h3{
+color:#00e5ff;
+}
 
 .price-card.popular{
-transform:scale(1.08);
-box-shadow:0 0 30px #ffd70055;
+border:1px solid #ffd700;
+box-shadow:0 0 35px #ffd70033;
 }
 
 /* =========================
@@ -237,9 +253,10 @@ gap:20px;
 
 .testimonial{
 padding:20px;
-border-radius:12px;
-border:1px solid #00e5ff55;
+border-radius:14px;
 background:rgba(255,255,255,0.03);
+border:1px solid #00e5ff22;
+backdrop-filter:blur(10px);
 }
 
 /* =========================
@@ -255,8 +272,8 @@ margin:auto;
 
 input,textarea{
 padding:12px;
-border-radius:8px;
-border:1px solid #00e5ff55;
+border-radius:10px;
+border:1px solid #00e5ff33;
 background:transparent;
 color:#fff;
 outline:none;
@@ -266,13 +283,13 @@ button{
 padding:12px;
 background:#00e5ff;
 border:none;
-border-radius:8px;
+border-radius:10px;
 cursor:pointer;
 font-weight:bold;
 }
 
 /* =========================
-FOOTER ICONS
+SOCIALS
 ========================= */
 .socials{
 display:flex;
@@ -296,10 +313,8 @@ color:#00e5ff;
 
 <body>
 
-<!-- ORBS -->
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
+<!-- FLOATING LIGHT FIELD -->
+<div class="light-field" id="field"></div>
 
 <!-- NAV -->
 <nav>
@@ -317,11 +332,11 @@ color:#00e5ff;
 <!-- HERO -->
 <div class="hero">
 <h1>High Performance Lead Generation</h1>
-<p>We help businesses scale with automated outreach systems.</p>
+<p>Automated outreach systems that generate predictable clients.</p>
 
 <div class="stats">
-<div class="stat"><h3 id="leads">0</h3><p>Leads Generated</p></div>
-<div class="stat"><h3 id="clients">0</h3><p>Clients Closed</p></div>
+<div class="stat"><h3 id="leads">0</h3><p>Leads</p></div>
+<div class="stat"><h3 id="clients">0</h3><p>Clients</p></div>
 <div class="stat"><h3 id="rate">0%</h3><p>Success Rate</p></div>
 </div>
 </div>
@@ -329,29 +344,30 @@ color:#00e5ff;
 <!-- ABOUT -->
 <section id="about">
 <h2>About Us</h2>
-<p style="max-width:800px;margin:auto;line-height:1.6;">
-We are Acquirely, a high-performance lead generation and outreach agency focused on helping businesses scale through automated systems, data-driven outreach, and conversion-optimized funnels. Our mission is to deliver predictable client acquisition systems that replace inconsistent marketing methods with structured growth engines.
+<p style="max-width:750px;margin:auto;line-height:1.6;opacity:0.85;">
+Acquirely builds automated outreach systems that help businesses generate consistent leads, close more clients, and scale without relying on unpredictable marketing channels.
 </p>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
 <h2>Services</h2>
+
 <div class="services">
 
 <div class="service" onclick="expand(this)">
 <h3>Lead Generation</h3>
-<p>We build automated systems that generate consistent, high-quality leads for your business using cold outreach and targeting strategies.</p>
+<p>Fully automated cold outreach systems that generate consistent, high-quality leads from targeted industries using data-driven scraping and outreach logic.</p>
 </div>
 
 <div class="service" onclick="expand(this)">
 <h3>Appointment Setting</h3>
-<p>We handle outreach, qualification, and booking so your calendar stays filled with high-intent prospects ready to buy.</p>
+<p>We handle outreach, follow-ups, qualification, and booking so your pipeline stays full of ready-to-buy prospects.</p>
 </div>
 
 <div class="service" onclick="expand(this)">
 <h3>Sales Funnels</h3>
-<p>We design conversion-optimized funnels that turn traffic into paying customers with high efficiency.</p>
+<p>High converting funnel systems designed to turn traffic into paying customers with optimized messaging and structure.</p>
 </div>
 
 </div>
@@ -363,22 +379,22 @@ We are Acquirely, a high-performance lead generation and outreach agency focused
 
 <div class="pricing">
 
-<div class="price-card white">
+<div class="price-card">
 <h3>Starter</h3>
 <p>$299/month</p>
-<p>Basic outreach system setup.</p>
+<p>Basic outreach + setup system for small scale lead flow.</p>
 </div>
 
-<div class="price-card blue popular">
-<h3>Growth (Most Popular)</h3>
+<div class="price-card popular">
+<h3>Growth</h3>
 <p>$599/month</p>
-<p>Full lead generation + appointment setting system.</p>
+<p>Full lead generation system + appointment setting automation.</p>
 </div>
 
-<div class="price-card gold">
+<div class="price-card">
 <h3>Elite</h3>
 <p>$999/month</p>
-<p>Done-for-you scaling system with optimization.</p>
+<p>Fully managed scaling system with optimization + advanced targeting.</p>
 </div>
 
 </div>
@@ -389,19 +405,9 @@ We are Acquirely, a high-performance lead generation and outreach agency focused
 <h2>Testimonials</h2>
 
 <div class="testimonials">
-
-<div class="testimonial">
-<p>"We doubled our client flow within 30 days."</p>
-</div>
-
-<div class="testimonial">
-<p>"Best outreach system we've ever used."</p>
-</div>
-
-<div class="testimonial">
-<p>"Consistent leads every single week."</p>
-</div>
-
+<div class="testimonial">"Doubled our client flow in 30 days."</div>
+<div class="testimonial">"Best outreach system we've used."</div>
+<div class="testimonial">"Consistent leads every week."</div>
 </div>
 </section>
 
@@ -417,64 +423,74 @@ We are Acquirely, a high-performance lead generation and outreach agency focused
 </form>
 
 <div class="socials">
-<a href="https://wa.me/1234567890"><i class="fab fa-whatsapp"></i></a>
-<a href="https://t.me/username"><i class="fab fa-telegram"></i></a>
-<a href="mailto:test@email.com"><i class="fas fa-envelope"></i></a>
-<a href="https://linkedin.com"><i class="fab fa-linkedin"></i></a>
+<a href="#"><i class="fab fa-whatsapp"></i></a>
+<a href="#"><i class="fab fa-telegram"></i></a>
+<a href="#"><i class="fas fa-envelope"></i></a>
+<a href="#"><i class="fab fa-linkedin"></i></a>
 </div>
 </section>
 
 <script>
 
+/* FLOATING LIGHTS */
+const field = document.getElementById("field");
+
+for(let i=0;i<70;i++){
+const p=document.createElement("div");
+p.classList.add("particle");
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(5+Math.random()*10)+"s";
+p.style.animationDelay=Math.random()*5+"s";
+field.appendChild(p);
+}
+
 /* COUNTERS */
 function animate(id,target){
 let start=0;
-let step=target/100;
+let step=target/120;
 let el=document.getElementById(id);
-let interval=setInterval(()=>{
+let t=setInterval(()=>{
 start+=step;
-if(start>=target){start=target;clearInterval(interval);}
+if(start>=target){start=target;clearInterval(t);}
 el.innerText=Math.floor(start);
-},20);
+},18);
 }
 
-animate("leads",14320);
-animate("clients",1120);
-animate("rate",71);
+animate("leads",14800);
+animate("clients",1250);
+animate("rate",74);
 
 /* MENU */
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
 
-/* CLOSE MENU ON CLICK OUTSIDE */
 document.addEventListener("click",function(e){
 const menu=document.getElementById("menu");
 const burger=document.querySelector(".burger");
+
 if(!menu.contains(e.target) && !burger.contains(e.target)){
 menu.classList.remove("active");
 }
 });
 
-/* SERVICES EXPAND */
+/* SERVICES */
 function expand(el){
 document.querySelectorAll(".service").forEach(s=>s.classList.remove("active"));
 el.classList.add("active");
 }
 
-/* GOOGLE SHEETS FORM */
+/* FORM */
 document.getElementById("contactForm").addEventListener("submit",function(e){
 e.preventDefault();
 
 fetch("YOUR_GOOGLE_SHEET_SCRIPT_URL",{
 method:"POST",
 body:new FormData(this)
-}).then(()=>{
-alert("Message sent successfully!");
-});
+}).then(()=>alert("Message sent!"));
 });
 
 </script>
 
 </body>
-</html>
+  </html>
