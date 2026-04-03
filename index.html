@@ -53,21 +53,21 @@ animation:floatBG 18s ease-in-out infinite alternate;
 }
 
 /* =========================
-APPLE GLASS
+APPLE LIQUID GLASS
 ========================= */
 .glass{
 background:linear-gradient(135deg,
-rgba(255,255,255,0.10),
+rgba(255,255,255,0.12),
 rgba(10,10,10,0.55),
-rgba(255,255,255,0.04)
+rgba(255,255,255,0.05)
 );
-backdrop-filter:blur(38px);
--webkit-backdrop-filter:blur(38px);
+backdrop-filter:blur(42px);
+-webkit-backdrop-filter:blur(42px);
 border:1px solid rgba(255,255,255,0.12);
-border-radius:20px;
+border-radius:22px;
 box-shadow:
-0 20px 60px rgba(0,0,0,0.75),
-inset 0 1px 0 rgba(255,255,255,0.15),
+0 25px 70px rgba(0,0,0,0.75),
+inset 0 1px 0 rgba(255,255,255,0.18),
 inset 0 -1px 0 rgba(0,245,255,0.08);
 }
 
@@ -84,7 +84,7 @@ align-items:center;
 padding:16px 24px;
 z-index:9999;
 background:rgba(0,0,0,0.25);
-backdrop-filter:blur(22px);
+backdrop-filter:blur(24px);
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
@@ -131,10 +131,10 @@ right:-100%;
 width:280px;
 height:100vh;
 padding:70px 20px;
-transition:0.4s;
+transition:0.5s cubic-bezier(0.4,0,0.2,1);
 z-index:9998;
 background:rgba(10,10,10,0.65);
-backdrop-filter:blur(28px);
+backdrop-filter:blur(30px);
 border-left:1px solid rgba(255,255,255,0.08);
 }
 
@@ -145,6 +145,23 @@ display:block;
 color:#fff;
 margin:18px 0;
 text-decoration:none;
+}
+
+/* overlay */
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(10px);
+opacity:0;
+pointer-events:none;
+transition:0.3s;
+z-index:9997;
+}
+
+.menu-overlay.active{
+opacity:1;
+pointer-events:auto;
 }
 
 /* =========================
@@ -235,11 +252,11 @@ margin-top:12px;
 }
 
 /* =========================
-PRICING COLORS
+PRICING COLORS FIXED
 ========================= */
-.price-card:nth-child(1){border:1px solid rgba(0,180,255,0.25);}
-.price-card:nth-child(2){border:1px solid rgba(0,245,255,0.45);}
-.price-card:nth-child(3){border:1px solid rgba(180,0,255,0.45);}
+.price-card:nth-child(1){border:1px solid rgba(0,180,255,0.35);}
+.price-card:nth-child(2){border:1px solid rgba(0,245,255,0.55);}
+.price-card:nth-child(3){border:1px solid rgba(180,0,255,0.55);}
 
 /* =========================
 STATS
@@ -310,12 +327,22 @@ height:100%;
 opacity:0.7;
 }
 
+.section-title{
+text-align:center;
+font-size:20px;
+letter-spacing:2px;
+opacity:0.7;
+margin-top:40px;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="bg"><canvas id="c"></canvas></div>
+
+<div class="menu-overlay" id="overlay"></div>
 
 <nav>
 <div class="logo"><div class="logo-a">A</div>Acquirely</div>
@@ -338,7 +365,6 @@ opacity:0.7;
 <a href="#contact"><button class="btn">Get Started</button></a>
 </section>
 
-<!-- ABOUT -->
 <div class="section-title">ABOUT</div>
 <section id="about" class="grid">
 <div class="about-box">
@@ -353,7 +379,6 @@ It combines cold email systems, AI follow-ups, LinkedIn automation, CRM pipeline
 </div>
 </section>
 
-<!-- SERVICES -->
 <div class="section-title">SERVICES</div>
 <section id="services" class="grid">
 
@@ -387,7 +412,6 @@ High-conversion landing pages, optimized copywriting, CTA systems, A/B testing f
 
 </section>
 
-<!-- PRICING -->
 <div class="section-title">PRICING</div>
 <section id="pricing" class="grid">
 
@@ -414,7 +438,6 @@ Full multi-channel system including email, LinkedIn automation, AI appointment s
 
 </section>
 
-<!-- TESTIMONIALS -->
 <div class="section-title">TESTIMONIALS</div>
 <section id="testimonials" class="grid">
 
@@ -441,11 +464,10 @@ Highest ROI system we’ve used for client acquisition. Everything runs automati
 
 </section>
 
-<!-- CONTACT -->
 <section id="contact" class="grid">
 <div class="card">
 <h3>Contact</h3>
-<form onsubmit="event.preventDefault(); alert('Sent!');">
+<form id="contactForm">
 <input type="text" placeholder="Name" required>
 <input type="email" placeholder="Email" required>
 <textarea placeholder="Message" required></textarea>
@@ -454,7 +476,6 @@ Highest ROI system we’ve used for client acquisition. Everything runs automati
 </div>
 </section>
 
-<!-- STATS -->
 <div class="stats">
 <div class="stat"><h2>128</h2><p>Leads Generated</p></div>
 <div class="stat"><h2>15420</h2><p>Emails Sent</p></div>
@@ -468,8 +489,8 @@ Disclaimer: Results vary depending on niche, execution, and market conditions.
 <footer>
 <p>© 2026 Acquirely. All rights reserved.</p>
 <div>
-<a href="#">WhatsApp</a>
-<a href="#">Telegram</a>
+<a href="https://wa.me/YOURNUMBER">WhatsApp</a>
+<a href="https://t.me/YOURUSERNAME">Telegram</a>
 <a href="#">LinkedIn</a>
 <a href="mailto:contact@acquirely.com">Email</a>
 </div>
@@ -478,12 +499,42 @@ Disclaimer: Results vary depending on niche, execution, and market conditions.
 <script>
 const menu=document.getElementById("menu");
 const burger=document.getElementById("burger");
+const overlay=document.getElementById("overlay");
 
-burger.onclick=()=>menu.classList.toggle("active");
+function closeMenu(){
+menu.classList.remove("active");
+overlay.classList.remove("active");
+document.body.style.overflow="auto";
+}
+
+burger.onclick=()=>{
+menu.classList.toggle("active");
+overlay.classList.toggle("active");
+document.body.style.overflow="hidden";
+}
+
+overlay.onclick=closeMenu;
 
 document.querySelectorAll(".card,.price-card,.testimonial,.about-box")
 .forEach(el=>{
 el.onclick=()=>el.classList.toggle("active");
+});
+
+document.addEventListener("keydown",(e)=>{
+if(e.key==="Escape") closeMenu();
+});
+
+document.getElementById("contactForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+const name=this.querySelector("input[type=text]").value;
+const email=this.querySelector("input[type=email]").value;
+const message=this.querySelector("textarea").value;
+
+const subject=`New Lead from ${name}`;
+const body=`Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+
+window.location.href=`mailto:contact@acquirely.com?subject=${subject}&body=${body}`;
 });
 
 const c=document.getElementById("c");
@@ -517,6 +568,7 @@ ctx.fill();
 requestAnimationFrame(draw);
 }
 draw();
+
 </script>
 
 </body>
