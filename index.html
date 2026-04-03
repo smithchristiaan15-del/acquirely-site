@@ -39,7 +39,7 @@ background:#000;
 overflow:hidden;
 }
 
-/* NEW: subtle 3D transparent screen overlay */
+/* 3D glass screen */
 .bg::after{
 content:"";
 position:absolute;
@@ -53,13 +53,13 @@ pointer-events:none;
 
 .bg span{
 position:absolute;
-width:2px;
-height:2px;
+width:3px;
+height:3px;
 background:#00f5ff;
 border-radius:50%;
-box-shadow:0 0 6px #00f5ff,0 0 14px #00f5ff;
+box-shadow:0 0 10px #00f5ff,0 0 25px #00f5ff;
 animation:float 10s linear infinite;
-opacity:0.35;
+opacity:0.55;
 }
 
 @keyframes float{
@@ -259,6 +259,31 @@ margin-top:12px;
 }
 
 /* =========================
+PRICING BADGES
+========================= */
+.badge{
+display:inline-block;
+padding:4px 10px;
+border-radius:999px;
+font-size:12px;
+margin-left:8px;
+font-weight:600;
+}
+
+.badge.popular{
+background:#00aaff;
+color:#000;
+box-shadow:0 0 12px #00aaff;
+}
+
+.badge.gold{
+background:transparent;
+color:#ffd700;
+border:1px solid #ffd700;
+box-shadow:0 0 12px #ffd700;
+}
+
+/* =========================
 STATS
 ========================= */
 .stats{
@@ -368,12 +393,15 @@ The goal is predictable revenue without manual prospecting.
 
 <div class="card"><h3>Cold Email Systems</h3><p class="extra">We build a fully automated cold email system that generates consistent outbound leads without manual work. This includes domain setup, inbox creation, authentication (SPF/DKIM/DMARC), and deliverability optimisation to ensure inbox placement.
 We also handle lead scraping, prospect list building, and niche targeting so outreach is highly relevant. Once live, your system runs automated sequences, follow-ups, and re-engagement campaigns daily.</p></div>
+
 <div class="card"><h3>AI Appointment Setting</h3><p class="extra">Our AI appointment system works 24/7 to handle conversations, qualify leads, respond to objections, and book calls directly into your calendar.
 It follows structured AI flows designed to replicate high-performing sales reps across email, chat, or CRM systems.
 You only receive qualified, sales-ready calls.</p></div>
+
 <div class="card"><h3>LinkedIn Automation</h3><p class="extra">We create a LinkedIn outreach system that generates consistent B2B conversations at scale through automated connection requests, messaging, and targeted audience building.
 It also tracks engagement so messaging can be improved over time for higher conversions.
 Your LinkedIn becomes a fully automated lead source running daily.</p></div>
+
 <div class="card"><h3>Conversion Funnels</h3><p class="extra">We build conversion-focused funnels that turn traffic into booked calls and clients. This includes landing pages, copywriting, A/B testing, and tracking.
 Each funnel follows a clear flow: awareness → interest → trust → conversion.
 Designed to improve conversions continuously over time.</p></div>
@@ -383,12 +411,20 @@ Designed to improve conversions continuously over time.</p></div>
 <div class="section-title">PRICING</div>
 <section id="pricing" class="grid">
 
-<div class="price-card"><h3>Starter - $399 p/m</h3><p class="extra">Basic outbound setup including cold email infrastructure, lead sourcing, and campaign setup.
-Good for testing and generating early leads.</p></div>
-<div class="price-card"><h3>Pro - $799 p/m (Most Popular)</h3><p class="extra">Fully automated system with AI follow-ups, response handling, and deliverability optimisation.
-Optimised for higher replies and booked calls.</p></div>
-<div class="price-card"><h3>Elite - $1599 p/m</h3><p class="extra">Full multi-channel system with email + LinkedIn, CRM integration, and AI pipeline management.
-Built for scaling and predictable revenue growth.</p></div>
+<div class="price-card">
+<h3>Starter - $399 p/m</h3>
+<p class="extra">Basic outbound setup including cold email infrastructure, lead sourcing, and campaign setup. Good for testing and generating early leads.</p>
+</div>
+
+<div class="price-card">
+<h3>Pro - $799 p/m <span class="badge popular">Most Popular</span></h3>
+<p class="extra">Fully automated system with AI follow-ups, response handling, and deliverability optimisation. Optimised for higher replies and booked calls.</p>
+</div>
+
+<div class="price-card">
+<h3>Elite - $1599 p/m <span class="badge gold">Premium</span></h3>
+<p class="extra">Full multi-channel system with email + LinkedIn, CRM integration, and AI pipeline management. Built for scaling and predictable revenue growth.</p>
+</div>
 
 </section>
 
@@ -498,4 +534,4 @@ count("c3",97);
 </script>
 
 </body>
-  </html>
+</html>
