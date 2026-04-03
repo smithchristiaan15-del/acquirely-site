@@ -535,19 +535,33 @@ animate("rate",72);
 
 /* menu */
 function toggleMenu(){
-document.getElementById("menu").classList.toggle("active");
+const menu = document.getElementById("menu");
+menu.classList.toggle("active");
 }
 
-/* services */
+/* MENU LINK CLOSE */
+document.querySelectorAll(".nav-links a").forEach(link=>{
+link.addEventListener("click",()=>{
+document.getElementById("menu").classList.remove("active");
+});
+});
+
+/* SERVICES */
 function expand(el){
 document.querySelectorAll(".service").forEach(s=>s.classList.remove("active"));
 el.classList.add("active");
 }
 
-/* click outside close */
-document.addEventListener("click",function(e){
-if(!document.querySelector(".services").contains(e.target)){
-document.querySelectorAll(".service").forEach(s=>s.classList.remove("active"));
+/* OUTSIDE CLICK CLOSE MENU */
+document.addEventListener("click", function(e){
+const menu = document.getElementById("menu");
+const burger = document.querySelector(".burger");
+
+const clickedInsideMenu = menu.contains(e.target);
+const clickedBurger = burger.contains(e.target);
+
+if(!clickedInsideMenu && !clickedBurger){
+menu.classList.remove("active");
 }
 });
 
