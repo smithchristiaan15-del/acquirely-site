@@ -9,9 +9,7 @@
 
 <style>
 
-/* =========================
-GLOBAL
-========================= */
+/* GLOBAL */
 *{
 margin:0;
 padding:0;
@@ -25,16 +23,13 @@ color:#fff;
 overflow-x:hidden;
 cursor:none;
 -webkit-font-smoothing:antialiased;
-text-rendering:optimizeSpeed;
 }
 
 html{
 scroll-behavior:smooth;
 }
 
-/* =========================
-APPLE BACKGROUND UPGRADE (UNCHANGED)
-========================= */
+/* BACKGROUND */
 .bg{
 position:fixed;
 inset:0;
@@ -52,37 +47,9 @@ content:"";
 position:absolute;
 inset:0;
 background:rgba(255,255,255,0.015);
-pointer-events:none;
 }
 
-canvas{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-opacity:0.75;
-}
-
-/* CLICK EFFECT */
-.click-glow{
-position:fixed;
-width:12px;
-height:12px;
-border-radius:50%;
-background:#00f5ff;
-box-shadow:0 0 25px #00f5ff;
-transform:translate(-50%,-50%);
-pointer-events:none;
-animation:clickAnim 0.5s ease-out forwards;
-z-index:9999;
-}
-
-@keyframes clickAnim{
-0%{transform:translate(-50%,-50%) scale(0.5);opacity:1;}
-100%{transform:translate(-50%,-50%) scale(3);opacity:0;}
-}
-
-/* NAV (UNCHANGED) */
+/* NAV */
 nav{
 position:fixed;
 top:0;
@@ -115,6 +82,7 @@ justify-content:center;
 box-shadow:0 0 15px #00f5ff;
 }
 
+/* BURGER */
 .burger{
 width:30px;
 height:22px;
@@ -122,6 +90,7 @@ display:flex;
 flex-direction:column;
 justify-content:space-between;
 cursor:pointer;
+z-index:10000;
 }
 
 .burger span{
@@ -130,6 +99,7 @@ background:#00f5ff;
 box-shadow:0 0 10px #00f5ff;
 }
 
+/* MENU */
 .menu{
 position:fixed;
 top:0;
@@ -143,7 +113,7 @@ transition:0.4s;
 z-index:9998;
 }
 
-.menu.active{ right:0; }
+.menu.active{right:0;}
 
 .menu a{
 display:block;
@@ -152,7 +122,7 @@ margin:18px 0;
 text-decoration:none;
 }
 
-/* HERO (UNCHANGED) */
+/* HERO */
 .hero{
 text-align:center;
 padding:180px 20px 60px;
@@ -169,16 +139,6 @@ color:transparent;
 max-width:900px;
 margin:20px auto;
 opacity:0.85;
-}
-
-/* SECTION TITLE */
-.section-title{
-text-align:center;
-font-size:22px;
-letter-spacing:3px;
-color:#00f5ff;
-margin-top:40px;
-opacity:0.9;
 }
 
 /* BUTTON */
@@ -214,16 +174,11 @@ border:1px solid rgba(0,245,255,0.3);
 border-radius:16px;
 padding:22px;
 cursor:pointer;
-transition:0.3s;
 overflow:hidden;
+transition:0.3s;
 }
 
-.card:hover,.price-card:hover,.testimonial:hover,.about-box:hover{
-transform:translateY(-6px);
-box-shadow:0 0 35px rgba(0,245,255,0.25);
-}
-
-/* EXPAND (UNCHANGED) */
+/* EXPAND SYSTEM */
 .extra{
 max-height:0;
 opacity:0;
@@ -237,44 +192,15 @@ opacity:1;
 margin-top:12px;
 }
 
-/* =========================
-PRICING COLORS FIX (ONLY CHANGE)
-========================= */
-
-.price-card{
-border:1px solid rgba(255,255,255,0.15);
-}
-
-.price-card h3{
-color:#ffffff;
-}
-
+/* PRICING COLORS */
 .price-card:nth-child(2){
 border:1px solid #00f5ff;
 box-shadow:0 0 20px rgba(0,245,255,0.25);
 }
 
-.price-card:nth-child(2) h3{
-color:#00f5ff;
-}
-
 .price-card:nth-child(3){
 border:1px solid gold;
 box-shadow:0 0 20px rgba(255,215,0,0.15);
-}
-
-.price-card:nth-child(3) h3{
-color:gold;
-}
-
-/* BADGE */
-.badge{
-font-size:11px;
-padding:4px 8px;
-border-radius:6px;
-margin-left:8px;
-background:#00f5ff;
-color:#000;
 }
 
 /* STATS */
@@ -313,6 +239,10 @@ margin:0 10px;
 text-decoration:none;
 }
 
+footer a:hover{
+text-shadow:0 0 10px #00f5ff;
+}
+
 /* FORM */
 form input,form textarea{
 width:100%;
@@ -324,18 +254,43 @@ color:#fff;
 border-radius:8px;
 }
 
+/* CLICK EFFECT */
+.click-glow{
+position:fixed;
+width:12px;
+height:12px;
+border-radius:50%;
+background:#00f5ff;
+box-shadow:0 0 25px #00f5ff;
+transform:translate(-50%,-50%);
+pointer-events:none;
+animation:clickAnim 0.5s ease-out forwards;
+}
+
+@keyframes clickAnim{
+0%{transform:translate(-50%,-50%) scale(0.5);opacity:1;}
+100%{transform:translate(-50%,-50%) scale(3);opacity:0;}
+}
+
+/* CANVAS */
+canvas{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+opacity:0.75;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="bg">
-<canvas id="c"></canvas>
-</div>
+<div class="bg"><canvas id="c"></canvas></div>
 
 <nav>
 <div class="logo"><div class="logo-a">A</div>Acquirely</div>
-<div class="burger" onclick="toggleMenu()">
+<div class="burger" id="burger">
 <span></span><span></span><span></span>
 </div>
 </nav>
@@ -372,20 +327,35 @@ The goal is predictable revenue without manual prospecting.
 <div class="section-title">SERVICES</div>
 <section id="services" class="grid">
 
-<div class="card"><h3>Cold Email Systems</h3><p class="extra">We build a fully automated cold email system that generates consistent outbound leads without manual work. This includes domain setup, inbox creation, authentication (SPF/DKIM/DMARC), and deliverability optimisation to ensure inbox placement.
-We also handle lead scraping, prospect list building, and niche targeting so outreach is highly relevant. Once live, your system runs automated sequences, follow-ups, and re-engagement campaigns daily.</p></div>
+<div class="card"><h3>Cold Email Systems</h3><p class="extra">
+We build a fully automated cold email system that generates consistent outbound leads without manual work. This includes domain setup, inbox creation, authentication (SPF/DKIM/DMARC), and deliverability optimisation to ensure inbox placement.
 
-<div class="card"><h3>AI Appointment Setting</h3><p class="extra">Our AI appointment system works 24/7 to handle conversations, qualify leads, respond to objections, and book calls directly into your calendar.
+We also handle lead scraping, prospect list building, and niche targeting so outreach is highly relevant. Once live, your system runs automated sequences, follow-ups, and re-engagement campaigns daily.
+</p></div>
+
+<div class="card"><h3>AI Appointment Setting</h3><p class="extra">
+Our AI appointment system works 24/7 to handle conversations, qualify leads, respond to objections, and book calls directly into your calendar.
+
 It follows structured AI flows designed to replicate high-performing sales reps across email, chat, or CRM systems.
-You only receive qualified, sales-ready calls.</p></div>
 
-<div class="card"><h3>LinkedIn Automation</h3><p class="extra">We create a LinkedIn outreach system that generates consistent B2B conversations at scale through automated connection requests, messaging, and targeted audience building.
+You only receive qualified, sales-ready calls.
+</p></div>
+
+<div class="card"><h3>LinkedIn Automation</h3><p class="extra">
+We create a LinkedIn outreach system that generates consistent B2B conversations at scale through automated connection requests, messaging, and targeted audience building.
+
 It also tracks engagement so messaging can be improved over time for higher conversions.
-Your LinkedIn becomes a fully automated lead source running daily.</p></div>
 
-<div class="card"><h3>Conversion Funnels</h3><p class="extra">We build conversion-focused funnels that turn traffic into booked calls and clients. This includes landing pages, copywriting, A/B testing, and tracking.
+Your LinkedIn becomes a fully automated lead source running daily.
+</p></div>
+
+<div class="card"><h3>Conversion Funnels</h3><p class="extra">
+We build conversion-focused funnels that turn traffic into booked calls and clients. This includes landing pages, copywriting, A/B testing, and tracking.
+
 Each funnel follows a clear flow: awareness → interest → trust → conversion.
-Designed to improve conversions continuously over time.</p></div>
+
+Designed to improve conversions continuously over time.
+</p></div>
 
 </section>
 
@@ -395,17 +365,23 @@ Designed to improve conversions continuously over time.</p></div>
 
 <div class="price-card">
 <h3>Starter - $399 p/m</h3>
-<p class="extra">Basic outbound setup including cold email infrastructure, lead sourcing, and campaign setup. Good for testing and generating early leads.</p>
+<p class="extra">
+Basic outbound setup including cold email infrastructure, lead sourcing, and campaign setup. Good for testing and generating early leads.
+</p>
 </div>
 
 <div class="price-card">
-<h3>Pro - $799 p/m <span class="badge">Most Popular</span></h3>
-<p class="extra">Fully automated system with AI follow-ups, response handling, and deliverability optimisation.</p>
+<h3>Pro - $799 p/m</h3>
+<p class="extra">
+Fully automated system with AI follow-ups, response handling, and deliverability optimisation.
+</p>
 </div>
 
 <div class="price-card">
 <h3>Elite - $1599 p/m</h3>
-<p class="extra">Full multi-channel system with email + LinkedIn, CRM integration, and AI pipeline management.</p>
+<p class="extra">
+Full multi-channel system with email + LinkedIn, CRM integration, and AI pipeline management.
+</p>
 </div>
 
 </section>
@@ -414,9 +390,17 @@ Designed to improve conversions continuously over time.</p></div>
 <div class="section-title">TESTIMONIALS</div>
 <section id="testimonials" class="grid">
 
-<div class="testimonial"><h3>Agency Owner</h3><p class="extra">We replaced manual outreach completely.</p></div>
-<div class="testimonial"><h3>SaaS Founder</h3><p class="extra">Predictable pipeline, predictable revenue.</p></div>
-<div class="testimonial"><h3>Consultant</h3><p class="extra">Highest ROI system we have had in a long time.</p></div>
+<div class="testimonial"><h3>Agency Owner</h3><p class="extra">
+We replaced manual outreach completely.
+</p></div>
+
+<div class="testimonial"><h3>SaaS Founder</h3><p class="extra">
+Predictable pipeline, predictable revenue.
+</p></div>
+
+<div class="testimonial"><h3>Private Business Owner</h3><p class="extra">
+Highest ROI system we have had in a long time.
+</p></div>
 
 </section>
 
@@ -433,113 +417,91 @@ Designed to improve conversions continuously over time.</p></div>
 </div>
 </section>
 
-<footer>
-<p>© 2026 Acquirely. All rights reserved.</p>
-<div>
-<a href="#">WhatsApp</a>
-<a href="#">Telegram</a>
-<a href="#">LinkedIn</a>
-<a href="#">Email</a>
+<!-- STATS -->
+<div class="stats">
+<div class="stat"><h2>128</h2><p>Leads Generated</p></div>
+<div class="stat"><h2>15420</h2><p>Emails Sent</p></div>
+<div class="stat"><h2>97%</h2><p>Success Rate</p></div>
 </div>
+
+<footer>
+<p>© 2024 Acquirely. All rights reserved.</p>
+
+<div>
+<a href="https://wa.me/">WhatsApp</a>
+<a href="https://t.me/">Telegram</a>
+<a href="https://linkedin.com">LinkedIn</a>
+<a href="mailto:contact@acquirely.com">Email</a>
+</div>
+
+<p style="font-size:12px;opacity:0.6;margin-top:10px;">
+Results vary. Systems require proper setup and execution.
+</p>
 </footer>
 
 <script>
 
-/* MENU */
-function toggleMenu(){
-document.getElementById("menu").classList.toggle("active");
-}
-
-/* OUTSIDE CLICK */
-document.addEventListener("click",(e)=>{
+/* MENU FIX */
 const menu=document.getElementById("menu");
-const burger=document.querySelector(".burger");
+const burger=document.getElementById("burger");
+
+burger.addEventListener("click",(e)=>{
+e.stopPropagation();
+menu.classList.toggle("active");
+});
+
+document.addEventListener("click",(e)=>{
 if(!menu.contains(e.target) && !burger.contains(e.target)){
 menu.classList.remove("active");
 }
 });
 
-/* PARTICLES */
-const canvas=document.getElementById("c");
-const ctx=canvas.getContext("2d");
+/* EXPAND */
+document.querySelectorAll(".card,.price-card,.testimonial,.about-box")
+.forEach(el=>{
+el.addEventListener("click",()=>el.classList.toggle("active"));
+});
 
+/* PARTICLES */
+const c=document.getElementById("c");
+const ctx=c.getContext("2d");
 let w,h;
+
 function resize(){
-w=canvas.width=window.innerWidth;
-h=canvas.height=window.innerHeight;
+w=c.width=window.innerWidth;
+h=c.height=window.innerHeight;
 }
-window.addEventListener("resize",resize);
 resize();
 
 const particles=[];
-const COUNT=90;
-
-for(let i=0;i<COUNT;i++){
+for(let i=0;i<80;i++){
 particles.push({
 x:Math.random()*w,
 y:Math.random()*h,
 vx:(Math.random()-0.5)*0.3,
 vy:(Math.random()-0.5)*0.3,
-r:Math.random()*1.8+0.5
+r:Math.random()*1.5
 });
 }
 
 function draw(){
 ctx.clearRect(0,0,w,h);
-
 for(let p of particles){
 p.x+=p.vx;
 p.y+=p.vy;
-
 if(p.x<0||p.x>w)p.vx*=-1;
 if(p.y<0||p.y>h)p.vy*=-1;
 
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fillStyle="rgba(0,245,255,0.55)";
+ctx.fillStyle="rgba(0,245,255,0.5)";
 ctx.fill();
 }
-
 requestAnimationFrame(draw);
 }
 draw();
 
-/* CLICK EFFECT */
-document.addEventListener("click",e=>{
-let d=document.createElement("div");
-d.className="click-glow";
-d.style.left=e.clientX+"px";
-d.style.top=e.clientY+"px";
-document.body.appendChild(d);
-setTimeout(()=>d.remove(),500);
-});
-
-/* COUNTER FIX */
-function animateCount(id, target) {
-const el = document.getElementById(id);
-let current = 0;
-let step = Math.ceil(target / 60);
-
-let interval = setInterval(() => {
-current += step;
-if (current >= target) {
-el.innerText = target;
-clearInterval(interval);
-} else {
-el.innerText = current;
-}
-}, 20);
-}
-
-function startCounters(){
-animateCount("c1",128);
-animateCount("c2",15420);
-animateCount("c3",97);
-}
-
-window.addEventListener("load",startCounters);
-
 </script>
 
 </body>
-  </html>
+</html>
