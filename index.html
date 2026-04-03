@@ -10,7 +10,7 @@
 <style>
 
 /* =========================
-GLOBAL
+GLOBAL (OPTIMIZED)
 ========================= */
 *{
 margin:0;
@@ -32,43 +32,47 @@ scroll-behavior:smooth;
 }
 
 /* =========================
-BACKGROUND
+BACKGROUND (SMOOTHER + LESS LAG)
 ========================= */
 .bg{
 position:fixed;
 inset:0;
 z-index:-3;
 background:
-radial-gradient(circle at 20% 20%, rgba(0,245,255,0.14), transparent 42%),
-radial-gradient(circle at 80% 30%, rgba(120,0,255,0.08), transparent 48%),
-radial-gradient(circle at 40% 80%, rgba(0,120,255,0.08), transparent 55%),
-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04), transparent 65%),
+radial-gradient(circle at 20% 20%, rgba(0,245,255,0.12), transparent 45%),
+radial-gradient(circle at 80% 30%, rgba(120,0,255,0.06), transparent 55%),
+radial-gradient(circle at 40% 80%, rgba(0,120,255,0.06), transparent 60%),
 #000;
-animation:floatBG 18s ease-in-out infinite alternate;
+animation:floatBG 22s ease-in-out infinite alternate;
+will-change:transform;
 }
 
 @keyframes floatBG{
 0%{transform:scale(1) translateY(0px);}
-100%{transform:scale(1.08) translateY(-18px);}
+100%{transform:scale(1.04) translateY(-12px);}
+}
+
+/* CANVAS PARTICLES (OPTIMIZED) */
+canvas{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+opacity:0.55;
 }
 
 /* =========================
-APPLE LIQUID GLASS
+APPLE LIQUID GLASS (IMPROVED)
 ========================= */
 .glass{
-background:linear-gradient(135deg,
-rgba(255,255,255,0.12),
-rgba(10,10,10,0.55),
-rgba(255,255,255,0.05)
-);
-backdrop-filter:blur(42px);
--webkit-backdrop-filter:blur(42px);
+background:rgba(10,10,10,0.35);
+backdrop-filter:blur(45px);
+-webkit-backdrop-filter:blur(45px);
 border:1px solid rgba(255,255,255,0.12);
 border-radius:22px;
 box-shadow:
 0 25px 70px rgba(0,0,0,0.75),
-inset 0 1px 0 rgba(255,255,255,0.18),
-inset 0 -1px 0 rgba(0,245,255,0.08);
+inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 /* NAV */
@@ -81,8 +85,8 @@ justify-content:space-between;
 align-items:center;
 padding:22px 24px;
 z-index:9999;
-background:rgba(0,0,0,0.25);
-backdrop-filter:blur(24px);
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(28px);
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
@@ -112,14 +116,15 @@ display:flex;
 flex-direction:column;
 gap:5px;
 cursor:pointer;
+z-index:10001;
 }
 
 .burger span{
 width:26px;
 height:2px;
 background:#00c8ff;
-box-shadow:0 0 8px rgba(0,200,255,0.6);
 border-radius:2px;
+box-shadow:0 0 8px rgba(0,200,255,0.4);
 }
 
 /* MENU */
@@ -127,14 +132,15 @@ border-radius:2px;
 position:fixed;
 top:0;
 right:-100%;
-width:280px;
+width:300px;
 height:100vh;
-padding:70px 20px;
-transition:0.5s cubic-bezier(0.4,0,0.2,1);
-z-index:9998;
-background:rgba(10,10,10,0.65);
-backdrop-filter:blur(30px);
+padding:80px 22px;
+transition:0.45s cubic-bezier(0.4,0,0.2,1);
+z-index:10000;
+background:rgba(10,10,10,0.72);
+backdrop-filter:blur(35px);
 border-left:1px solid rgba(255,255,255,0.08);
+overflow-y:auto;
 }
 
 .menu.active{right:0;}
@@ -144,19 +150,19 @@ display:block;
 color:#00c8ff;
 margin:18px 0;
 text-decoration:none;
-text-shadow:0 0 10px rgba(0,200,255,0.25);
+font-size:16px;
 }
 
-/* overlay */
+/* OVERLAY FIXED */
 .menu-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.35);
-backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(8px);
 opacity:0;
 pointer-events:none;
 transition:0.3s;
-z-index:9997;
+z-index:9998;
 }
 
 .menu-overlay.active{
@@ -164,10 +170,10 @@ opacity:1;
 pointer-events:auto;
 }
 
-/* HERO */
+/* HERO (FIXED SPACING) */
 .hero{
 text-align:center;
-padding:240px 20px 60px;
+padding:260px 20px 80px;
 }
 
 .hero h1{
@@ -175,6 +181,12 @@ font-size:54px;
 background:linear-gradient(90deg,#00f5ff,#fff,#00f5ff);
 -webkit-background-clip:text;
 color:transparent;
+margin-bottom:18px;
+}
+
+.hero p{
+opacity:0.8;
+margin-bottom:28px;
 }
 
 /* BUTTON */
@@ -185,7 +197,7 @@ background:transparent;
 color:#fff;
 border-radius:12px;
 cursor:pointer;
-transition:0.3s;
+transition:0.25s ease;
 }
 
 .btn:hover{
@@ -206,20 +218,19 @@ margin:auto;
 
 /* CARDS */
 .card,.price-card,.testimonial,.about-box{
-background:rgba(10,10,10,0.45);
-backdrop-filter:blur(30px);
+background:rgba(10,10,10,0.35);
+backdrop-filter:blur(35px);
 border:1px solid rgba(255,255,255,0.10);
 border-radius:18px;
 padding:22px;
 cursor:pointer;
-transition:0.35s ease;
+transition:0.25s ease;
 overflow:hidden;
 }
 
 .card:hover,.price-card:hover,.testimonial:hover,.about-box:hover{
-transform:scale(1.05);
+transform:scale(1.03);
 border:1px solid rgba(0,245,255,0.35);
-box-shadow:0 0 22px rgba(0,245,255,0.18);
 }
 
 /* EXPAND */
@@ -227,7 +238,7 @@ box-shadow:0 0 22px rgba(0,245,255,0.18);
 max-height:0;
 opacity:0;
 overflow:hidden;
-transition:0.6s ease;
+transition:0.5s ease;
 }
 
 .active .extra{
@@ -237,15 +248,11 @@ margin-top:12px;
 }
 
 /* PRICING COLORS */
-.price-card:nth-child(1){
-border:1px solid rgba(255,255,255,0.35);
-}
-
+.price-card:nth-child(1){border:1px solid rgba(255,255,255,0.35);}
 .price-card:nth-child(2){
-border:1px solid rgba(0,150,255,0.65);
+border:1px solid rgba(0,150,255,0.7);
 position:relative;
 }
-
 .price-card:nth-child(2)::before{
 content:"MOST POPULAR";
 position:absolute;
@@ -257,18 +264,15 @@ background:rgba(0,150,255,0.15);
 color:#00c8ff;
 border:1px solid rgba(0,150,255,0.35);
 }
+.price-card:nth-child(3){border:1px solid rgba(255,200,0,0.7);}
 
-.price-card:nth-child(3){
-border:1px solid rgba(255,200,0,0.65);
-}
-
-/* FOOTER */
+/* FOOTER (NO WHITE EDGE ISSUE FIXED) */
 footer{
 padding:40px;
 text-align:center;
 border-top:1px solid rgba(255,255,255,0.08);
 margin-top:40px;
-background:rgba(10,10,10,0.5);
+background:rgba(10,10,10,0.55);
 }
 
 footer a{
@@ -290,6 +294,8 @@ text-decoration:none;
 <span></span><span></span><span></span>
 </div>
 </nav>
+
+<div class="menu-overlay" id="overlay"></div>
 
 <div class="menu" id="menu">
 <a href="#about">About</a>
@@ -323,85 +329,24 @@ We do not offer generic marketing services — we build end-to-end revenue syste
 
 <div class="section-title">SERVICES</div>
 <section id="services" class="grid">
-<div class="card"><h3>Cold Email Systems</h3><p class="extra">We design and deploy high-deliverability cold email infrastructure including domain setup, warm-up systems, copywriting, segmentation, and automated follow-ups. This ensures consistent inbox placement and predictable reply rates.</p></div>
-
-<div class="card"><h3>AI Appointment Setting</h3><p class="extra">AI-powered outbound systems that handle lead qualification, automated responses, booking flows, and calendar scheduling. This replaces manual SDR work with intelligent automation that works 24/7.</p></div>
-
-<div class="card"><h3>LinkedIn Automation</h3><p class="extra">Fully automated LinkedIn outreach systems including connection flows, personalized messaging, profile optimization, and lead nurturing sequences designed to convert cold connections into booked calls.</p></div>
-
-<div class="card"><h3>Conversion Funnels</h3><p class="extra">High-converting landing pages and funnel systems designed to turn traffic into booked calls. Includes A/B testing, CTA optimization, tracking systems, and behavioral conversion improvements.</p></div>
+<div class="card"><h3>Cold Email Systems</h3><p class="extra">Full deliverability infrastructure, domains, warmup, copywriting, segmentation, automation, and scaling systems.</p></div>
+<div class="card"><h3>AI Appointment Setting</h3><p class="extra">Automated lead qualification, AI responders, calendar booking flows, and smart pipeline handling 24/7.</p></div>
+<div class="card"><h3>LinkedIn Automation</h3><p class="extra">Connection campaigns, DM flows, profile optimization, and conversion-focused outreach sequences.</p></div>
+<div class="card"><h3>Conversion Funnels</h3><p class="extra">Landing pages, CRO optimization, A/B testing, and conversion tracking systems designed for booked calls.</p></div>
 </section>
 
 <div class="section-title">PRICING</div>
 <section id="pricing" class="grid">
-<div class="price-card">
-<h3>Starter - $399 p/m</h3>
-<p class="extra">
-Includes:
-- Cold email setup (1 domain)
-- Basic outreach automation
-- Email copywriting templates
-- 1 campaign structure
-- Monthly optimization report
-
-Best for individuals starting outbound lead generation.
-</p>
-</div>
-
-<div class="price-card">
-<h3>Pro - $799 p/m</h3>
-<p class="extra">
-Includes:
-- Everything in Starter
-- Multi-domain infrastructure
-- AI appointment setting system
-- LinkedIn automation setup
-- Advanced segmentation
-- Conversion tracking dashboard
-
-MOST POPULAR choice for agencies and SaaS founders.
-</p>
-</div>
-
-<div class="price-card">
-<h3>Elite - $1599 p/m</h3>
-<p class="extra">
-Includes:
-- Everything in Pro
-- Full outbound infrastructure buildout
-- Dedicated optimization system
-- High-volume lead scaling
-- CRM integration
-- Custom funnel development
-- Priority support & strategy consulting
-
-Built for companies scaling aggressively and requiring full automation.
-</p>
-</div>
+<div class="price-card"><h3>Starter - $399 p/m</h3><p class="extra">Cold email setup, 1 domain, templates, basic automation, reporting.</p></div>
+<div class="price-card"><h3>Pro - $799 p/m</h3><p class="extra">Multi-domain system, AI appointment setting, LinkedIn automation, tracking dashboard.</p></div>
+<div class="price-card"><h3>Elite - $1599 p/m</h3><p class="extra">Full outbound infrastructure, CRM integration, scaling systems, funnel buildout, consulting.</p></div>
 </section>
 
 <div class="section-title">TESTIMONIALS</div>
 <section id="testimonials" class="grid">
-<div class="testimonial">
-<h3>Agency Owner</h3>
-<p class="extra">
-“We went from inconsistent leads to a predictable pipeline within 30 days. Acquirely completely replaced our outbound chaos with a structured system that actually scales.”
-</p>
-</div>
-
-<div class="testimonial">
-<h3>SaaS Founder</h3>
-<p class="extra">
-“Our trial signups doubled after implementing their funnel system. The automation behind their outreach is extremely efficient and saves us hours every day.”
-</p>
-</div>
-
-<div class="testimonial">
-<h3>Consultant</h3>
-<p class="extra">
-“I stopped doing manual outreach completely. Now I just wake up to booked calls every morning. This system is exactly what I needed.”
-</p>
-</div>
+<div class="testimonial"><h3>Agency Owner</h3><p class="extra">“Predictable pipeline within weeks. Completely replaced our outbound chaos.”</p></div>
+<div class="testimonial"><h3>SaaS Founder</h3><p class="extra">“Doubled trial signups with automated outreach.”</p></div>
+<div class="testimonial"><h3>Consultant</h3><p class="extra">“Daily booked calls without manual outreach anymore.”</p></div>
 </section>
 
 <section id="contact" class="grid">
@@ -417,7 +362,7 @@ Built for companies scaling aggressively and requiring full automation.
 </section>
 
 <footer>
-<p>© 2026 Acquirely. All rights reserved.</p>
+<p>© 2026 Acquirely</p>
 <div>
 <a href="#">WhatsApp</a>
 <a href="#">Telegram</a>
@@ -428,33 +373,50 @@ Built for companies scaling aggressively and requiring full automation.
 
 <script>
 
+/* MENU FIX */
 const menu=document.getElementById("menu");
 const burger=document.getElementById("burger");
 const overlay=document.getElementById("overlay");
 
-burger.onclick=()=>{
-menu.classList.toggle("active");
+function openMenu(){
+menu.classList.add("active");
+overlay.classList.add("active");
 document.body.style.overflow="hidden";
 }
 
 function closeMenu(){
 menu.classList.remove("active");
+overlay.classList.remove("active");
 document.body.style.overflow="auto";
 }
+
+burger.onclick=()=>{
+if(menu.classList.contains("active")) closeMenu();
+else openMenu();
+};
+
+overlay.onclick=closeMenu;
 
 document.addEventListener("keydown",(e)=>{
 if(e.key==="Escape") closeMenu();
 });
 
+/* EXPAND */
 document.querySelectorAll(".card,.price-card,.testimonial,.about-box")
 .forEach(el=>{
 el.onclick=()=>el.classList.toggle("active");
 });
 
-const SCRIPT_URL="PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE";
+/* GOOGLE SHEETS */
+const SCRIPT_URL="";
 
 document.getElementById("contactForm").addEventListener("submit",async function(e){
 e.preventDefault();
+
+if(!SCRIPT_URL){
+alert("Please add Google Sheets Script URL");
+return;
+}
 
 const name=this.querySelector("input[type=text]").value;
 const email=this.querySelector("input[type=email]").value;
@@ -463,7 +425,6 @@ const message=this.querySelector("textarea").value;
 await fetch(SCRIPT_URL,{
 method:"POST",
 mode:"no-cors",
-headers:{"Content-Type":"application/json"},
 body:JSON.stringify({name,email,message,time:new Date().toISOString()})
 });
 
@@ -471,11 +432,11 @@ alert("Message sent!");
 this.reset();
 });
 
-/* PARTICLES */
+/* OPTIMIZED PARTICLES */
 const c=document.getElementById("c");
 const ctx=c.getContext("2d");
-let w,h;
 
+let w,h;
 function resize(){
 w=c.width=window.innerWidth;
 h=c.height=window.innerHeight;
@@ -484,8 +445,14 @@ resize();
 window.addEventListener("resize",resize);
 
 const particles=[];
-for(let i=0;i<90;i++){
-particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*1.5});
+for(let i=0;i<70;i++){
+particles.push({
+x:Math.random()*w,
+y:Math.random()*h,
+vx:(Math.random()-0.5)*0.25,
+vy:(Math.random()-0.5)*0.25,
+r:Math.random()*1.2
+});
 }
 
 function draw(){
@@ -495,9 +462,10 @@ p.x+=p.vx;
 p.y+=p.vy;
 if(p.x<0||p.x>w)p.vx*=-1;
 if(p.y<0||p.y>h)p.vy*=-1;
+
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fillStyle="rgba(0,245,255,0.5)";
+ctx.fillStyle="rgba(0,245,255,0.45)";
 ctx.fill();
 }
 requestAnimationFrame(draw);
@@ -507,4 +475,4 @@ draw();
 </script>
 
 </body>
-  </html>
+</html>
