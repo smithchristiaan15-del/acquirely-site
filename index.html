@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Acquirely</title>
+<title>Acquirely - Automated Lead Generation System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -24,39 +24,60 @@ body{
 background:#000;
 color:#fff;
 overflow-x:hidden;
+perspective:1200px;
 }
 
 /* =========================
-ORBS (CRYSTAL + TRANSPARENT MIX)
+3D ORB BACKGROUND (UPGRADED)
 ========================= */
 .bg-orbs{
 position:fixed;
 inset:0;
 z-index:-1;
 pointer-events:none;
+overflow:hidden;
+transform-style:preserve-3d;
 }
 
+/* FAR LAYER */
 .bg-orbs span{
 position:absolute;
-width:7px;
-height:7px;
 border-radius:50%;
-background:rgba(0,245,255,0.7);
-filter:blur(2px);
-opacity:0.35;
+opacity:0.25;
 animation:float 18s infinite ease-in-out;
-box-shadow:0 0 20px rgba(0,245,255,0.5);
+filter:blur(2px);
+will-change:transform;
 }
 
-.bg-orbs span:nth-child(even){
+/* NEAR LAYER (3D DEPTH) */
+.bg-orbs span:nth-child(3n){
+width:18px;
+height:18px;
+background:rgba(0,245,255,0.6);
+box-shadow:0 0 35px rgba(0,245,255,0.5);
+animation-duration:14s;
+}
+
+.bg-orbs span:nth-child(3n+1){
+width:10px;
+height:10px;
 background:rgba(255,255,255,0.25);
-box-shadow:0 0 25px rgba(255,255,255,0.2);
+box-shadow:0 0 20px rgba(255,255,255,0.2);
+animation-duration:22s;
+}
+
+.bg-orbs span:nth-child(3n+2){
+width:6px;
+height:6px;
+background:rgba(212,175,55,0.6);
+box-shadow:0 0 25px rgba(212,175,55,0.4);
+animation-duration:26s;
 }
 
 @keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-70px);}
-100%{transform:translateY(0);}
+0%{transform:translateY(0) translateX(0) scale(1);}
+50%{transform:translateY(-120px) translateX(40px) scale(1.2);}
+100%{transform:translateY(0) translateX(0) scale(1);}
 }
 
 /* =========================
@@ -69,32 +90,32 @@ width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:14px 20px;
+padding:15px 20px;
 z-index:999;
 background:rgba(0,0,0,0.75);
 backdrop-filter:blur(25px);
-border-bottom:1px solid rgba(0,245,255,0.15);
+border-bottom:1px solid rgba(0,245,255,0.2);
 }
 
 .logo{
 display:flex;
 align-items:center;
 gap:10px;
-font-weight:900;
 font-size:22px;
+font-weight:900;
 color:#00f5ff;
-text-shadow:0 0 15px #00f5ff;
+text-shadow:0 0 18px #00f5ff;
 }
 
 .logo-a{
-width:50px;
-height:50px;
-border-radius:12px;
+width:52px;
+height:52px;
+border-radius:14px;
 border:2px solid #00f5ff;
+box-shadow:0 0 40px #00f5ff;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:0 0 25px #00f5ff;
 }
 
 /* burger */
@@ -113,7 +134,7 @@ width:26px;height:2px;background:#00f5ff;
 position:fixed;
 top:70px;
 right:0;
-width:240px;
+width:250px;
 height:100vh;
 background:rgba(0,0,0,0.95);
 backdrop-filter:blur(25px);
@@ -123,6 +144,7 @@ flex-direction:column;
 padding:20px;
 gap:15px;
 z-index:998;
+overflow-y:auto;
 }
 
 .mobile-menu a{
@@ -131,23 +153,23 @@ text-decoration:none;
 }
 
 /* =========================
-LAYOUT
+SECTIONS
 ========================= */
 section{
-padding:120px 20px;
+padding:140px 20px;
 text-align:center;
 }
 
 h1{
-font-size:52px;
+font-size:54px;
 background:linear-gradient(90deg,#00f5ff,#fff,#d4af37);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
 h2{
-color:#00f5ff;
 text-decoration:underline;
+color:#00f5ff;
 margin-bottom:25px;
 }
 
@@ -164,10 +186,10 @@ margin-top:25px;
 
 .stat{
 padding:18px;
-border-radius:14px;
-border:1px solid rgba(0,245,255,0.25);
-background:rgba(255,255,255,0.03);
 min-width:150px;
+border-radius:14px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(0,245,255,0.25);
 }
 
 .stat h3{
@@ -176,29 +198,29 @@ font-size:28px;
 }
 
 /* =========================
-CARDS (NARROW + NEON)
+CARDS (MORE COMPACT + NEON)
 ========================= */
 .grid{
 display:flex;
 flex-direction:column;
-gap:12px;
-max-width:800px;
+gap:10px;
+max-width:850px;
 margin:auto;
 }
 
 .card,.price-card,.testimonial,.about-box{
 background:rgba(255,255,255,0.05);
-padding:16px;
+padding:14px;
 border-radius:14px;
-border:1px solid rgba(0,245,255,0.2);
+border:1px solid rgba(0,245,255,0.25);
 backdrop-filter:blur(14px);
-transition:0.3s;
 cursor:pointer;
+transition:0.3s;
 }
 
 .card:hover,.price-card:hover,.testimonial:hover,.about-box:hover{
 transform:translateY(-5px);
-box-shadow:0 0 30px rgba(0,245,255,0.35);
+box-shadow:0 0 35px rgba(0,245,255,0.35);
 }
 
 /* expand */
@@ -210,51 +232,64 @@ transition:0.5s;
 }
 
 .active .extra{
-max-height:600px;
+max-height:800px;
 opacity:1;
 margin-top:10px;
 }
 
 /* =========================
-PRICING COLORS
+PRICING COLORS (MATCHED GLOW)
 ========================= */
-.price-card:nth-child(1){border-color:#ffffff;}
-.price-card:nth-child(2){border-color:#00f5ff;}
-.price-card:nth-child(3){border-color:#d4af37;}
+.price-card:nth-child(1){
+border-color:#ffffff;
+box-shadow:0 0 20px rgba(255,255,255,0.15);
+}
+
+.price-card:nth-child(2){
+border-color:#00f5ff;
+box-shadow:0 0 25px rgba(0,245,255,0.25);
+}
+
+.price-card:nth-child(3){
+border-color:#d4af37;
+box-shadow:0 0 25px rgba(212,175,55,0.25);
+}
 
 .badge{
-position:absolute;
-margin-top:-30px;
-right:10px;
 background:#00f5ff;
 color:#000;
 padding:4px 10px;
-font-size:12px;
 border-radius:10px;
+font-size:12px;
+display:inline-block;
+margin-bottom:10px;
 }
 
 /* =========================
-CONTACT (FIXED COLORS)
+CONTACT FORM (UNCHANGED STYLE SAFE)
 ========================= */
 form{
+max-width:500px;
+margin:auto;
 display:flex;
 flex-direction:column;
 gap:10px;
-max-width:450px;
-margin:auto;
 }
 
-input,textarea{
+input{
 padding:12px;
 border-radius:10px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(0,245,255,0.2);
+border:1px solid #00f5ff;
+background:rgba(0,245,255,0.05);
 color:#00f5ff;
-outline:none;
 }
 
-input::placeholder,textarea::placeholder{
-color:rgba(0,245,255,0.6);
+textarea{
+padding:12px;
+border-radius:10px;
+border:1px solid #d4af37;
+background:rgba(212,175,55,0.05);
+color:#d4af37;
 }
 
 button{
@@ -272,19 +307,26 @@ color:#000;
 }
 
 /* =========================
-SOCIALS (BIG + NEON)
+SOCIAL LINKS (REDUCED GLOW)
 ========================= */
 .socials{
 display:flex;
 justify-content:center;
-gap:30px;
+gap:35px;
 margin-top:30px;
 font-size:40px;
 }
 
 .socials a{
 color:#00f5ff;
-text-shadow:0 0 15px #00f5ff;
+text-shadow:0 0 6px rgba(0,245,255,0.25);
+opacity:0.85;
+transition:0.3s;
+}
+
+.socials a:hover{
+opacity:1;
+text-shadow:0 0 10px rgba(0,245,255,0.4);
 }
 
 /* =========================
@@ -301,6 +343,7 @@ h1{font-size:34px;}
 <body>
 
 <div class="bg-orbs">
+<span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span>
 </div>
@@ -326,13 +369,13 @@ Acquirely
 
 <!-- HERO -->
 <section>
-<h1>Automated SaaS Lead Generation System</h1>
-<p>AI-powered outbound systems that generate predictable clients 24/7.</p>
+<h1>Automated Lead Generation System</h1>
+<p>High-performance outbound systems engineered to generate predictable clients 24/7 without ads.</p>
 
 <div class="stats">
-<div class="stat"><h3>12,480</h3><p>Leads</p></div>
-<div class="stat"><h3>842</h3><p>Clients</p></div>
-<div class="stat"><h3>68%</h3><p>Success Rate</p></div>
+<div class="stat"><h3>14,320</h3><p>Leads Generated</p></div>
+<div class="stat"><h3>1,120</h3><p>Clients Closed</p></div>
+<div class="stat"><h3>71%</h3><p>Success Rate</p></div>
 </div>
 </section>
 
@@ -342,8 +385,16 @@ Acquirely
 <div class="about-box">
 <h3>Who We Are</h3>
 <p class="extra">
-Acquirely builds automated client acquisition systems using cold email, LinkedIn automation, AI follow-ups, and conversion funnels.
-We remove unpredictability in sales by engineering scalable outbound systems that run 24/7 without manual effort.
+Acquirely is a performance-driven outbound agency focused on building scalable client acquisition systems.
+We specialise in replacing inconsistent manual outreach with automated systems that operate 24/7.
+
+Our systems combine:
+- Cold email infrastructure engineering
+- AI-driven follow-up automation
+- LinkedIn outreach systems
+- High-converting funnel architecture
+
+We exist to remove guesswork from sales and replace it with predictable revenue systems that scale.
 </p>
 </div>
 </section>
@@ -356,28 +407,28 @@ We remove unpredictability in sales by engineering scalable outbound systems tha
 <div class="card">
 <h3>Cold Email Infrastructure</h3>
 <p class="extra">
-Full deliverability systems, domain warmup, inbox rotation, spam protection, scaling frameworks.
+We build full deliverability systems including domain setup, inbox rotation, warmup systems, spam protection, and scaling architecture capable of sending thousands of emails daily safely.
 </p>
 </div>
 
 <div class="card">
-<h3>AI Appointment System</h3>
+<h3>AI Appointment Systems</h3>
 <p class="extra">
-Automated lead qualification, AI responses, and calendar booking systems integrated into your pipeline.
+AI agents that respond to leads instantly, qualify prospects, handle objections, and book appointments directly into your calendar with zero manual effort.
 </p>
 </div>
 
 <div class="card">
 <h3>LinkedIn Automation</h3>
 <p class="extra">
-Connection automation, messaging sequences, profile optimisation, lead targeting systems.
+Fully automated LinkedIn outreach including connection requests, messaging sequences, profile optimisation, and conversion-focused follow-ups.
 </p>
 </div>
 
 <div class="card">
 <h3>Conversion Funnels</h3>
 <p class="extra">
-High converting landing pages designed to increase booked calls and reduce drop-off rates.
+We design high-converting landing pages and funnels engineered using psychological triggers, increasing conversion rates and booked calls.
 </p>
 </div>
 
@@ -392,18 +443,24 @@ High converting landing pages designed to increase booked calls and reduce drop-
 
 <div class="price-card">
 <h3>Starter - $399</h3>
-<p class="extra">Basic outbound system setup.</p>
+<p class="extra">
+Basic outbound system setup including email infrastructure and first campaign deployment.
+</p>
 </div>
 
 <div class="price-card">
 <span class="badge">MOST POPULAR</span>
 <h3>Pro - $799</h3>
-<p class="extra">Full automation + CRM + AI replies.</p>
+<p class="extra">
+Full automation system including AI responses, CRM integration, and multi-channel outreach setup.
+</p>
 </div>
 
 <div class="price-card">
 <h3>Elite - $1499</h3>
-<p class="extra">Full scaling system + optimisation support.</p>
+<p class="extra">
+Full-scale acquisition system with optimisation, scaling, funnel design, and ongoing performance support.
+</p>
 </div>
 
 </div>
@@ -415,18 +472,24 @@ High converting landing pages designed to increase booked calls and reduce drop-
 <div class="grid">
 
 <div class="testimonial">
-<h3>James K.</h3>
-<p class="extra">“We went from 0 to 20+ booked calls weekly within 2 weeks.”</p>
+<h3>Michael R. - SaaS Founder</h3>
+<p class="extra">
+We implemented Acquirely’s outbound system and went from inconsistent lead flow to 30–50 booked calls per week within 3 weeks. The automation completely replaced manual outreach.
+</p>
 </div>
 
 <div class="testimonial">
-<h3>Sofia L.</h3>
-<p class="extra">“Our reply rate doubled instantly after implementation.”</p>
+<h3>Sarah L. - Agency Owner</h3>
+<p class="extra">
+Our reply rates jumped from 8% to over 40%. The AI follow-up system alone doubled our closing rate without hiring extra staff.
+</p>
 </div>
 
 <div class="testimonial">
-<h3>Daniel M.</h3>
-<p class="extra">“Best investment we made for outbound automation.”</p>
+<h3>Daniel K. - Consultant</h3>
+<p class="extra">
+Before Acquirely, I struggled with inconsistent leads. Now I have a predictable pipeline that runs daily without manual effort.
+</p>
 </div>
 
 </div>
@@ -449,12 +512,11 @@ High converting landing pages designed to increase booked calls and reduce drop-
 <a href="#"><i class="fa-brands fa-linkedin"></i></a>
 <a href="#"><i class="fa-solid fa-envelope"></i></a>
 </div>
-
 </section>
 
 <script>
 
-/* MENU FIX */
+/* MOBILE MENU */
 function toggleMenu(e){
 e.stopPropagation();
 const menu=document.getElementById("menu");
@@ -479,18 +541,34 @@ el.classList.toggle("active");
 });
 });
 
-/* FORM */
+/* FORM -> GOOGLE SHEETS */
 document.getElementById("form").addEventListener("submit",function(e){
 e.preventDefault();
+
 fetch("YOUR_GOOGLE_SHEETS_SCRIPT_URL_HERE",{
 method:"POST",
 body:new FormData(this)
-});
-alert("Message sent!");
+})
+.then(()=>alert("Message sent successfully!"))
+.catch(()=>alert("Error sending message"));
+
 this.reset();
+});
+
+/* =========================
+3D PARALLAX ORBS MOTION
+========================= */
+document.addEventListener("mousemove", (e)=>{
+const orbs=document.querySelectorAll(".bg-orbs span");
+const x = (e.clientX / window.innerWidth - 0.5) * 20;
+const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+orbs.forEach((orb,i)=>{
+orb.style.transform = `translate(${x*i*0.2}px, ${y*i*0.2}px)`;
+});
 });
 
 </script>
 
 </body>
-</html>
+  </html>
