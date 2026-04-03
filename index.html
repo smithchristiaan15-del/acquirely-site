@@ -74,10 +74,34 @@ z-index:10;
 }
 
 .logo{
-font-size:28px;
+font-size:32px;
 font-weight:800;
 color:#00e5ff;
-text-shadow:0 0 15px #00e5ff;
+letter-spacing:2px;
+
+text-shadow:
+0 0 5px #00e5ff,
+0 0 15px #00e5ff,
+0 0 30px #00e5ff;
+
+position:relative;
+}
+
+.logo-reflection{
+font-size:32px;
+font-weight:800;
+letter-spacing:2px;
+color:#00e5ff;
+opacity:0.15;
+
+transform:scaleY(-1);
+display:block;
+margin-top:5px;
+
+mask-image:linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+-webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+
+filter:blur(2px);
 }
 
 .nav-links{
@@ -357,7 +381,10 @@ color:#00e5ff;
 
 <!-- NAV -->
 <nav>
-<div class="logo">Acquirely</div>
+<div class="logo">
+  Acquirely
+  <span class="logo-reflection">Acquirely</span>
+</div>
 <div class="burger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
 <div class="nav-links" id="menu">
 <a href="#about">About</a>
