@@ -39,15 +39,27 @@ background:#000;
 overflow:hidden;
 }
 
+/* NEW: subtle 3D transparent screen overlay */
+.bg::after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(255,255,255,0.02);
+backdrop-filter: blur(2px);
+-webkit-backdrop-filter: blur(2px);
+z-index:1;
+pointer-events:none;
+}
+
 .bg span{
 position:absolute;
 width:2px;
 height:2px;
 background:#00f5ff;
 border-radius:50%;
-box-shadow:0 0 10px #00f5ff,0 0 25px #00f5ff;
+box-shadow:0 0 6px #00f5ff,0 0 14px #00f5ff;
 animation:float 10s linear infinite;
-opacity:0.7;
+opacity:0.35;
 }
 
 @keyframes float{
@@ -326,7 +338,6 @@ border-radius:8px;
 <h1>SaaS Lead Generation System</h1>
 <p>Fully automated outbound infrastructure that generates leads, books calls, and scales revenue predictably.</p>
 
-<!-- FIX 1: scroll to bottom -->
 <a href="#contact">
 <button class="btn">Get Started</button>
 </a>
@@ -420,19 +431,16 @@ Built for scaling and predictable revenue growth.</p></div>
 
 <script>
 
-/* MENU */
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
 
-/* CLOSE MENU ON LINK CLICK */
 document.querySelectorAll(".menu a").forEach(link=>{
 link.addEventListener("click",()=>{
 document.getElementById("menu").classList.remove("active");
 });
 });
 
-/* CLOSE MENU ON OUTSIDE CLICK */
 document.addEventListener("click",(e)=>{
 const menu=document.getElementById("menu");
 const burger=document.querySelector(".burger");
@@ -441,7 +449,6 @@ menu.classList.remove("active");
 }
 });
 
-/* BACKGROUND */
 const bg=document.querySelector(".bg");
 for(let i=0;i<260;i++){
 let s=document.createElement("span");
@@ -450,14 +457,12 @@ s.style.animationDuration=(5+Math.random()*7)+"s";
 bg.appendChild(s);
 }
 
-/* EXPAND */
 document.querySelectorAll(".card,.price-card,.testimonial,.about-box").forEach(el=>{
 el.addEventListener("click",()=>{
 el.classList.toggle("active");
 });
 });
 
-/* CLICK EFFECT */
 document.addEventListener("click",e=>{
 let d=document.createElement("div");
 d.className="click-glow";
@@ -467,12 +472,11 @@ document.body.appendChild(d);
 setTimeout(()=>d.remove(),600);
 });
 
-/* COUNTERS */
 function count(id, target){
 let el=document.getElementById(id);
 let current=0;
 
-let steps=60; // fewer steps = faster animation
+let steps=60;
 let increment=Math.ceil(target/steps);
 
 let t=setInterval(()=>{
@@ -484,7 +488,7 @@ clearInterval(t);
 }else{
 el.innerText=current;
 }
-},18); // fast interval
+},18);
 }
 
 count("c1",128);
