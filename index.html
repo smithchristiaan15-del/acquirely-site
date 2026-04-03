@@ -76,11 +76,10 @@ z-index:10;
 .logo{
 font-size:32px;
 font-weight:800;
-color:#3aaec4; /* muted blue */
+color:#3aaec4;
 letter-spacing:1px;
-
-text-shadow:none; /* removed strong glow */
 opacity:0.95;
+line-height:1;
 }
 
 .logo-reflection{
@@ -88,16 +87,16 @@ font-size:32px;
 font-weight:800;
 letter-spacing:1px;
 color:#3aaec4;
-opacity:0.10;
+opacity:0.08;
 
 transform:scaleY(-1);
 display:block;
-margin-top:5px;
+margin-top:2px;
 
-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
--webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+mask-image:linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+-webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
 
-filter:blur(1.5px);
+filter:blur(1.2px);
 }
 
 .nav-links{
@@ -536,11 +535,34 @@ menu.classList.remove("active");
 }
 });
 
-/* SERVICES */
+/* =========================
+SERVICES (OPEN / CLOSE + OUTSIDE CLICK CLOSE)
+========================= */
+
 function expand(el){
-document.querySelectorAll(".service").forEach(s=>s.classList.remove("active"));
+const all=document.querySelectorAll(".service");
+
+// toggle same box
+if(el.classList.contains("active")){
+el.classList.remove("active");
+return;
+}
+
+// close others + open clicked
+all.forEach(s=>s.classList.remove("active"));
 el.classList.add("active");
 }
+
+// click outside closes all services
+document.addEventListener("click",function(e){
+const servicesWrap=document.querySelector(".services");
+
+if(servicesWrap && !servicesWrap.contains(e.target)){
+document.querySelectorAll(".service").forEach(s=>{
+s.classList.remove("active");
+});
+}
+});
 
 /* FORM */
 document.getElementById("contactForm").addEventListener("submit",function(e){
